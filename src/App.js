@@ -6,6 +6,7 @@ import { checkUser } from "./redux/actions"
 
 import Login from "./forms/Login"
 import Home from "./homepage/Home"
+import CreditUnions from "./creditunions/CreditUnionContainer"
 
 class App extends React.Component {
 
@@ -21,6 +22,9 @@ class App extends React.Component {
         <Switch>
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : < Home user={this.props.currentUser}/>  
+          }}/>
+          < Route exact path="/credit_unions" render={() => {
+            return this.props.currentUser.isadmin ? < CreditUnions /> : < Login />
           }}/>
         </Switch>
       </div>

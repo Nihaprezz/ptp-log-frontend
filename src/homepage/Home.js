@@ -13,7 +13,7 @@ const Home = (props) => {
     return (
         
         <div> 
-            < Navbar signOut={signOut}/>
+            < Navbar signOut={signOut} user={props.user}/>
             <h1> Welcome {props.user.username}!</h1>
             < PTPContainer />
         </div>
