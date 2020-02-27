@@ -18,7 +18,7 @@ class PTPContainer extends React.Component {
           default:
             return < NewPtp />;
         }
-      }
+    }
     
     render(){
 
