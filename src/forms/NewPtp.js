@@ -13,8 +13,26 @@ class NewPtp extends React.Component {
             lastName:"",
             ptpAmt: "",
             ptpDate: "",
-            comments: ""
+            comments: "",
+            allCreditUnions: []
         }
+    }
+
+    componentDidMount(){
+        fetch(backend_url + 'creditunions', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(creditUnions => {
+            this.setState({
+                allCreditUnions: creditUnions.map(cu => cu.name),
+                creditUnion: creditUnions[0].name
+            })
+        })
     }
 
     handleChange = (e) => {
@@ -33,15 +51,6 @@ class NewPtp extends React.Component {
                 "Content-Type": 'application/json',
                 "Accept": 'application/json'
             }, 
-            // body: JSON.stringify({
-            //     accountNo: this.state.accountNo,
-            //     creditUnion: this.state.creditUnion,
-            //     firstName: this.state.firstName,
-            //     lastName: this.state.lastName,
-            //     ptpAmt: this.state.ptpAmt,
-            //     ptpDate: this.state.ptpDate,
-            //     comments: this.state.comments
-            // })
             body: JSON.stringify({
                 newPTP: this.state
             })
@@ -73,8 +82,14 @@ class NewPtp extends React.Component {
 
                         <div className="field">
                             <label>Credit Union</label>
-                            <input onChange={(e) => this.handleChange(e)}
-                            type="text" placeholder="Credit Union" name="creditUnion" value={this.state.creditUnion}/>
+                            <select onChange={(e) => this.handleChange(e)}
+                            className="ui fluid dropdown" name="creditUnion" value={this.state.creditUnion}>
+                                {this.state.allCreditUnions.map((cu, index)=> {
+                                    return <option key={index} value={cu}>{cu}</option>
+                                })}
+                            </select>
+
+                            
                         </div>
                     </div>
 
