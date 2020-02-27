@@ -37,7 +37,7 @@ class Login extends React.Component {
                         <div className="field">
                             <label>Password</label>
                             <input onChange={(e) => this.handleChange(e)}
-                            type="text" name="password" placeholder="Password"/>
+                            type="password" name="password" placeholder="Password"/>
                         </div>
 
                         <button className="ui button" type="submit">Submit</button>

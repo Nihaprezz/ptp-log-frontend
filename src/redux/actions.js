@@ -49,4 +49,9 @@ function checkUser(){
         }
 }
 
-export { checkUser, logIn }
+function signOut(){
+    localStorage.removeItem('jwt')
+    return {type: "SIGN_OUT", payload: []} 
+}
+
+export { checkUser, logIn, signOut}

@@ -20,7 +20,7 @@ class App extends React.Component {
       <div className="App">
         <Switch>
           < Route exact path="/" render={() => {
-            return Array.isArray(this.props.currentUser) ? < Login /> : < Home />  
+            return Array.isArray(this.props.currentUser) ? < Login /> : < Home user={this.props.currentUser}/>  
           }}/>
         </Switch>
       </div>
