@@ -1,5 +1,7 @@
 import React from "react"
 
+const backend_url = `http://localhost:3001`
+
 class NewCU extends React.Component {
     constructor(){
         super();
@@ -20,7 +22,21 @@ class NewCU extends React.Component {
     }
 
     handleSubmit = () => {
-        console.log('attempting to submit', this.state)
+        fetch(backend_url + '/creditunions', {
+            method: 'POST', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify({
+                creditUnion: this.state
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data.name, ' has been added!')
+        })
     }
 
     render(){

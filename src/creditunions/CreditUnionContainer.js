@@ -4,7 +4,7 @@ import CreditUnionTable from "./CreditUnionTable"
 
 class CreditUnionContainer extends React.Component {
     state = {
-        showForm: true,
+        showForm: false,
     }
 
     toggleForm = () => {
