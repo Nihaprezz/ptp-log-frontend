@@ -1,5 +1,6 @@
 import React from "react"
 import Navbar from "./Navbar"
+import PTPContainer from "../promisetopay/PTPContainer"
 import { signOut } from "../redux/actions"
 import { connect } from "react-redux"
 
@@ -14,6 +15,7 @@ const Home = (props) => {
         <div> 
             < Navbar signOut={signOut}/>
             <h1> Welcome {props.user.username}!</h1>
+            < PTPContainer />
         </div>
     )
 }
