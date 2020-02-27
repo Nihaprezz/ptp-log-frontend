@@ -1,5 +1,7 @@
 import React from "react";
 
+const backend_url = `http://localhost:3001/`
+
 class NewPtp extends React.Component {
     constructor(){
         super();
@@ -23,6 +25,34 @@ class NewPtp extends React.Component {
 
     handleSubmit = () => {
         console.log("attempting to submit new PTP", this.state)
+
+        fetch(backend_url + '/promisetopays', {
+            method: "POST", 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            // body: JSON.stringify({
+            //     accountNo: this.state.accountNo,
+            //     creditUnion: this.state.creditUnion,
+            //     firstName: this.state.firstName,
+            //     lastName: this.state.lastName,
+            //     ptpAmt: this.state.ptpAmt,
+            //     ptpDate: this.state.ptpDate,
+            //     comments: this.state.comments
+            // })
+            body: JSON.stringify({
+                newPTP: this.state
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            debugger
+            console.log(data)
+        })
+        .catch(err => console.log(err))
+
 
         this.setState({
             accountNo: "", creditUnion: "", firstName: "", lastName: "", ptpAmt: "", ptpDate: "", comments: ""
