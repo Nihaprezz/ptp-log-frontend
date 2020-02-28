@@ -54,4 +54,27 @@ function signOut(){
     return {type: "SIGN_OUT", payload: []} 
 }
 
-export { checkUser, logIn, signOut}
+
+//FETCHING PTP DATA FROM BACKEND
+function setPTPDate(data){
+    return {type: "FETCHED_PTP_DATA", payload: data}
+}
+
+function fetchPTPData(type){
+    debugger
+    return (dispatch) => {
+        fetch(HOST_URL + `/promisetopays/categeory/${type}`,{
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json' 
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            dispatch(setPTPDate(data))
+        })
+    }
+}
+
+export { checkUser, logIn, signOut, fetchPTPData}

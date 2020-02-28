@@ -2,37 +2,37 @@ import React from "react"
 import NewPtp from "../forms/NewPtp"
 import PTPTable from "../promisetopay/PTPTable"
 
+const backend_url = `http://localhost:3001/`
+
 class PTPContainer extends React.Component {
     constructor(){
         super();
 
         this.state = {
             newPtp: false,
-            ptpType: "current"
+            ptpType: "current", 
+            ptpData: []
         }
-    }  
+    } 
     
-    // renderSwitch = (param) => {
-    //     switch(param) {
-    //       case "current":
-    //         return < PTPTable ptpTypes={"current"}/>;
-    //       case 'daybefore':
-    //           return < PTPTable ptpTypes={"daybefore"}/>;
-    //       case 'dayafter':
-    //         return < PTPTable ptpTypes={"dayafter"}/>;
-    //      case 'followups':
-    //         return < PTPTable ptpTypes={"followups"}/>;
-    //       default:
-    //         return < NewPtp />;
-    //     }
-    // }
+    componentDidMount(){
+        this.fetchBackend(this.state.ptpType)
+    }
+
+    fetchBackend = (type) => {
+        fetch(backend_url +`promisetopays/categeory/${type}`)
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({ptpData: data})
+        })
+    }
 
     toggleForm = () => {
         this.setState({newPtp: !this.state.newPtp})
     }
 
     handlePTPChange = (type) => {
-        this.setState({newPtp: false, ptpType: type})
+        this.setState({newPtp: false, ptpType: type}, () => this.fetchBackend(type))
     }
     
     render(){
@@ -48,11 +48,25 @@ class PTPContainer extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.newPtp ? < NewPtp />  : <PTPTable ptpTypes={this.state.ptpType}/>}
+                    {this.state.newPtp ? < NewPtp />  : <PTPTable ptpTypes={this.state.ptpType} ptpData={this.state.ptpData}/>}
                 </div>
             </div>
         )
     }
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         fetchPTPData: (type) => {dispatch(fetchPTPData(type))}
+//     }
+// }
+
+// const mapStateToProps = state => {
+//     return {
+//         ptpData: state.ptpData
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(PTPContainer)
 
 export default PTPContainer

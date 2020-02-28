@@ -11,8 +11,18 @@ const userReducer = (state = [], action) => {
     }
 }
 
+const ptpReducer = (state = [], action) => {
+    switch(action.type){
+        case "FETCHED_PTP_DATA":
+            return action.payload
+        default: 
+            return state;
+    }
+}
+
 const rootReducer = combineReducers({
-    currentUser: userReducer
+    currentUser: userReducer,
+    ptpData: ptpReducer,
 })
 
 export default rootReducer;
