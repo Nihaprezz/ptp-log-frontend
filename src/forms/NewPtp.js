@@ -57,8 +57,11 @@ class NewPtp extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            debugger
-            console.log(data)
+            if(data.id){
+                console.log("PTP Added!", data)
+            } else {
+                console.log('Unable to Add')
+            }
         })
         .catch(err => console.log(err))
 
@@ -128,7 +131,7 @@ class NewPtp extends React.Component {
                         name="comments" placeholder="PTP Comments" value={this.state.comments}></textarea>
                     </div>
            
-                    <div className="ui button" tabIndex="0" onClick={this.handleSubmit}>Submit Order</div>
+                    <div className="ui button" tabIndex="0" onClick={this.handleSubmit}>Submit PTP</div>
                 </form>
             </div>
         )
