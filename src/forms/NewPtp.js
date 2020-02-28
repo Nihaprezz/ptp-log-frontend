@@ -131,7 +131,7 @@ class NewPtp extends React.Component {
                         name="comments" placeholder="PTP Comments" value={this.state.comments}></textarea>
                     </div>
            
-                    <div className="ui button" tabIndex="0" onClick={this.handleSubmit}>Submit PTP</div>
+                    <div className="ui button primary" tabIndex="0" onClick={this.handleSubmit}>Submit PTP</div>
                 </form>
             </div>
         )

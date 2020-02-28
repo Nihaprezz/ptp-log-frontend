@@ -7,6 +7,7 @@ import { checkUser } from "./redux/actions"
 import Login from "./forms/Login"
 import Home from "./homepage/Home"
 import CreditUnions from "./creditunions/CreditUnionContainer"
+import PTPEditContainer from "./promisetopay/PTPEditContainer"
 
 class App extends React.Component {
 
@@ -23,9 +24,16 @@ class App extends React.Component {
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : < Home user={this.props.currentUser}/>  
           }}/>
+
           < Route exact path="/credit_unions" render={() => {
             return this.props.currentUser.isadmin ? < CreditUnions /> : < Login />
           }}/>
+
+          < Route exact path="/promisetopay/:id" render={(props) => {
+            let ptpID = props.match.params.id
+            return Array.isArray(this.props.currentUser) ? < Login /> : < PTPEditContainer ptpID={ptpID}/>  
+          }}/>
+
         </Switch>
       </div>
     )

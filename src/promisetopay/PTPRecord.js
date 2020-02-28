@@ -1,8 +1,9 @@
 import React from "react"
+import { Link } from "react-router-dom";
 
 const PTPRecord = (props) => {
-    console.log(props)
-    let {acct_no, first_name, last_name, ptp_amt, ptp_date, created_at, comments, collected_amt } = props.recordObj
+ 
+    let {id, acct_no, first_name, last_name, ptp_amt, ptp_date, created_at, comments, collected_amt } = props.recordObj
     let cuName = props.recordObj.creditunion.name
 
     return (
@@ -13,7 +14,7 @@ const PTPRecord = (props) => {
             <td>{last_name}</td>
             <td>${ptp_amt.toFixed(2)}</td>
             <td>{ptp_date}</td>
-            <td><a className="ui button">Edit</a></td>
+            <td><Link className="ui button" to={`/promisetopay/${id}`}>Edit</Link></td>
         </tr>
     )
 }

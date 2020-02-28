@@ -55,18 +55,4 @@ class PTPContainer extends React.Component {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         fetchPTPData: (type) => {dispatch(fetchPTPData(type))}
-//     }
-// }
-
-// const mapStateToProps = state => {
-//     return {
-//         ptpData: state.ptpData
-//     }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(PTPContainer)
-
 export default PTPContainer
