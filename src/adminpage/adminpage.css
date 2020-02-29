@@ -1,0 +1,8 @@
+.menu-container{
+    display: grid;
+    justify-items: center;
+}
+.adminMenu {
+    width: 70vw !important;
+    margin: auto !important;
+}

@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { checkUser } from "./redux/actions"
+import { checkUser, signOut } from "./redux/actions"
 
 import Login from "./forms/Login"
 import Home from "./homepage/Home"
+import Navbar from "./homepage/Navbar"
 import CreditUnions from "./creditunions/CreditUnionContainer"
 import PTPEditContainer from "./promisetopay/PTPEditContainer"
+import AdminPage from "./adminpage/AdminPage"
 
 class App extends React.Component {
 
@@ -17,9 +19,15 @@ class App extends React.Component {
     }
   }
 
+  signOut = () => {
+    this.props.signOut()
+  }
+
   render(){
     return (
       <div className="App">
+        <Navbar signOut={this.signOut} user={this.props.currentUser}/>
+
         <Switch>
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : < Home user={this.props.currentUser}/>  
@@ -27,6 +35,10 @@ class App extends React.Component {
 
           < Route exact path="/credit_unions" render={() => {
             return this.props.currentUser.isadmin ? < CreditUnions /> : < Login />
+          }}/>
+
+          < Route exact path="/admin_page" render={() => {
+            return this.props.currentUser.isadmin ? < AdminPage /> : < Login />
           }}/>
 
           < Route exact path="/promisetopay/:id" render={(props) => {
@@ -42,7 +54,8 @@ class App extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-     checkUser: () => {dispatch(checkUser())}
+     checkUser: () => {dispatch(checkUser())},
+     signOut: () => {dispatch(signOut())} 
   }
 }
 
