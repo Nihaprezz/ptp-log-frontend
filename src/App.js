@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { checkUser, signOut } from "./redux/actions"
 
@@ -34,11 +34,11 @@ class App extends React.Component {
           }}/>
 
           < Route exact path="/credit_unions" render={() => {
-            return this.props.currentUser.isadmin ? < CreditUnions /> : < Login />
+            return this.props.currentUser.isadmin ? < CreditUnions /> : <Redirect to="/" />
           }}/>
 
           < Route exact path="/admin_page" render={() => {
-            return this.props.currentUser.isadmin ? < AdminPage /> : < Login />
+            return this.props.currentUser.isadmin ? < AdminPage /> :  <Redirect to="/" />
           }}/>
 
           < Route exact path="/promisetopay/:id" render={(props) => {

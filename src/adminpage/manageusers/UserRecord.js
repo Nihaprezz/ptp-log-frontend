@@ -1,16 +1,18 @@
 import React from "react";
 
-const recordStyle = {
-    display: 'grid'
-}
+
  
 const UserRecord = (props) => {
-    console.log(props)
+    console.log(props.userObj.isadmin)
     
     return (
-        <div style={recordStyle}>
+        <div className="user-record-container">
             <p>{props.userObj.username}</p>
-            <span className="ui button">Edit</span>
+            <div className="user-record-btns">  
+             <button className="ui button">Edit</button> 
+             {props.userObj.isadmin ? <p>Admin</p> : null}
+            </div>
+            
         </div>
     )
 }

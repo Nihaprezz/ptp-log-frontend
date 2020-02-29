@@ -6,3 +6,59 @@
     width: 70vw !important;
     margin: auto !important;
 }
+
+
+
+/* Manage Users Page ! */
+.user-page-container {
+    /* border: 5px solid black; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 1vh;
+
+    padding: 1vh 1vw;
+}
+
+.user-record-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    justify-items: center;
+    align-items: center;
+
+    border: 5px solid black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    border: 1px solid rgba(34,36,38,.15);
+    border-top-color: rgba(34, 36, 38, 0.15);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgba(34, 36, 38, 0.15);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgba(34, 36, 38, 0.15);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgba(34, 36, 38, 0.15);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+}
+
+.user-record-container p {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+.user-record-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}

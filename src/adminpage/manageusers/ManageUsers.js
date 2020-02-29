@@ -28,13 +28,18 @@ class ManageUsers extends React.Component {
 
     render(){
         return (
-            <div>
-                <h1>This is the ManageUsers</h1>
+            <div className="user-page-container">
 
-                <div className="ui list">
+                <div className="">
+                    <h1>Manage Users</h1>
+                    
                     {this.state.allUsers.map(user => {
                         return < UserRecord key={user.id} userObj={user}/>
                     })}
+                </div>
+
+                <div>
+                    This is where the form will be
                 </div>
             </div>
         )
