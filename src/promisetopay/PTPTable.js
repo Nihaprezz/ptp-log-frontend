@@ -17,7 +17,6 @@ class PTPTable extends React.Component {
 
         return (
             <div>
-                This will be the PTP Table
                 <h1>{this.props.ptpTypes}</h1>
                 <div>
                     {this.props.ptpData.length === 0 ? <h3>Loading...</h3> : (

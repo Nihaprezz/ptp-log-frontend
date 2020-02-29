@@ -6,7 +6,6 @@ const navStyle ={
 }
 
 const Navbar = (props) => {
-    console.log(props)
     return (
         <div className="ui inverted menu" style={navStyle}>
             <Link to="/" className="item"> Home </Link>
