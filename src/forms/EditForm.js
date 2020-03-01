@@ -1,32 +1,30 @@
 import React from "react"
 
 class EditForm extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             username: "", 
             password: "", 
-            isadmin: false,
-            editState: false,
+            isadmin: props.userObj.isadmin,
         }
     }
 
-    // componentDidMount(){
-    //     this.setState({username: this.props.userObj.username, isadmin: this.props.userObj.isadmin})
-    // }
+    handleUncheck = (e) => {
+        this.setState({isadmin: !this.state.isadmin})
+    }
 
     render(){
-        console.log(this.state)
-        console.log(this.props)
+
 
         let {username, isadmin} = this.props.userObj
 
         return (
             
-            <div>
+            <div >
                 <h1>Edit User: {username}</h1>
-                <form className="ui form">
+                <form className="ui form card">
                     <div className="field">
                         <label>Username</label>
                         <input type="text" name="username" placeholder={username}/>
@@ -35,13 +33,17 @@ class EditForm extends React.Component {
                         <label>Password</label>
                         <input type="password" name="password" placeholder="Password"/>
                     </div>
+
                     <div className="field">
-                        <div className="">
-                        <input type="checkbox" tabIndex="0"/>
                         <label>Admin</label>
-                        </div>
+                        <input type="checkbox" checked={this.state.isadmin} onChange={(e) => this.handleUncheck(e)}/>
+                    </div>   
+
+
+                    <div>
+                        <button className="ui button green" type="submit">Save</button> 
+                        <button className="ui button" onClick={() => this.props.toggleForm()}> Cancel </button>
                     </div>
-                    <button className="ui button" type="submit">Submit</button>
                 </form>
             </div>
         )

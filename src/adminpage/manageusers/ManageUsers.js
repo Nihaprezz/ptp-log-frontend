@@ -34,6 +34,10 @@ class ManageUsers extends React.Component {
         this.setState({editForm: true, editUser: user})
     }
 
+    toggleForm = () => {
+        this.setState({editForm: false})
+    }
+
 
     render(){
 
@@ -49,7 +53,7 @@ class ManageUsers extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.editForm ? < EditForm userObj={this.state.editUser} /> : (
+                    {this.state.editForm ? < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm}/> : (
                         < NewUser />
                     )}
                 </div>
