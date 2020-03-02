@@ -27,7 +27,7 @@ class NewUser extends React.Component {
         if(this.state.isadmin){
             Swal.fire({
                 title: 'Are you sure?',
-                text: 'User will have Admin Privileges', 
+                text: 'User will be an Admin', 
                 icon: 'warning', 
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
