@@ -23,7 +23,8 @@ class NewUser extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        this.props.submitUser(this.state)
+        this.setState({username: "", password: "", isadmin: false})
     }
 
     render(){

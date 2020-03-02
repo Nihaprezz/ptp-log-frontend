@@ -3,6 +3,7 @@ import UserRecord from "./UserRecord"
 import NewUser from "../../forms/NewUser"
 import EditForm from "../../forms/EditForm"
 
+import Swal from "sweetalert2"
 const backend_url = `http://localhost:3001/`
 
 class ManageUsers extends React.Component {
@@ -38,6 +39,38 @@ class ManageUsers extends React.Component {
         this.setState({editForm: false})
     }
 
+    submitUser = (user) => {
+        console.log("adding the user", user)
+    }
+
+    updateUser = (user) => {
+        debugger
+        fetch(backend_url + `users/${user.id}`, {
+            method: "PATCH", 
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept':'application/json',
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`
+            }, 
+            body: JSON.stringify({
+                user : {
+                    username: user.user, 
+                    password: user.password, 
+                    isadmin: user.isadmin
+                }
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.id){
+                Swal.fire('Updated', 'User has been updated!', 'success')
+            } else {
+                Swal.fire('Error!', `${data.message}`, 'error')
+            }
+        })
+
+    }
+
 
     render(){
 
@@ -53,8 +86,8 @@ class ManageUsers extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.editForm ? < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm}/> : (
-                        < NewUser />
+                    {this.state.editForm ? < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm} update={this.updateUser}/> : (
+                        < NewUser submitUser={this.submitUser}/>
                     )}
                 </div>
             </div>
