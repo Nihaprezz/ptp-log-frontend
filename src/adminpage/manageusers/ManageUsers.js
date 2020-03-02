@@ -39,12 +39,34 @@ class ManageUsers extends React.Component {
         this.setState({editForm: false})
     }
 
+    //NEED TO ADD THE CORRECT FIELD 
     submitUser = (user) => {
-        console.log("adding the user", user)
+        fetch(backend_url + "api/v1/users", {
+            method: "POST", 
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }, 
+            body: JSON.stringify({
+                user: {
+                    username: user.username, 
+                    password: user.password, 
+                    isadmin: user.isadmin
+                }
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.error){
+                Swal.fire('Failed', `Error: ${data.error}`, 'error')
+            } else {
+                Swal.fire('Created', `User: ${data.user.username} was created!`, 'success')
+                this.setState({allUsers: [...this.state.allUsers, data.user]})
+            }
+        })
     }
 
     updateUser = (user) => {
-        debugger
         fetch(backend_url + `users/${user.id}`, {
             method: "PATCH", 
             headers: {

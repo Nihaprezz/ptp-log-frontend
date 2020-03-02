@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2"
 
 class NewUser extends React.Component {
     constructor(){
@@ -23,7 +24,24 @@ class NewUser extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.submitUser(this.state)
+        if(this.state.isadmin){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'User will have Admin Privileges', 
+                icon: 'warning', 
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                if(result.value){
+                    this.props.submitUser(this.state)
+                }
+            })
+        } else {
+          this.props.submitUser(this.state)  
+        }
+        
         this.setState({username: "", password: "", isadmin: false})
     }
 
@@ -35,12 +53,12 @@ class NewUser extends React.Component {
                 <div className="field">
                     <label>Username</label>
                     <input onChange ={(e) => this.handleChange(e)}
-                    type="text" name="username" placeholder="Password" value={this.state.username}/>
+                    type="text" name="username" placeholder="Password" value={this.state.username} required/>
                 </div>
                 <div className="field">
                     <label>Password</label>
                     <input onChange ={(e) => this.handleChange(e)}
-                    type="password" name="password" placeholder="Password" value={this.state.password}/>
+                    type="password" name="password" placeholder="Password" value={this.state.password} required/>
                 </div>
 
                 <div className="field">
