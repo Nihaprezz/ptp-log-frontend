@@ -33,7 +33,7 @@ class PTPTable extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {allRecords}
+                                {this.props.ptpData.length ? allRecords: <tr><td>{this.props.ptpData.message}</td></tr>}
                             </tbody>
                         </table>
                     )}

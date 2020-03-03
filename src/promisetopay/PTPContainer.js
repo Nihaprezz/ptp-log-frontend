@@ -20,7 +20,7 @@ class PTPContainer extends React.Component {
     }
 
     fetchBackend = (type) => {
-        fetch(backend_url +`promisetopays/categeory/${type}`)
+        fetch(backend_url +`promisetopays/categeory/${type}/`+ this.props.userid)
         .then(resp => resp.json())
         .then(data => {
             this.setState({ptpData: data})
@@ -44,6 +44,7 @@ class PTPContainer extends React.Component {
                     <button className="ui button" onClick={() => this.handlePTPChange('current')}>Current PTP's</button>
                     <button className="ui button" onClick={() => this.handlePTPChange('daybefore')}>Day Before PTP's</button>
                     <button className="ui button" onClick={() => this.handlePTPChange('dayafter')}>Day After PTP's</button>
+                    <button className="ui button">OTP/Transfers</button>
                 </div>
 
                 <div>

@@ -132,9 +132,9 @@ class ManageUsers extends React.Component {
                 <div className="users-info-container">
                     <h1>Manage Users</h1>
 
-                    <div class="ui icon input">
+                    <div className="ui icon input">
                         <input type="text" placeholder="Search..."/>
-                        <i class="circular search link icon"></i>
+                        <i className="circular search link icon"></i>
                     </div>
 
                     <table className="ui celled table">

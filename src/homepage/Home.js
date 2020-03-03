@@ -6,7 +6,7 @@ const Home = (props) => {
     return (
         <div> 
             <h1> Welcome {props.user.username}!</h1>
-            < PTPContainer />
+            < PTPContainer userid={props.user.id}/>
         </div>
     )
 }
