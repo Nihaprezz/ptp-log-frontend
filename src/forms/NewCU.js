@@ -1,6 +1,6 @@
 import React from "react"
 
-const backend_url = `http://localhost:3001`
+const backend_url = `http://localhost:3001/`
 
 class NewCU extends React.Component {
     constructor(){
@@ -22,7 +22,7 @@ class NewCU extends React.Component {
     }
 
     handleSubmit = () => {
-        fetch(backend_url + '/creditunions', {
+        fetch(backend_url + 'creditunions', {
             method: 'POST', 
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,

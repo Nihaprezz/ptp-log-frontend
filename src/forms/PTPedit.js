@@ -1,6 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
+const backend_url = `http://localhost:3001/`
+
+
 class PTPEdit extends React.Component {
     constructor(){
         super();
@@ -14,25 +17,53 @@ class PTPEdit extends React.Component {
             ptpDate: "",
             comments: "", 
             collectedAmt: "",
-            followedPTP: "",
-            activePtp: ""
+            followedPTP: false, 
+            moveOTP: false,
+            closed_ptp: "",
+            allCreditUnions: []
         }
     }
 
     componentDidMount(){
-        let {acct_no, first_name, last_name, ptp_amt, ptp_date, comments, collected_amt, followed_up, active_ptp } = this.props.ptpObj
+        let {acct_no, first_name, last_name, ptp_amt, ptp_date, comments, collected_amt, followed_up, closed_ptp } = this.props.ptpObj
 
         this.setState({
             accountNo: acct_no, creditUnion: this.props.ptpObj.creditunion.name, firstName: first_name, lastName: last_name,
-            ptpAmt: ptp_amt, ptpDate: ptp_date, comments: comments,  collectedAmt: collected_amt, followedPTP: followed_up, activePtp: active_ptp
+            ptpAmt: ptp_amt, ptpDate: ptp_date, comments: comments,  collectedAmt: collected_amt, followedPTP: followed_up, closed_ptp: closed_ptp
+        })
+
+        this.getAllCUs()
+    }
+
+    getAllCUs = () => {
+        fetch(backend_url + 'creditunions', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(creditUnions => {
+            this.setState({
+                allCreditUnions: creditUnions.map(cu => cu.name),
+            })
+        })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleCheckbox = (e) => {
+        this.setState({
+            [e.target.name]: e.currentTarget.checked
         })
     }
 
     render(){
-        // let {id, acct_no, first_name, last_name, ptp_amt, ptp_date, comments, collected_amt, followed_ptp, active_ptp } = this.props.ptpObj
-        //let employees change the CU NAME?
-
-        console.log(this.props)
         return (
             <div className="form-container">
             <form className="ui form">
@@ -46,8 +77,12 @@ class PTPEdit extends React.Component {
 
                     <div className="field">
                         <label>Credit Union</label>
-                        <input 
-                        type="text" placeholder="Account Number" name="accountNo" defaultValue={this.state.creditUnion}/>  
+                            <select onChange={(e) => this.handleChange(e)}
+                            className="ui fluid dropdown" name="creditUnion" value={this.state.creditUnion}>
+                                {this.state.allCreditUnions.map((cu, index)=> {
+                                    return <option key={index} value={cu}>{cu}</option>
+                                })}
+                            </select>
                     </div>
                 </div>
 
@@ -80,21 +115,29 @@ class PTPEdit extends React.Component {
                     </div>
                 </div>
 
-                <div className="three fields">
+                <div className="four fields">
                     <div className="field">
                         <label>Collected Amt</label>
                         <input onChange={(e) => this.handleChange(e)}
-                        type="number" step="0.01" placeholder="PTP Amount $" name="ptpAmt" value={this.state.collectedAmt}/>
+                        type="number" step="0.01" name="collectedAmt" value={this.state.collectedAmt}/>
                     </div>
 
                     <div className="field">
                         <label>Followed Up</label>
-                        <input className="" type="checkbox" name="example"/>
+                        <input onChange={(e) => this.handleCheckbox(e)}
+                        className="checkbox-style" type="checkbox" name="followedPTP"/>
+                    </div>
+
+                    <div className="field">
+                        <label>Move to OTP/Transers</label>
+                        <input onChange={(e) => this.handleCheckbox(e)}
+                        className="checkbox-style" type="checkbox" name="moveOTP"/>
                     </div>
 
                     <div className="field">
                         <label>Close PTP</label>
-                        <input className="" type="checkbox" name="example"/>
+                        <input onChange={(e) => this.handleCheckbox(e)}
+                        className="checkbox-style" type="checkbox" name="closed_ptp"/>
                     </div>
 
                 </div>
@@ -105,7 +148,7 @@ class PTPEdit extends React.Component {
                     name="comments" placeholder="PTP Comments" value={this.state.comments}></textarea>
                 </div>
        
-                <div className="ui button primary" tabIndex="0" onClick={this.handleSubmit}>Update PTP</div>
+                <div className="ui button primary" tabIndex="0" onClick={() => this.props.updatePTP(this.state, this.props.ptpObj.id)}>Update PTP</div>
                 <Link className="ui button" to="/">Go Back</Link>
 
             </form>
