@@ -44,7 +44,7 @@ class PTPContainer extends React.Component {
                     <button className="ui button" onClick={() => this.handlePTPChange('current')}>Current PTP's</button>
                     <button className="ui button" onClick={() => this.handlePTPChange('daybefore')}>Day Before PTP's</button>
                     <button className="ui button" onClick={() => this.handlePTPChange('dayafter')}>Day After PTP's</button>
-                    <button className="ui button">OTP/Transfers</button>
+                    <button className="ui button" onClick={() => this.handlePTPChange('otptransfers')}>OTP/Transfers</button>
                 </div>
 
                 <div>

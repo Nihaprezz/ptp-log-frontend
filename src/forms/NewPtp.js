@@ -43,6 +43,9 @@ class NewPtp extends React.Component {
 
     handleSubmit = () => {
         console.log("attempting to submit new PTP", this.state)
+        if (this.state.includes("")){
+            console.log('this is empty')
+        }
 
         fetch(backend_url + '/promisetopays', {
             method: "POST", 
@@ -100,13 +103,13 @@ class NewPtp extends React.Component {
                         <div className="field">
                             <label>First Name</label>
                             <input onChange={(e) => this.handleChange(e)}
-                            type="text" placeholder="First Name" name="firstName" value={this.state.firstName}/>
+                            type="text" placeholder="First Name" name="firstName" value={this.state.firstName} required/>
                         </div>
 
                         <div className="field">
                             <label>Last Name</label>
                             <input onChange={(e) => this.handleChange(e)}
-                            type="text" placeholder="Last Name" name="lastName" value={this.state.lastName}/>
+                            type="text" placeholder="Last Name" name="lastName" value={this.state.lastName} required/>
                         </div>
                     </div>
 
@@ -115,13 +118,13 @@ class NewPtp extends React.Component {
                         <div className="field">
                             <label>PTP Amount</label>
                             <input onChange={(e) => this.handleChange(e)}
-                            type="number" step="0.01" placeholder="PTP Amount $" name="ptpAmt" value={this.state.ptpAmt}/>
+                            type="number" step="0.01" placeholder="PTP Amount $" name="ptpAmt" value={this.state.ptpAmt} required/>
                         </div>
 
                         <div className="field">
                             <label>PTP Date</label>
                             <input onChange={(e) => this.handleChange(e)}
-                            type="date" placeholder="PTP Date" name="ptpDate" value={this.state.ptpDate}/>
+                            type="date" placeholder="PTP Date" name="ptpDate" value={this.state.ptpDate} required/>
                         </div>
                     </div>
 

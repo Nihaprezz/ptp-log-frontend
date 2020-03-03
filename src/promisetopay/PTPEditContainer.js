@@ -58,7 +58,6 @@ class PTPEditContainer extends React.Component {
 
 
     render(){
-        console.log(this.state)
         return(
             <div>
                 PTP CONTAINER
