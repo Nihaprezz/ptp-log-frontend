@@ -39,7 +39,20 @@ class PTPTracker extends React.Component {
 
     handleSubmit = () => {
         if(this.state.user !== "" && this.state.user !== ""){
-          console.log('Submitting...', this.state.user, this.state.ptpType, this.state.showClosed)  
+            const customURL = `promisetopays/${this.state.user}/${this.state.ptpType}/${this.state.showClosed}`
+            fetch(backend_url + customURL, {
+                headers: {
+                    "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                    "Content-Type": 'application/json',
+                    "Accept": 'application/json' 
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                debugger
+                console.log(data)
+            })
+          
         } else {
             console.log('Please make sure fields are filled')
         }  

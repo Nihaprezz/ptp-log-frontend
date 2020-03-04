@@ -22,7 +22,7 @@ const FilterBar = (props) => {
                     <option value="">Select PTP Type</option>
                     <option value="daybefore">Day Before</option>
                     <option value="dayafter">Day After</option>
-                    <option value="otptransers">OTP/Transfers</option>
+                    <option value="otptransfers">OTP/Transfers</option>
                 </select>
             </div>
 

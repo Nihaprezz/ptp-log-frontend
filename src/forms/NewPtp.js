@@ -43,9 +43,6 @@ class NewPtp extends React.Component {
 
     handleSubmit = () => {
         console.log("attempting to submit new PTP", this.state)
-        if (this.state.includes("")){
-            console.log('this is empty')
-        }
 
         fetch(backend_url + '/promisetopays', {
             method: "POST", 
