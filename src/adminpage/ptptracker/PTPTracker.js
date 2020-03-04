@@ -38,7 +38,7 @@ class PTPTracker extends React.Component {
     }
 
     handleSubmit = () => {
-        if(this.state.user !== "" && this.state.user !== ""){
+        if(this.state.user !== "" && this.state.ptpType !== ""){
             const customURL = `promisetopays/${this.state.user}/${this.state.ptpType}/${this.state.showClosed}`
             fetch(backend_url + customURL, {
                 headers: {
@@ -49,8 +49,7 @@ class PTPTracker extends React.Component {
             })
             .then(resp => resp.json())
             .then(data => {
-                debugger
-                console.log(data)
+                this.setState({ptpData: data})
             })
           
         } else {
@@ -64,7 +63,7 @@ class PTPTracker extends React.Component {
                 <h1>This is the PTP Tracker</h1>
                 < FilterBar allUsers={this.state.allUsers} handleChange={this.handleChange} 
                 handleSubmit={this.handleSubmit}/>
-                < PTPResults />
+                {this.state.ptpData.length !== 0 ? < PTPResults ptpType={this.state.ptpType} ptpData={this.state.ptpData}/> : null}
             </div>
         )
     }
