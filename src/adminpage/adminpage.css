@@ -42,3 +42,25 @@
     margin-top: 8% !important;
 }
 
+/* PTP Manager Page ! */
+#search-by-bar {
+    width: 50%;
+    margin: auto !important;
+}
+
+.ptp-manager-filter-bar {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    grid-column-gap: 1vh;
+    margin: 2% 5%;
+}
+
+.ptp-manager-filter-bar button {
+    margin-top: 1vh !important;
+}
+
+.dates label {
+    margin-right: .6vw !important;
+}

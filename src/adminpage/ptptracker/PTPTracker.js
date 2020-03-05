@@ -18,17 +18,7 @@ class PTPTracker extends React.Component {
     }
 
     componentDidMount(){
-        fetch(backend_url + 'users', {
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({allUsers: data.map(user => user.username)})
-        }) 
+        this.setState({allUsers: this.props.allUsers.map(user => user.username)})
     }
 
     handleChange = (e) => {

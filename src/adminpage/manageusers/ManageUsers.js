@@ -18,17 +18,7 @@ class ManageUsers extends React.Component {
     }
 
     componentDidMount(){
-        fetch(backend_url + 'users', {
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({allUsers: data})
-        })
+        this.setState({allUsers: this.props.allUsers})
     }
 
     changeToEdit = (user) => {
