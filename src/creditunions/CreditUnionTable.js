@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react"
 import TableRow from "./TableRow"
 
-const backend_url = `http://localhost:3001`
-
 const CreditUnionTable = (props) => {
     const [allCu, setAllCu] = useState([])
 
     useEffect(() => {
-        fetch(backend_url + '/creditunions',{
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
-        .then(resp => resp.json())
-        .then(data => setAllCu(data))
+        setAllCu(props.allCUs)
     }, [])
 
 

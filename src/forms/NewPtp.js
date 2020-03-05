@@ -19,20 +19,8 @@ class NewPtp extends React.Component {
     }
 
     componentDidMount(){
-        fetch(backend_url + 'creditunions', {
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
-        .then(resp => resp.json())
-        .then(creditUnions => {
-            this.setState({
-                allCreditUnions: creditUnions.map(cu => cu.name),
-                creditUnion: creditUnions[0].name
-            })
-        })
+        this.setState({allCreditUnions: this.props.allCUs.map(cu =>  cu.name),
+             creditUnion: this.props.allCUs[0].name})
     }
 
     handleChange = (e) => {

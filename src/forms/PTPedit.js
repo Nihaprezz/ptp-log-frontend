@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
-
-const backend_url = `http://localhost:3001/`
-
+import { Link } from "react-router-dom";
 
 class PTPEdit extends React.Component {
     constructor(){
@@ -28,26 +25,17 @@ class PTPEdit extends React.Component {
         let {acct_no, first_name, last_name, ptp_amt, ptp_date, comments, collected_amt, followed_up, closed_ptp } = this.props.ptpObj
 
         this.setState({
-            accountNo: acct_no, creditUnion: this.props.ptpObj.creditunion.name, firstName: first_name, lastName: last_name,
-            ptpAmt: ptp_amt, ptpDate: ptp_date, comments: comments,  collectedAmt: collected_amt, followedPTP: followed_up, closed_ptp: closed_ptp
-        })
-
-        this.getAllCUs()
-    }
-
-    getAllCUs = () => {
-        fetch(backend_url + 'creditunions', {
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
-        .then(resp => resp.json())
-        .then(creditUnions => {
-            this.setState({
-                allCreditUnions: creditUnions.map(cu => cu.name),
-            })
+            accountNo: acct_no, 
+            creditUnion: this.props.ptpObj.creditunion.name, 
+            firstName: first_name, 
+            lastName: last_name,
+            ptpAmt: ptp_amt, 
+            ptpDate: ptp_date, 
+            comments: comments,  
+            collectedAmt: collected_amt, 
+            followedPTP: followed_up, 
+            closed_ptp: closed_ptp, 
+            allCreditUnions: this.props.allCUs.map(cu => cu.name)
         })
     }
 

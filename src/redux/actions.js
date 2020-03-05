@@ -77,4 +77,5 @@ function fetchPTPData(type){
     }
 }
 
+
 export { checkUser, logIn, signOut, fetchPTPData}

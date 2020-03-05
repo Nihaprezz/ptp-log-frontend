@@ -11,11 +11,30 @@ import CreditUnions from "./creditunions/CreditUnionContainer"
 import PTPEditContainer from "./promisetopay/PTPEditContainer"
 import AdminPage from "./adminpage/AdminPage"
 
+const backend_url = `http://localhost:3001/`
+
 class App extends React.Component {
+  constructor(){
+    super();
+
+    this.state = {
+      allCUs: []
+    }
+  }
 
   componentDidMount(){
     if (localStorage.getItem('jwt')){
       this.props.checkUser()
+
+      fetch(backend_url + 'creditunions',{
+        headers: {
+            "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+            "Content-Type": 'application/json',
+            "Accept": 'application/json'
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => this.setState({allCUs: data}))
     }
   }
 
@@ -30,21 +49,26 @@ class App extends React.Component {
 
         <Switch>
           < Route exact path="/" render={() => {
-            return Array.isArray(this.props.currentUser) ? < Login /> : < Home user={this.props.currentUser}/>  
+            return Array.isArray(this.props.currentUser) ? < Login /> : (
+              < Home user={this.props.currentUser} allCUs={this.state.allCUs}/>  
+            )
           }}/>
 
           < Route exact path="/credit_unions" render={() => {
-            return this.props.currentUser.isadmin ? < CreditUnions /> : <Redirect to="/" />
+            return this.props.currentUser.isadmin ? < CreditUnions allCUs={this.state.allCUs}/> : <Redirect to="/" />
           }}/>
 
           < Route exact path="/admin_page" render={() => {
-            return this.props.currentUser.isadmin ? < AdminPage /> :  <Redirect to="/" />
+            return this.props.currentUser.isadmin ? < AdminPage allCUs={this.state.allCUs}/> :  <Redirect to="/" />
           }}/>
 
           < Route exact path="/promisetopay/:id" render={(props) => {
             let ptpID = props.match.params.id
-            return Array.isArray(this.props.currentUser) ? < Login /> : < PTPEditContainer ptpID={ptpID}/>  
-          }}/>
+            
+            return Array.isArray(this.props.currentUser) ? < Login/> : (
+              < PTPEditContainer ptpID={ptpID} allCUs={this.state.allCUs}/>  
+            )
+            }}/>
 
         </Switch>
       </div>

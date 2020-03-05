@@ -48,7 +48,7 @@ class PTPContainer extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.newPtp ? < NewPtp />  : <PTPTable ptpTypes={this.state.ptpType} ptpData={this.state.ptpData}/>}
+                    {this.state.newPtp ? < NewPtp allCUs={this.props.allCUs} />  : <PTPTable ptpTypes={this.state.ptpType} ptpData={this.state.ptpData}/>}
                 </div>
             </div>
         )

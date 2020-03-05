@@ -12,10 +12,11 @@ class CreditUnionContainer extends React.Component {
     }
 
     render() {
+        console.log(this.props.allCUs)
         return(
             <div>
                 <button className="ui green button" onClick={this.toggleForm}>Add New Credit Union</button>
-                {this.state.showForm ? < NewCU closeForm={this.toggleForm}/> : < CreditUnionTable />}
+                {this.state.showForm ? < NewCU closeForm={this.toggleForm}/> : < CreditUnionTable allCUs={this.props.allCUs}/>}
             </div> 
         )
     }

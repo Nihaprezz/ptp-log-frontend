@@ -62,7 +62,7 @@ class PTPEditContainer extends React.Component {
             <div>
                 PTP CONTAINER
                 <Link className="ui button" to="/">Back Home</Link>
-                {this.state.ptpInfo.length === 0 ? <h3>Loading...</h3> : < PTPEdit ptpObj={this.state.ptpInfo} updatePTP={this.updatePTP}/>}
+                {this.state.ptpInfo.length === 0 ? <h3>Loading...</h3> : < PTPEdit ptpObj={this.state.ptpInfo} updatePTP={this.updatePTP} allCUs={this.props.allCUs}/>}
             </div>
         )
     }
