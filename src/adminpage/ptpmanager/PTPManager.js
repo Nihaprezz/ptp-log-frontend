@@ -14,7 +14,6 @@ class PTPManager extends React.Component {
             endDate: "",
         }
     }
-    
 
     changeSearchType = (type) => {
         this.setState({searchType: type})
@@ -32,7 +31,7 @@ class PTPManager extends React.Component {
                     <a className="item" onClick={() => this.changeSearchType('creditunion')}>Credit Union</a>
                 </div>
 
-                < FilterBar searchType={this.state.searchType}/>
+                < FilterBar searchType={this.state.searchType} allUsers={this.props.allUsers.map(user => user.username)}/>
                 
 
             </div>

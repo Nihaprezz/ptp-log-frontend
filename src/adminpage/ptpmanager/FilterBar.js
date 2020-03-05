@@ -2,7 +2,7 @@ import React from "react";
 
 //Filter Bar for PTP Manager
 const FilterBar = (props) => {
-    console.log(props)
+
     return (
         <div className="ptp-manager-filter-bar">
 
@@ -11,8 +11,10 @@ const FilterBar = (props) => {
                     <label>User</label>
 
                     <select className="ui fluid dropdown">
-                        <option>Sergio</option>
-                        <option>Diego</option>
+                        <option>Choose User</option>>
+                        {props.allUsers.map(user => {
+                            return <option key={user} value="user">{user}</option>
+                        })}
                     </select>
                 </div>
             ) : (
