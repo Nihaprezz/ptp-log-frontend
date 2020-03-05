@@ -6,7 +6,7 @@ const CreditUnionTable = (props) => {
 
     useEffect(() => {
         setAllCu(props.allCUs)
-    }, [])
+    }, [props.allCUs])
 
 
     return (

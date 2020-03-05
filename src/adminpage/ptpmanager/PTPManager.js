@@ -19,6 +19,16 @@ class PTPManager extends React.Component {
         this.setState({searchType: type})
     }
 
+    updateSearchParams = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    submitPTPSearch = () => {
+        console.log("submitting for search....", this.state)
+    }
+
     render(){
         return (
             <div>
@@ -31,8 +41,12 @@ class PTPManager extends React.Component {
                     <a className="item" onClick={() => this.changeSearchType('creditunion')}>Credit Union</a>
                 </div>
 
-                < FilterBar searchType={this.state.searchType} allUsers={this.props.allUsers.map(user => user.username)}/>
-                
+                < FilterBar 
+                searchType={this.state.searchType} 
+                allUsers={this.props.allUsers.map(user => user.username)}
+                allCUs={this.props.allCUs.map(cu => cu.name)}
+                handleChange={this.updateSearchParams}
+                submitPTPSearch={this.submitPTPSearch} />
 
             </div>
         )

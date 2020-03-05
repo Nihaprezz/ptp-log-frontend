@@ -41,7 +41,7 @@ class AdminPage extends React.Component {
           case 'ptpTracker':
             return < PTPTracker allUsers={this.state.allUsers}/>;
           case 'ptpManager':
-            return < PTPManager allUsers={this.state.allUsers}/>;
+            return < PTPManager allUsers={this.state.allUsers} allCUs={this.props.allCUs}/>;
           default:
             return < ManageUsers allUsers={this.state.allUsers}/>;
         }
