@@ -64,3 +64,39 @@
 .dates label {
     margin-right: .6vw !important;
 }
+
+.select-all {
+    margin-right: 5% !important;
+}
+
+.select-all-chbox {
+    width: 40px;
+    height: 10px;
+}
+
+.records-form-container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.records-form-container .segment {
+    height: 80vh;
+    margin-left: 5%;
+    overflow: auto;
+}
+
+.re-assgin-form-container {
+    margin-top: 0 !important;
+    margin-right: 5% !important;
+}
+
+.re-assgin-form-container button {
+    margin-top: 5% !important;
+    margin-bottom: 5% !important;
+}
+
+.reassign-form {
+    width: 70%;
+    margin: auto !important;
+
+}

@@ -1,5 +1,7 @@
 import React from "react";
 import FilterBar from "./FilterBar"
+import PTPRecordsContainer from "./PTPRecordsContainer"
+import ReassignForm from "./ReassignForm"
 
 class PTPManager extends React.Component {
     constructor(){
@@ -48,6 +50,11 @@ class PTPManager extends React.Component {
                 handleChange={this.updateSearchParams}
                 submitPTPSearch={this.submitPTPSearch} />
 
+                <div className="records-form-container container">
+                    < PTPRecordsContainer />
+                    < ReassignForm />    
+                </div>
+               
             </div>
         )
     }
