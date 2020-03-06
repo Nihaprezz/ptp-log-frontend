@@ -58,9 +58,10 @@ class EditForm extends React.Component {
         console.log(this.state)
         return (
             
-            <div >
-                <h1>Edit User: {username}</h1>
-                <form className="ui form card">
+            <div className="user-edit-form-container">
+                <h1><i class="id card icon"></i> Edit User: {username}</h1> 
+
+                <form className="ui form ">
                     <div className="field">
                         <label>Username</label>
                         <input onChange={(e) => this.handleChange(e)}

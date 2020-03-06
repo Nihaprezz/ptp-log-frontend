@@ -120,7 +120,7 @@ class ManageUsers extends React.Component {
             <div className="user-page-container">
 
                 <div className="users-info-container">
-                    <h1>Manage Users</h1>
+                <h1>Manage Users</h1>
 
                     <div className="ui icon input">
                         <input type="text" placeholder="Search..."/>
@@ -130,8 +130,10 @@ class ManageUsers extends React.Component {
                     <table className="ui celled table">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Admin</th>
+                                <th> User Name </th>
+                                <th> Is Admin </th>
+                                <th> Edit </th>
+                                <th> Delete </th>
                             </tr>
                         </thead>
                         <tbody>

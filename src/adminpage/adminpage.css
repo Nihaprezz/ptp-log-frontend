@@ -26,6 +26,15 @@
     font-size: 2vh;
 }
 
+.user-edit-form-container {
+    /* border: 3px solid red; */
+    width: 45vw;
+}
+
+.user-edit-form-container h1 {
+    margin-bottom: 10%;
+}
+
 
 /* PTP Tracker Page ! */
 .filter-bar-container {

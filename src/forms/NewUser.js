@@ -47,9 +47,9 @@ class NewUser extends React.Component {
 
     render(){
         return (
-            <div >
-            <h1>New User</h1>
-            <form className="ui form card">
+            <div className="user-edit-form-container" >
+            <h1> <i class="user icon"></i> New User</h1>
+            <form className="ui form">
                 <div className="field">
                     <label>Username</label>
                     <input onChange ={(e) => this.handleChange(e)}

@@ -13,7 +13,7 @@ class AdminPage extends React.Component {
         super();
 
         this.state = {
-            showPage: "ptpManager", 
+            showPage: "ptpTracker", 
             allUsers: [],
         }
     }
