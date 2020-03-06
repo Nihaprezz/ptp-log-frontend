@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`
 
@@ -30,29 +31,31 @@ class NewPtp extends React.Component {
     }
 
     handleSubmit = () => {
-        console.log("attempting to submit new PTP", this.state)
-
-        fetch(backend_url + '/promisetopays', {
-            method: "POST", 
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }, 
-            body: JSON.stringify({
-                newPTP: this.state
+        if(this.state.accountNo === "" && this.state.creditUnion === "" && this.state.firstName === "", this.state.lastName === "", this.state.ptpAmt === "" && this.state.ptpDate === "") {
+            Swal.fire('Invalid', 'Make sure all fields are filled in.', 'info')
+        } else {
+            fetch(backend_url + '/promisetopays', {
+                method: "POST", 
+                headers: {
+                    "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                    "Content-Type": 'application/json',
+                    "Accept": 'application/json'
+                }, 
+                body: JSON.stringify({
+                    newPTP: this.state
+                })
             })
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            if(data.id){
-                console.log("PTP Added!", data)
-            } else {
-                console.log('Unable to Add')
-            }
-        })
-        .catch(err => console.log(err))
-
+            .then(resp => resp.json())
+            .then(data => {
+                if(data.id){
+                    Swal.fire('Done', 'PTP Added!', 'success')
+                    console.log("PTP Added!", data)
+                } else {
+                    Swal.fire('Error', 'Unable to create PTP. Try Again?', 'error')
+                }
+            })
+            .catch(err => Swal.fire('Error', 'Unable to create PTP. Try Again?', 'error'))
+        }
 
         this.setState({
             accountNo: "", creditUnion: "", firstName: "", lastName: "", ptpAmt: "", ptpDate: "", comments: ""

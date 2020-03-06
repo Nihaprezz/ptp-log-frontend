@@ -22,7 +22,7 @@ class PTPEdit extends React.Component {
     }
 
     componentDidMount(){
-        let {acct_no, first_name, last_name, ptp_amt, ptp_date, comments, collected_amt, followed_up, closed_ptp } = this.props.ptpObj
+        let {acct_no, first_name, last_name, ptp_amt, ptp_date, comments, collected_amt, followed_up, closed_ptp, otp_or_transer } = this.props.ptpObj
 
         this.setState({
             accountNo: acct_no, 
@@ -35,6 +35,7 @@ class PTPEdit extends React.Component {
             collectedAmt: collected_amt, 
             followedPTP: followed_up, 
             closed_ptp: closed_ptp, 
+            moveOTP: otp_or_transer, 
             allCreditUnions: this.props.allCUs.map(cu => cu.name)
         })
     }
@@ -52,6 +53,7 @@ class PTPEdit extends React.Component {
     }
 
     render(){
+        console.log(this.props)
         return (
             <div className="form-container">
             <form className="ui form">
@@ -116,11 +118,14 @@ class PTPEdit extends React.Component {
                         className="checkbox-style" type="checkbox" name="followedPTP"/>
                     </div>
 
-                    <div className="field">
-                        <label>Move to OTP/Transers</label>
-                        <input onChange={(e) => this.handleCheckbox(e)}
-                        className="checkbox-style" type="checkbox" name="moveOTP"/>
-                    </div>
+                     {this.state.moveOTP ? null : (
+                         <div className="field">
+                         <label>Move to OTP/Transers</label>
+                         <input onChange={(e) => this.handleCheckbox(e)}
+                         className="checkbox-style" type="checkbox" name="moveOTP"/>
+                        </div>
+                     )}           
+                    
 
                     <div className="field">
                         <label>Close PTP</label>
