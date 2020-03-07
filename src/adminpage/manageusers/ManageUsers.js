@@ -11,14 +11,9 @@ class ManageUsers extends React.Component {
         super();
 
         this.state = {
-            allUsers : [],
             editForm: false,
             editUser: []
         }
-    }
-
-    componentDidMount(){
-        this.setState({allUsers: this.props.allUsers})
     }
 
     changeToEdit = (user) => {
@@ -51,8 +46,8 @@ class ManageUsers extends React.Component {
                 Swal.fire('Failed', `Error: ${data.error}`, 'error')
             } else {
                 Swal.fire('Created', `User: ${data.user.username} was created!`, 'success')
-                this.setState({allUsers: [...this.state.allUsers, data.user]})
-            }
+                this.props.updateUsersArray(data, "newuser")
+            }   
         })
     }
 
@@ -106,8 +101,7 @@ class ManageUsers extends React.Component {
                })
                .then(resp =>  resp.json())
                .then(data => {
-                   const filtered = [...this.state.allUsers].filter(user => user.id !== data.id)
-                   this.setState({allUsers: filtered})
+                   this.props.updateUsersArray(data, "deleted")
                })
             }
         })
@@ -115,7 +109,7 @@ class ManageUsers extends React.Component {
 
 
     render(){
-
+        console.log(this.state)
         return (
             <div className="user-page-container">
 
@@ -137,7 +131,7 @@ class ManageUsers extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.allUsers.map(user => {
+                            {this.props.allUsers.map(user => {
                                 return < UserRecord key={user.id} userObj={user} changeToEdit={this.changeToEdit}
                                 deleteUser={this.deleteUser}/>
                             })}

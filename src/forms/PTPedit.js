@@ -117,16 +117,13 @@ class PTPEdit extends React.Component {
                         <input onChange={(e) => this.handleCheckbox(e)}
                         className="checkbox-style" type="checkbox" name="followedPTP"/>
                     </div>
-
-                     {this.state.moveOTP ? null : (
-                         <div className="field">
-                         <label>Move to OTP/Transers</label>
-                         <input onChange={(e) => this.handleCheckbox(e)}
-                         className="checkbox-style" type="checkbox" name="moveOTP"/>
-                        </div>
-                     )}           
                     
-
+                    <div className="field">
+                        <label>Move to OTP/Transers</label>
+                        <input onChange={(e) => this.handleCheckbox(e)}
+                         className="checkbox-style" type="checkbox" name="moveOTP"/>
+                    </div>
+                            
                     <div className="field">
                         <label>Close PTP</label>
                         <input onChange={(e) => this.handleCheckbox(e)}

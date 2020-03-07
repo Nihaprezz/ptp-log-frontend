@@ -59,7 +59,7 @@ class EditForm extends React.Component {
         return (
             
             <div className="user-edit-form-container">
-                <h1><i class="id card icon"></i> Edit User: {username}</h1> 
+                <h1><i className="id card icon"></i> Edit User: {username}</h1> 
 
                 <form className="ui form ">
                     <div className="field">

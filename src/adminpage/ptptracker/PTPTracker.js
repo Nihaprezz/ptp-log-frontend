@@ -51,8 +51,9 @@ class PTPTracker extends React.Component {
         return (
             <div>
                 <h1>This is the PTP Tracker</h1>
-                < FilterBar allUsers={this.state.allUsers} handleChange={this.handleChange} 
+                < FilterBar allUsers={this.props.allUsers.map(user => user.username)} handleChange={this.handleChange} 
                 handleSubmit={this.handleSubmit}/>
+
                 {this.state.ptpData.length !== 0 ? < PTPResults ptpType={this.state.ptpType} ptpData={this.state.ptpData}/> : null}
             </div>
         )

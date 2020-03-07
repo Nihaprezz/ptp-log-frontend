@@ -14,7 +14,7 @@ class AdminPage extends React.Component {
 
         this.state = {
             showPage: "ptpTracker", 
-            allUsers: [],
+            allUsers: []
         }
     }
 
@@ -36,6 +36,16 @@ class AdminPage extends React.Component {
         this.setState({showPage: page})
     }
 
+    //handles users being added and removed from the users state.
+    updateUsersArray = (user, type) => {
+        if (type === "deleted"){
+            let filtered = this.state.allUsers.filter(record => record.id !== user.id)
+            this.setState({allUsers: filtered})
+        } else if (type === "newuser"){
+           this.setState({allUsers: [...this.state.allUsers, user.user]})
+        } 
+    }
+
     renderSwitch(page) {
         switch(page) {
           case 'ptpTracker':
@@ -43,7 +53,7 @@ class AdminPage extends React.Component {
           case 'ptpManager':
             return < PTPManager allUsers={this.state.allUsers} allCUs={this.props.allCUs}/>;
           default:
-            return < ManageUsers allUsers={this.state.allUsers}/>;
+            return < ManageUsers allUsers={this.state.allUsers} updateUsersArray={this.updateUsersArray}/>;
         }
     }
 
