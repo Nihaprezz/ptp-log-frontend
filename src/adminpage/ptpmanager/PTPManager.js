@@ -3,6 +3,8 @@ import FilterBar from "./FilterBar"
 import PTPRecordsContainer from "./PTPRecordsContainer"
 import ReassignForm from "./ReassignForm"
 
+const backend_url = `http://localhost:3001/`
+
 class PTPManager extends React.Component {
     constructor(){
         super();
@@ -14,6 +16,7 @@ class PTPManager extends React.Component {
             creditunion: "",
             startDate: "", 
             endDate: "",
+            searchResults: []
         }
     }
 
@@ -28,7 +31,26 @@ class PTPManager extends React.Component {
     }
 
     submitPTPSearch = () => {
-        console.log("submitting for search....", this.state)
+        let {searchType, user, showClosed, creditunion, startDate, endDate} = this.state
+        let endpoint = "";
+
+        if(searchType === "user"){
+            endpoint = `promisetopays/user/${user}/${showClosed}/${startDate}/${endDate}`
+        } else {
+            endpoint = `promisetopays/creditunon/${creditunion}/${showClosed}/${startDate}/${endDate}`
+        }
+
+        fetch(backend_url + endpoint, {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({searchResults: data})
+        })
     }
 
     render(){
@@ -51,7 +73,7 @@ class PTPManager extends React.Component {
                 submitPTPSearch={this.submitPTPSearch} />
 
                 <div className="records-form-container container">
-                    < PTPRecordsContainer />
+                    < PTPRecordsContainer ptpData={this.state.searchResults}/>
                     < ReassignForm />    
                 </div>
                

@@ -1,6 +1,8 @@
 import React from "react";
+import ResultsPTPRecord from "./ResultsPTPRecord"
 
 const PTPRecordsContainer = (props) => {
+    console.log(props)
     return (
         <div className="ui segment">
             <table className="ui celled table">
@@ -18,6 +20,13 @@ const PTPRecordsContainer = (props) => {
                         </th>
                     </tr>
                 </thead>
+                <tbody>
+                    {props.ptpData.message ? <tr><td>{props.ptpData.message}</td></tr> : (
+                        props.ptpData.map(record => {
+                            return < ResultsPTPRecord key={record.id} ptpObj={record}/>
+                        })
+                    )}
+                </tbody>
             </table>
         </div>
     )

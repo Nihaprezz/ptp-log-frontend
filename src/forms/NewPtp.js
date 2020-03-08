@@ -31,7 +31,7 @@ class NewPtp extends React.Component {
     }
 
     handleSubmit = () => {
-        if(this.state.accountNo === "" && this.state.creditUnion === "" && this.state.firstName === "", this.state.lastName === "", this.state.ptpAmt === "" && this.state.ptpDate === "") {
+        if(this.state.accountNo && this.state.creditUnion && this.state.firstName && this.state.lastName && this.state.ptpAmt && this.state.ptpDate ) {
             Swal.fire('Invalid', 'Make sure all fields are filled in.', 'info')
         } else {
             fetch(backend_url + '/promisetopays', {
@@ -54,7 +54,7 @@ class NewPtp extends React.Component {
                     Swal.fire('Error', 'Unable to create PTP. Try Again?', 'error')
                 }
             })
-            .catch(err => Swal.fire('Error', 'Unable to create PTP. Try Again?', 'error'))
+            .catch(err => Swal.fire('Error', `Unable to create PTP : ${err}. Try Again?`, 'error'))
         }
 
         this.setState({

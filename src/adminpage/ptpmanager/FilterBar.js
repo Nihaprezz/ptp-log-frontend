@@ -2,7 +2,6 @@ import React from "react";
 
 //Filter Bar for PTP Manager
 const FilterBar = (props) => {
-    console.log(props)
     return (
         <div className="ptp-manager-filter-bar">
 

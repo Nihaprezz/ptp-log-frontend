@@ -12,13 +12,8 @@ class PTPTracker extends React.Component {
             user: "", 
             ptpType: "", 
             showClosed: false, 
-            ptpData: [], 
-            allUsers: []
+            ptpData: []
         }
-    }
-
-    componentDidMount(){
-        this.setState({allUsers: this.props.allUsers.map(user => user.username)})
     }
 
     handleChange = (e) => {
