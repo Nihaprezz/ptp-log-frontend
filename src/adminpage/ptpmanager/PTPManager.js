@@ -56,8 +56,6 @@ class PTPManager extends React.Component {
     }
 
     handleCheckbox = (e, id) => {
-        console.log('handling checkbox', e.currentTarget.checked, id)
-
         if (e.currentTarget.checked) {
             this.setState({selectedPTPs: [...this.state.selectedPTPs, id]})
         } else {
@@ -69,12 +67,29 @@ class PTPManager extends React.Component {
     handleSelectAll = (e) => {
         this.setState({selectedAll: e.currentTarget.checked})
     }
+    
+    handleUpdate = () => {
+        let recordsToChange = [];
 
-    //handlCheckbox, should take the status of the checked. True or False. along with the id of the record... it will be added or removed from an array depending on what status the check comes in. 
+        if(this.state.selectedAll){
+            recordsToChange = [...this.state.searchResults].map(record => record.id)
+        } else {
+            recordsToChange = this.state.selectedPTPs
+        }
 
-    //handleSelectAll. if the checked is true then the array should switch and will map through this.state.searchResults and turn it into an array of ID's 
+        console.log('updating the', recordsToChange)
+    }
 
-    //HTML element on the re-assign form will have the amount of records selected and should be able to toggle between the select all items and also check to see how many records have a checkbox of select all is not checked....
+    handleDelete = () => {
+        let recordsToDelete = [];
+
+        if(this.state.selectedAll){
+            recordsToDelete = [...this.state.searchResults].map(record =>  record.id)
+        } else {
+            recordsToDelete = this.state.selectedPTPs
+        }
+        console.log('The following records will be deleted', recordsToDelete)
+    }
 
     render(){
         return (
@@ -99,8 +114,12 @@ class PTPManager extends React.Component {
                     < PTPRecordsContainer ptpData={this.state.searchResults} handleSelectAll={this.handleSelectAll} 
                     handleCheckbox={this.handleCheckbox}/>
 
-                    < ReassignForm selectedPTPs={this.state.selectedPTPs} selectedAll={this.state.selectedAll}
-                    allResults={this.state.searchResults.length}/>    
+                    < ReassignForm 
+                    selectedPTPs={this.state.selectedPTPs} 
+                    selectedAll={this.state.selectedAll}
+                    allResults={this.state.searchResults.length} 
+                    handleUpdate={this.handleUpdate}
+                    handleDelete={this.handleDelete} />    
                 </div>
                
             </div>

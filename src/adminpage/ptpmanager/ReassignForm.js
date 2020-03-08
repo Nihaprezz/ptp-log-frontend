@@ -17,11 +17,11 @@ const ReassignForm = (props) => {
                 </div>
             </form>
 
-            <button className="ui button"> Submit </button>
+            <button className="ui button" onClick={() => props.handleUpdate()}> Submit </button>
 
             <div className="ui horizontal divider">OR</div>
 
-            <button className="ui red button">Delete PTP's</button>
+            <button className="ui red button" onClick={() => props.handleDelete()}>Delete PTP's</button>
         </div>
     )
 }
