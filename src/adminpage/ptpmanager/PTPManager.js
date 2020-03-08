@@ -16,7 +16,8 @@ class PTPManager extends React.Component {
             creditunion: "",
             startDate: "", 
             endDate: "",
-            searchResults: []
+            searchResults: [], 
+            selectedAll: false
         }
     }
 
@@ -53,6 +54,16 @@ class PTPManager extends React.Component {
         })
     }
 
+    handleCheckbox = (e) => {
+        console.log('handling checkbox', e.currentTarget.checked)
+    }
+
+    handleSelectAll = (e) => {
+        console.log('handling the select all', e.currentTarget.checked)
+    }
+
+    //
+
     render(){
         return (
             <div>
@@ -73,7 +84,9 @@ class PTPManager extends React.Component {
                 submitPTPSearch={this.submitPTPSearch} />
 
                 <div className="records-form-container container">
-                    < PTPRecordsContainer ptpData={this.state.searchResults}/>
+                    < PTPRecordsContainer ptpData={this.state.searchResults} handleSelectAll={this.handleSelectAll} 
+                    handleCheckbox={this.handleCheckbox}/>
+
                     < ReassignForm />    
                 </div>
                

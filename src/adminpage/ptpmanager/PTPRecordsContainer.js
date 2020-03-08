@@ -2,7 +2,7 @@ import React from "react";
 import ResultsPTPRecord from "./ResultsPTPRecord"
 
 const PTPRecordsContainer = (props) => {
-    console.log(props)
+
     return (
         <div className="ui segment">
             <table className="ui celled table">
@@ -16,14 +16,15 @@ const PTPRecordsContainer = (props) => {
                         <th>Created On</th>
                         <th>
                             <label className="select-all">Select All</label>
-                            <input className="select-all-chbox" type="checkbox"></input>
+                            <input onChange={(e) => props.handleSelectAll(e)}
+                            className="select-all-chbox" type="checkbox"></input>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {props.ptpData.message ? <tr><td>{props.ptpData.message}</td></tr> : (
                         props.ptpData.map(record => {
-                            return < ResultsPTPRecord key={record.id} ptpObj={record}/>
+                            return < ResultsPTPRecord key={record.id} ptpObj={record} selectedAll={props.selectedAll} handleCheckbox={props.handleCheckbox}/>
                         })
                     )}
                 </tbody>
