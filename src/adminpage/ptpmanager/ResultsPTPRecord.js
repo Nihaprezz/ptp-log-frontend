@@ -2,7 +2,7 @@ import React from "react"
 
 const ResultsPTPRecord = (props) => {
     console.log(props)
-    let {first_name, last_name, acct_no, ptp_date, date_created } = props.ptpObj;
+    let {id, first_name, last_name, acct_no, ptp_date, date_created } = props.ptpObj;
     let cuName = props.ptpObj.creditunion.name;
     let userName = props.ptpObj.user.username;
 
@@ -15,7 +15,7 @@ const ResultsPTPRecord = (props) => {
             <td>{ptp_date}</td>
             <td>{date_created}</td>
             <td>
-                <input onChange={(e) => props.handleCheckbox(e)}
+                <input onChange={(e) => props.handleCheckbox(e, id)}
                 type="checkbox" ></input>
             </td>
         </tr>

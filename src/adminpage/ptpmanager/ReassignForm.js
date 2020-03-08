@@ -1,9 +1,13 @@
 import React from "react"
 
 const ReassignForm = (props) => {
+
     return (
         <div className="ui segment re-assgin-form-container">
             <h3>Re-Assign PTPs</h3>
+            <div className="ui card selected-ptps-div">
+                {props.selectedAll ? <p>{props.allResults} PTPs Selected(All)</p> : <p>{props.selectedPTPs.length} PTPs Selected</p>} 
+            </div>
             <form className="ui form reassign-form">
                 <div>
                     <label>User</label>

@@ -17,7 +17,8 @@ class PTPManager extends React.Component {
             startDate: "", 
             endDate: "",
             searchResults: [], 
-            selectedAll: false
+            selectedAll: false,
+            selectedPTPs: []
         }
     }
 
@@ -54,12 +55,19 @@ class PTPManager extends React.Component {
         })
     }
 
-    handleCheckbox = (e) => {
-        console.log('handling checkbox', e.currentTarget.checked)
+    handleCheckbox = (e, id) => {
+        console.log('handling checkbox', e.currentTarget.checked, id)
+
+        if (e.currentTarget.checked) {
+            this.setState({selectedPTPs: [...this.state.selectedPTPs, id]})
+        } else {
+            let removed = [...this.state.selectedPTPs].filter(ptp =>  ptp !== id)
+            this.setState({selectedPTPs: removed})
+        }
     }
 
     handleSelectAll = (e) => {
-        console.log('handling the select all', e.currentTarget.checked)
+        this.setState({selectedAll: e.currentTarget.checked})
     }
 
     //handlCheckbox, should take the status of the checked. True or False. along with the id of the record... it will be added or removed from an array depending on what status the check comes in. 
@@ -91,7 +99,8 @@ class PTPManager extends React.Component {
                     < PTPRecordsContainer ptpData={this.state.searchResults} handleSelectAll={this.handleSelectAll} 
                     handleCheckbox={this.handleCheckbox}/>
 
-                    < ReassignForm />    
+                    < ReassignForm selectedPTPs={this.state.selectedPTPs} selectedAll={this.state.selectedAll}
+                    allResults={this.state.searchResults.length}/>    
                 </div>
                
             </div>

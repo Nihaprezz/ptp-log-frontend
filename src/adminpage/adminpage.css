@@ -107,5 +107,10 @@
 .reassign-form {
     width: 70%;
     margin: auto !important;
+}
 
+.selected-ptps-div {
+    padding: 1vh !important;
+    margin: auto !important;
+    margin-bottom: 2vh !important;
 }
