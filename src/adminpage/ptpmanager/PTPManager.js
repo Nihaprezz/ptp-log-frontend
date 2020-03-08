@@ -67,6 +67,10 @@ class PTPManager extends React.Component {
     handleSelectAll = (e) => {
         this.setState({selectedAll: e.currentTarget.checked})
     }
+
+    handleUserChange = (e) => {
+        this.setState({user: e.currentTarget.value})
+    }
     
     handleUpdate = () => {
         let recordsToChange = [];
@@ -77,7 +81,24 @@ class PTPManager extends React.Component {
             recordsToChange = this.state.selectedPTPs
         }
 
-        console.log('updating the', recordsToChange)
+        fetch(backend_url + 'promisetopays/update_batch/1', {
+            method: "PATCH",
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                ptpIds: recordsToChange, 
+                selectedUser: this.state.user
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            debugger
+        })
+        .catch(err => console.log(err))
     }
 
     handleDelete = () => {
@@ -88,7 +109,24 @@ class PTPManager extends React.Component {
         } else {
             recordsToDelete = this.state.selectedPTPs
         }
-        console.log('The following records will be deleted', recordsToDelete)
+        
+        fetch(backend_url + 'promisetopays/delete_batch/1', {
+            method: 'DELETE', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                ptpIds: recordsToDelete
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            debugger
+            console.log(data)
+        })
+        .catch(err => console.log(err))
     }
 
     render(){
@@ -115,9 +153,11 @@ class PTPManager extends React.Component {
                     handleCheckbox={this.handleCheckbox}/>
 
                     < ReassignForm 
+                    allUsers={this.props.allUsers.map(user => user.username)}
                     selectedPTPs={this.state.selectedPTPs} 
                     selectedAll={this.state.selectedAll}
                     allResults={this.state.searchResults.length} 
+                    handleUserChange={this.handleUserChange}
                     handleUpdate={this.handleUpdate}
                     handleDelete={this.handleDelete} />    
                 </div>

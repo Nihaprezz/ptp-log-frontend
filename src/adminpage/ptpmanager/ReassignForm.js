@@ -11,8 +11,11 @@ const ReassignForm = (props) => {
             <form className="ui form reassign-form">
                 <div>
                     <label>User</label>
-                    <select className="ui fluid dropdown">
-                        <option>User</option>
+                    <select className="ui fluid dropdown" onChange={(e) => props.handleUserChange(e)}>
+                        <option value="">Choose User</option>
+                        {props.allUsers.map(user => {
+                            return <option key={user}>{user}</option>
+                        })}
                     </select>
                 </div>
             </form>
