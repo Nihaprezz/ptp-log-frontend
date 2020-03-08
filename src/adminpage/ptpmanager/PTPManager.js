@@ -62,7 +62,11 @@ class PTPManager extends React.Component {
         console.log('handling the select all', e.currentTarget.checked)
     }
 
-    //
+    //handlCheckbox, should take the status of the checked. True or False. along with the id of the record... it will be added or removed from an array depending on what status the check comes in. 
+
+    //handleSelectAll. if the checked is true then the array should switch and will map through this.state.searchResults and turn it into an array of ID's 
+
+    //HTML element on the re-assign form will have the amount of records selected and should be able to toggle between the select all items and also check to see how many records have a checkbox of select all is not checked....
 
     render(){
         return (
