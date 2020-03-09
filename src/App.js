@@ -77,8 +77,9 @@ class App extends React.Component {
           }}/>
 
           < Route exact path="/user_stats" render={() => {
-              return Array.isArray(this.props.currentUser) ? <Redirect to="/" /> : < RegularStatsPage allCUs={this.state.allCUs} />
-            }}/>
+              return Array.isArray(this.props.currentUser) ? <Redirect to="/" /> : < RegularStatsPage allCUs={this.state.allCUs} user={this.props.currentUser}/>
+          }}/>
+
           </Switch>
       </div>
     )
