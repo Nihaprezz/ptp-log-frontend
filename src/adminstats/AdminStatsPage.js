@@ -1,5 +1,6 @@
 import React from "react";
 import StatsRecord from "../regularstats/StatsRecord"  //Re-using component from regular stats
+import { monthNames } from "../utils/index"
 
 const backend_url =`http://localhost:3001/`
 
@@ -29,15 +30,37 @@ class AdminStatsPage extends React.Component {
         })
         .catch(err => console.log(err))
     }
+    
+    handleMonthChange = (e) => {
+        let monthNum = parseInt(e.currentTarget.value)
+        this.setState({selectedMonth: monthNum + 1})
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.getMonthStats(this.state.selectedMonth)
+    }
 
     render(){
         return (
             <div>
                 <h2>Admin Stats Page</h2>
 
-                <form>
-                    <label>Month</label>
-                    <select></select>
+                <form className="ui form month-select-container">
+                    <div className="field month-field">
+                        <label>Month</label>
+
+                        <select className="ui fluid dropdown" value={this.state.selectedMonth - 1}
+                        onChange={(e) => this.handleMonthChange(e)}>
+
+                            {monthNames.map((month, index)=> {
+                                return <option key={index} value={index}>{month}</option>
+                            })}
+
+                        </select>
+                    </div>
+
+                    <button className="ui primary button" onClick={(e) => this.handleSubmit(e)}>Submit</button>
                 </form>
 
                 <table className="ui celled table stats-table">

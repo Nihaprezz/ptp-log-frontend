@@ -2,3 +2,12 @@
     width: 90% !important;
     margin: auto !important;
 }
+
+.month-field {
+    width: 20% !important;
+    margin: auto !important;
+}
+
+.month-select-container button {
+    margin: 1% !important;
+}

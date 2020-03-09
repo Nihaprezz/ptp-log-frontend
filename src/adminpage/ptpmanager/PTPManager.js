@@ -53,9 +53,7 @@ class PTPManager extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            debugger
             this.setState({searchResults: data})
-
         })
     }
 

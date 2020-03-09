@@ -8,4 +8,4 @@ function getMonth(){
     return monthNames[d.getMonth()]
 }
 
-export { getMonth };
+export { getMonth, monthNames };
