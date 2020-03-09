@@ -2,6 +2,7 @@ import React from "react";
 import FilterBar from "./FilterBar"
 import PTPRecordsContainer from "./PTPRecordsContainer"
 import ReassignForm from "./ReassignForm"
+import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`
 
@@ -18,7 +19,8 @@ class PTPManager extends React.Component {
             endDate: "",
             searchResults: [], 
             selectedAll: false,
-            selectedPTPs: []
+            selectedPTPs: [],
+            userToReassign: ""
         }
     }
 
@@ -51,7 +53,9 @@ class PTPManager extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
+            debugger
             this.setState({searchResults: data})
+
         })
     }
 
@@ -69,7 +73,7 @@ class PTPManager extends React.Component {
     }
 
     handleUserChange = (e) => {
-        this.setState({user: e.currentTarget.value})
+        this.setState({userToReassign: e.currentTarget.value})
     }
     
     handleUpdate = () => {
@@ -90,13 +94,17 @@ class PTPManager extends React.Component {
             }, 
             body: JSON.stringify({
                 ptpIds: recordsToChange, 
-                selectedUser: this.state.user
+                selectedUser: this.state.userToReassign
             })
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
-            debugger
+            if(data.error){
+                Swal.fire('Error', `${data.error}`, 'error')
+            } else {
+                Swal.fire('Success', `${data.message}`, 'success')
+                this.setState({searchResults: []})
+            }
         })
         .catch(err => console.log(err))
     }
@@ -123,8 +131,12 @@ class PTPManager extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            debugger
-            console.log(data)
+            if(data.error){
+                Swal.fire('Error', `${data.error}`, 'error')
+            } else {
+                Swal.fire('Success', `${data.message}`, 'success')
+                this.setState({searchResults: []})
+            }
         })
         .catch(err => console.log(err))
     }

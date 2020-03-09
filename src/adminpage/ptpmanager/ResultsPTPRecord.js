@@ -2,8 +2,10 @@ import React from "react"
 
 const ResultsPTPRecord = (props) => {
     let {id, first_name, last_name, acct_no, ptp_date, date_created } = props.ptpObj;
-    let cuName = props.ptpObj.creditunion.name;
-    let userName = props.ptpObj.user.username;
+    let cuName, userName;
+
+    props.ptpObj.user ? userName = props.ptpObj.user.username : userName = 'User Deleted'
+    props.ptpObj.creditunion ? cuName = props.ptpObj.creditunion.name : cuName = "CU Deleted"
 
     return (
         <tr>
