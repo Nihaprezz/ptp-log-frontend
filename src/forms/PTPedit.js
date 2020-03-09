@@ -53,7 +53,6 @@ class PTPEdit extends React.Component {
     }
 
     render(){
-        console.log(this.props)
         return (
             <div className="form-container">
             <form className="ui form">

@@ -56,6 +56,7 @@ class App extends React.Component {
             )
           }}/>
 
+          {/* CREDIT UNION ADDING AND DELETING  */}
           < Route exact path="/credit_unions" render={() => {
             return this.props.currentUser.isadmin ? < CreditUnions allCUs={this.state.allCUs}/> : <Redirect to="/" />
           }}/>
@@ -73,11 +74,11 @@ class App extends React.Component {
           }}/>
 
           < Route exact path="/admin_stats" render={() => {
-            return this.props.currentUser.isadmin ? < AdminStatsPage allCUs={this.state.allCUs} /> : <Redirect to="/" />
+            return this.props.currentUser.isadmin ? < AdminStatsPage user={this.props.currentUser} /> : <Redirect to="/" />
           }}/>
 
           < Route exact path="/user_stats" render={() => {
-              return Array.isArray(this.props.currentUser) ? <Redirect to="/" /> : < RegularStatsPage allCUs={this.state.allCUs} user={this.props.currentUser}/>
+              return Array.isArray(this.props.currentUser) ? <Redirect to="/" /> : < RegularStatsPage user={this.props.currentUser}/>
           }}/>
 
           </Switch>

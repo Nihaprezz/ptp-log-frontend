@@ -1,8 +1,7 @@
 import React from "react";
-
-const monthNames = ["January", "February", "March", "April", "May", "June",
-"July", "August", "September", "October", "November", "December"
-]
+import StatsRecord from "./StatsRecord"
+import "./regularstats.css"
+import { getMonth } from "../utils/index"
 
 const backend_url = `http://localhost:3001/`
 
@@ -24,16 +23,11 @@ class RegularStats extends React.Component {
         .catch(err => console.log(err))
     }
     
-    getMonth = () => {
-        const d = new Date();
-        return monthNames[d.getMonth()]
-    }
-
     render(){
         return (
             <div>
-                <h1>Stats for {this.getMonth()}</h1>
-                <table className="ui celled table">
+                <h1>Stats for {getMonth()}</h1>
+                <table className="ui celled table stats-table">
                     <thead>
                     <tr>
                         <th>Credit Union</th>
@@ -44,6 +38,13 @@ class RegularStats extends React.Component {
                         <th>Percentage of Amount Collected</th>
                     </tr>
                     </thead>
+                    <tbody>
+                        {this.state.userStats.length === 0 ? <tr><td>Loading...</td></tr> : (
+                            this.state.userStats.map(data => {
+                                return < StatsRecord key={data.cuname} dataObj={data} />
+                            })
+                        )}
+                    </tbody>
                 </table>
             </div>
         )
