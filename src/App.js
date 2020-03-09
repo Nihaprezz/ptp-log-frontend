@@ -10,6 +10,8 @@ import Navbar from "./homepage/Navbar"
 import CreditUnions from "./creditunions/CreditUnionContainer"
 import PTPEditContainer from "./promisetopay/PTPEditContainer"
 import AdminPage from "./adminpage/AdminPage"
+import AdminStatsPage from "./adminstats/AdminStatsPage"
+import RegularStatsPage from "./regularstats/RegularStats"
 
 const backend_url = `http://localhost:3001/`
 
@@ -68,9 +70,16 @@ class App extends React.Component {
             return Array.isArray(this.props.currentUser) ? < Login/> : (
               < PTPEditContainer ptpID={ptpID} allCUs={this.state.allCUs}/>  
             )
-            }}/>
+          }}/>
 
-        </Switch>
+          < Route exact path="/admin_stats" render={() => {
+            return this.props.currentUser.isadmin ? < AdminStatsPage allCUs={this.state.allCUs} /> : <Redirect to="/" />
+          }}/>
+
+          < Route exact path="/user_stats" render={() => {
+              return Array.isArray(this.props.currentUser) ? <Redirect to="/" /> : < RegularStatsPage allCUs={this.state.allCUs} />
+            }}/>
+          </Switch>
       </div>
     )
   }

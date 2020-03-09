@@ -9,10 +9,21 @@ const Navbar = (props) => {
     return (
         <div className="ui inverted menu" style={navStyle}>
             <Link to="/" className="item"> Home </Link>
-            { props.user.isadmin ? < Link to="/credit_unions" className="item">Add Credit Union</Link>: null}
-            { props.user.isadmin ? < Link to="/admin_page" className="item">Admin Page</Link>: null}
-            < Link to="/stats" className="item"> Stats </Link>
-            < Link to="/stats" className="item"> Skip Tracing </Link>
+
+            { props.user.isadmin ? (
+                <React.Fragment>
+                    < Link to="/credit_unions" className="item">Add Credit Union</Link>
+                    < Link to="/admin_page" className="item">Admin Page</Link>
+                </React.Fragment>
+            ): null}
+
+            {props.user.id ? ( 
+                <React.Fragment>
+                    < Link to={props.user.isadmin ? "/admin_stats" : "/user_stats"} className="item"> Stats </Link>
+                    < Link to="/skiptrace" className="item"> Skip Tracing </Link>
+                </React.Fragment>
+            ): null }
+
             <div className="right menu">
                 {/* eslint-disable-next-line*/}
                 {props.user.id ? <a onClick={() => props.signOut()} className="item">Sign Out</a> : null } 
