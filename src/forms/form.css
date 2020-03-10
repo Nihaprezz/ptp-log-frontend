@@ -3,3 +3,11 @@
     margin: auto;
     padding-top: 10vh;
 }
+
+.form-btns-container {
+    margin-top: 5%;
+}
+
+.form-btns-container button:first-child {
+    margin-right: 1%;
+}

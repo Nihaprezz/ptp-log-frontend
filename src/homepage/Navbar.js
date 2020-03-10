@@ -20,7 +20,7 @@ const Navbar = (props) => {
             {props.user.id ? ( 
                 <React.Fragment>
                     < Link to={props.user.isadmin ? "/admin_stats" : "/user_stats"} className="item"> Stats </Link>
-                    < Link to="/skiptrace" className="item"> Skip Tracing </Link>
+                    < Link to="/skip_trace" className="item"> Skip Tracing </Link>
                 </React.Fragment>
             ): null }
 
