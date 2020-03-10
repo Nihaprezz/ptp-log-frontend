@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PTPEdit from "../forms/PTPedit"
+import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`
 
@@ -26,7 +27,6 @@ class PTPEditContainer extends React.Component {
 
         let followed_up = followedPTP ? 1 : 0
 
-        console.log('attempting to update ptp', ptpData)
         fetch(backend_url + `promisetopays/${id}`,{
             method: 'PATCH',
             headers: {
@@ -50,9 +50,14 @@ class PTPEditContainer extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
-            debugger
+            if(data.message === "updated"){
+                Swal.fire('Updated', `PTP has been ${data.message}`, 'success')
+                .then(() => window.history.back());
+            } else {
+                Swal.fire('Error', 'Something seemed to go wrong..', 'error')
+            }
         })
+        .catch(err => alert(err))
     }
 
 

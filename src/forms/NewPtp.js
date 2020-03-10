@@ -1,5 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2"
+import { validatePTP } from "../utils/index" 
 
 const backend_url = `http://localhost:3001/`
 
@@ -31,7 +32,7 @@ class NewPtp extends React.Component {
     }
 
     handleSubmit = () => {
-        if(this.state.accountNo && this.state.creditUnion && this.state.firstName && this.state.lastName && this.state.ptpAmt && this.state.ptpDate ) {
+        if(validatePTP(this.state.accountNo, this.state.firstName, this.state.lastName, this.state.ptpAmt, this.state.ptpDate)) {
             Swal.fire('Invalid', 'Make sure all fields are filled in.', 'info')
         } else {
             fetch(backend_url + '/promisetopays', {
@@ -49,7 +50,6 @@ class NewPtp extends React.Component {
             .then(data => {
                 if(data.id){
                     Swal.fire('Done', 'PTP Added!', 'success')
-                    console.log("PTP Added!", data)
                 } else {
                     Swal.fire('Error', 'Unable to create PTP. Try Again?', 'error')
                 }

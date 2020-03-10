@@ -8,4 +8,14 @@ function getMonth(){
     return monthNames[d.getMonth()]
 }
 
-export { getMonth, monthNames };
+//HELPER TO VALIDATE FORM
+function validatePTP(accountNo, firstName, lastName, ptpAmt, ptpDate){
+    if(accountNo === "" || firstName === ""
+    || lastName === "" || ptpAmt === "" || ptpDate === "") {
+        return true
+    } else {
+        return false
+    }
+}
+
+export { getMonth, monthNames, validatePTP };
