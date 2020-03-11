@@ -2,6 +2,7 @@ import React from "react";
 import SkipTraceTable from "./SkipTraceTable"
 import NewSkip from "../forms/NewSkip"
 import Swal from "sweetalert2"
+import { encryptSSN, decipherSSN } from "../utils/index"
 
 const backend_url = `http://localhost:3001/`
 
@@ -15,6 +16,10 @@ class SkipTracePage extends React.Component {
             skipData: []
         }
     }
+    
+    componentDidMount(){
+        this.fetchSkips()
+    }
 
     handleSkipChange = (type) => {
         this.setState({newSkip: false, skipType: type})
@@ -26,6 +31,8 @@ class SkipTracePage extends React.Component {
 
     submitSkip = (info) => {
         let { creditUnion, accountNo, firstName, lastName, ssn } = info
+        
+        let encryptedSSN = encryptSSN(ssn)
         
         fetch(backend_url + 'skips/', {
             method: 'POST', 
@@ -40,12 +47,13 @@ class SkipTracePage extends React.Component {
                 accountNo, 
                 firstName, 
                 lastName, 
-                ssn
+                ssn: encryptedSSN
             })
         })
         .then(resp => resp.json())
         .then(data => {
             if(data.id){
+                debugger
                 Swal.fire('Success', 'Skip has been added!', 'success')
             } else {
                 Swal.fire('Error', `${data.error}`, 'error')
@@ -53,8 +61,24 @@ class SkipTracePage extends React.Component {
         })
         .catch(err => alert(err))
     }
+
+    fetchSkips = () => {
+        fetch(backend_url + 'skips/1', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(skipData => {
+            this.setState({skipData: skipData[0]})
+            console.log(decipherSSN(skipData[0].ssn))
+        })
+    }
     
     render(){
+        console.log(this.state)
         return (
             <div>
                 <h1>Skip Trace Page </h1>
