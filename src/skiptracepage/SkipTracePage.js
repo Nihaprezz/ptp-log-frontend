@@ -1,6 +1,7 @@
 import React from "react";
 import SkipTraceTable from "./SkipTraceTable"
 import NewSkip from "../forms/NewSkip"
+import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`
 
@@ -24,7 +25,33 @@ class SkipTracePage extends React.Component {
     }
 
     submitSkip = (info) => {
-        console.log("sending the skip for submission", info)
+        let { creditUnion, accountNo, firstName, lastName, ssn } = info
+        
+        fetch(backend_url + 'skips/', {
+            method: 'POST', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                user: this.props.user.id,
+                creditUnion, 
+                accountNo, 
+                firstName, 
+                lastName, 
+                ssn
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.id){
+                Swal.fire('Success', 'Skip has been added!', 'success')
+            } else {
+                Swal.fire('Error', `${data.error}`, 'error')
+            }
+        })
+        .catch(err => alert(err))
     }
     
     render(){

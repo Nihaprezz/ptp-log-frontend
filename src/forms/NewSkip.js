@@ -5,11 +5,11 @@ class NewSkip extends React.Component {
         super();
 
         this.state = {
-            accountNo: false,
-            creditUnion: false,
-            firstName: false,
-            lastName: false,
-            ssn: false, 
+            accountNo: "",
+            creditUnion: "",
+            firstName: "",
+            lastName: "",
+            ssn: "", 
         }
     }   
 
