@@ -16,13 +16,13 @@ class SkipTracePage extends React.Component {
             skipData: []
         }
     }
-    
+
     componentDidMount(){
-        this.fetchSkips()
+        this.fetchSkips('pending')
     }
 
     handleSkipChange = (type) => {
-        this.setState({newSkip: false, skipType: type})
+        this.setState({newSkip: false, skipType: type}, () => this.fetchSkips(type))
     }
 
     toggleForm = () => {
@@ -53,7 +53,6 @@ class SkipTracePage extends React.Component {
         .then(resp => resp.json())
         .then(data => {
             if(data.id){
-                debugger
                 Swal.fire('Success', 'Skip has been added!', 'success')
             } else {
                 Swal.fire('Error', `${data.error}`, 'error')
@@ -62,8 +61,8 @@ class SkipTracePage extends React.Component {
         .catch(err => alert(err))
     }
 
-    fetchSkips = () => {
-        fetch(backend_url + 'skips/1', {
+    fetchSkips = (type) => {
+        fetch(backend_url + `skips/user_${type}/${this.props.user.id}`, {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
@@ -72,13 +71,14 @@ class SkipTracePage extends React.Component {
         })
         .then(resp => resp.json())
         .then(skipData => {
-            this.setState({skipData: skipData[0]})
-            console.log(decipherSSN(skipData[0].ssn))
+            debugger
+            console.log(skipData)
         })
+        .catch(err => console.log(err))
     }
     
     render(){
-        console.log(this.state)
+    
         return (
             <div>
                 <h1>Skip Trace Page </h1>
