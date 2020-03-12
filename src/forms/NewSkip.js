@@ -1,4 +1,6 @@
 import React from "react";
+import {validateSkip} from "../utils/index"
+import Swal from "sweetalert2"
 
 class NewSkip extends React.Component {
     constructor(){
@@ -21,7 +23,13 @@ class NewSkip extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.submitSkip(this.state)
+        let { accountNo, creditUnion, firstName, lastName, ssn } = this.state
+        if( validateSkip(accountNo, creditUnion, firstName, lastName, ssn)){
+            Swal.fire('Error', 'Make sure all fields are filled.', 'info')
+        } else {
+            this.props.submitSkip(this.state)
+            this.setState({accountNo: "", creditUnion: "", firstName: "", lastName: "", ssn: ""})
+        }
     }
 
     render(){

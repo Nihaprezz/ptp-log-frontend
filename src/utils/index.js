@@ -10,7 +10,7 @@ function getMonth(){
     return monthNames[d.getMonth()]
 }
 
-//HELPER TO VALIDATE FORM
+//HELPER TO VALIDATE PTP FORM
 function validatePTP(accountNo, firstName, lastName, ptpAmt, ptpDate){
     if(accountNo === "" || firstName === ""
     || lastName === "" || ptpAmt === "" || ptpDate === "") {
@@ -19,6 +19,17 @@ function validatePTP(accountNo, firstName, lastName, ptpAmt, ptpDate){
         return false
     }
 }
+
+//HELPER TO VALIDATE SKIP FORM
+function validateSkip (accountNo, creditUnion, firstName, lastName, ssn){
+    if(accountNo === "" || creditUnion === "" || firstName === "" || 
+    lastName === "" || ssn === ""){
+        return true
+    } else {
+        return false
+    }
+}
+
 
 //ENCRYPT AND DECRYPT
 const _secretKey = process.env.REACT_APP_SECRET_KEY
@@ -36,4 +47,4 @@ function decipherSSN(cipherText){
     return decipherText
 }
 
-export { getMonth, monthNames, validatePTP, encryptSSN, decipherSSN };
+export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN };

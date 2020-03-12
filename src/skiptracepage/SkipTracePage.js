@@ -3,6 +3,7 @@ import SkipTraceTable from "./SkipTraceTable"
 import NewSkip from "../forms/NewSkip"
 import Swal from "sweetalert2"
 import { encryptSSN, decipherSSN } from "../utils/index"
+import "./skiptrace.css"
 
 const backend_url = `http://localhost:3001/`
 
@@ -54,6 +55,7 @@ class SkipTracePage extends React.Component {
         .then(data => {
             if(data.id){
                 Swal.fire('Success', 'Skip has been added!', 'success')
+                this.setState({skipData: [...this.state.skipData, data]})
             } else {
                 Swal.fire('Error', `${data.error}`, 'error')
             }
@@ -71,8 +73,7 @@ class SkipTracePage extends React.Component {
         })
         .then(resp => resp.json())
         .then(skipData => {
-            debugger
-            console.log(skipData)
+            this.setState({skipData: skipData})
         })
         .catch(err => console.log(err))
     }
@@ -81,7 +82,6 @@ class SkipTracePage extends React.Component {
     
         return (
             <div>
-                <h1>Skip Trace Page </h1>
 
                 <button className="ui green button" onClick={() => this.toggleForm()}>Add New</button>
                 <button className="ui button" onClick={() => this.handleSkipChange('pending')}>Pending Skips</button>
