@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import AdminSkipRecord from "./AdminSkipRecord" 
+import AdminSkipRecord from "./AdminSkipRecord"
+import AdminSkipSearch from "./AdminSkipSearch" 
 import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`
@@ -10,7 +11,8 @@ class AdminSkipTrace extends React.Component {
         super();
 
         this.state = {
-            skipData: []
+            skipData: [], 
+            showSearchPage: false,
         }
     }
 
@@ -65,38 +67,50 @@ class AdminSkipTrace extends React.Component {
     
     }
 
+    toggleSearch = () => {
+        this.setState({showSearchPage: !this.state.showSearchPage})
+    }
+
     render(){
         return(
             <div>
                 <h1>Pending Skips</h1>
 
-                < Link className="ui primary button" to="/skip_trace" >My Skips</Link>   
+                < Link className="ui primary button" to="/skip_trace" >My Skips</Link>
+
+                <button className="ui button" onClick={() =>  this.toggleSearch()}>
+                    {this.state.showSearchPage ? "Pending Skips" : "Search Returned Skips"}
+                </button>
                 
-                <div className="skip-trace-table">
-                    {this.state.skipData.length === 0 ? <h3>Loading... </h3>: (
-                          <table className="ui celled table">
-                          <thead>
-                              <tr>
-                                  <th>User</th>
-                                  <th>Credit Union</th>
-                                  <th>Acct No</th>
-                                  <th>Member Name</th>
-                                  <th>SSN</th>
-                                  <th>Date Submitted</th>
-                                  <th>Update</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            {this.state.skipData.message ? <tr><td>{this.state.skipData.message}</td></tr>: (
-                                this.state.skipData.map(skip => {
-                                    return <AdminSkipRecord key={skip.id} skipObj={skip}
-                                    updateResults={this.updateResults}/>
-                                })
-                            )}
-                          </tbody>
-                      </table>
-                    )}
-                </div>
+                {this.state.showSearchPage ? (
+                    < AdminSkipSearch />
+                ) : (
+                    <div className="skip-trace-table">
+                        {this.state.skipData.length === 0 ? <h3>Loading... </h3>: (
+                            <table className="ui celled table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Credit Union</th>
+                                    <th>Acct No</th>
+                                    <th>Member Name</th>
+                                    <th>SSN</th>
+                                    <th>Date Submitted</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.skipData.message ? <tr><td>{this.state.skipData.message}</td></tr>: (
+                                    this.state.skipData.map(skip => {
+                                        return <AdminSkipRecord key={skip.id} skipObj={skip}
+                                        updateResults={this.updateResults}/>
+                                    })
+                                )}
+                            </tbody>
+                        </table>
+                        )}
+                    </div>
+                )}
             </div>
         )
     }

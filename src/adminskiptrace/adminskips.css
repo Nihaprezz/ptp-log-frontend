@@ -1,0 +1,23 @@
+/* SKIP SEARCH BAR STYLING */
+.skip-search-bar {
+    width: 60%;
+    margin: auto !important;
+}
+
+.skip-search-bar form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+    margin-top: 3%;
+}
+
+/* SKIP RESULTS AND FORM CONTAINER */
+.skip-results-and-form {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 1fr;
+    grid-gap: 5% 2%;
+}   
+
