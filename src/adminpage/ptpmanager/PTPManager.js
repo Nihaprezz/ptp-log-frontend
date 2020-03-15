@@ -101,7 +101,7 @@ class PTPManager extends React.Component {
                 Swal.fire('Error', `${data.error}`, 'error')
             } else {
                 Swal.fire('Success', `${data.message}`, 'success')
-                this.setState({searchResults: []})
+                this.setState({searchResults: [], selectedPTPs: []})
             }
         })
         .catch(err => console.log(err))
@@ -133,7 +133,7 @@ class PTPManager extends React.Component {
                 Swal.fire('Error', `${data.error}`, 'error')
             } else {
                 Swal.fire('Success', `${data.message}`, 'success')
-                this.setState({searchResults: []})
+                this.setState({searchResults: [], selectedPTPs: []})
             }
         })
         .catch(err => console.log(err))

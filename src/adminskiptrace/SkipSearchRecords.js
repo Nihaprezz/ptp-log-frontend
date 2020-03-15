@@ -2,7 +2,7 @@ import React from "react"
 
 const SkipSearchRecords = (props) => {
 
-    let {first_name, last_name, found, data_created} = props.skipObj
+    let {id, first_name, last_name, found, data_created} = props.skipObj
     let user = props.skipObj.user.username
     let cuName = props.skipObj.creditunion.name
 
@@ -14,7 +14,8 @@ const SkipSearchRecords = (props) => {
             <td>{found ? 'Yes' : 'No'}</td>
             <td>{data_created}</td>
             <td>
-                <input type="checkbox" />
+                <input onChange={(e) => props.handleCheckbox(e, id)}
+                type="checkbox" ></input>
             </td>
         </tr>
     )

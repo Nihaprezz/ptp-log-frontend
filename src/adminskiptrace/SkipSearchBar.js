@@ -26,7 +26,7 @@ const SkipSearchBar = (props) => {
                     <label>
                         Show Closed
                     </label>
-                    <input onChange={(e) => props.handleCheckbox(e)}
+                    <input onChange={(e) => props.handleShowClosed(e)}
                     type="checkbox" name="showClosed"/>
                 </div>
 

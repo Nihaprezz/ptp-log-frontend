@@ -12,13 +12,18 @@ const SkipSearchResult = (props) => {
                         <th>Member Name</th>
                         <th>Found User</th>
                         <th>Date Submitted</th>
-                        <th>Select All</th>
+                        <th>
+                            <label className="select-all">Select All</label>
+                            <input onChange={(e) => props.handleSelectAll(e)}
+                            className="select-all-chbox" type="checkbox"></input>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                 {props.skipRecords.length !== 0 ? (
                     props.skipRecords.map(skip => {
-                        return < SkipSearchRecords key={skip.id} skipObj={skip}/>
+                        return < SkipSearchRecords key={skip.id} skipObj={skip} 
+                        handleCheckbox={props.handleCheckbox}/>
                     })
                 ): null}
                 </tbody>
