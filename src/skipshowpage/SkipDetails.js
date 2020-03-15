@@ -1,14 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom"
 
 const SkipDetails = (props) => {
 
     console.log(props)
     let {id, acct_no, first_name, last_name, results } = props.skipObj
     let cuName = props.skipObj.creditunion.name
-
-    const backBtn = () => {
-        window.history.back()
-    }
 
     return (
         <div>
@@ -33,7 +30,10 @@ const SkipDetails = (props) => {
                     </div>
 
                     <button className="ui primary button">Done</button>
-                    <button className="ui button" onClick={() => backBtn()}>Cancel</button>
+                    <Link className="ui button" to={{
+                        pathname: '/skip_trace', 
+                        state: 'returned'
+                    }}>Back to Log</Link>
                 </div>
 
             </div>

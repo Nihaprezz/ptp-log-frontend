@@ -1,6 +1,6 @@
 import React from "react";
 import SkipTraceTable from "./SkipTraceTable"
-import { Link } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import NewSkip from "../forms/NewSkip"
 import Swal from "sweetalert2"
 import { encryptSSN } from "../utils/index"
@@ -22,6 +22,10 @@ class SkipTracePage extends React.Component {
 
     componentDidMount(){
         this.fetchSkips('pending')
+
+        if(this.props.location.state === 'returned'){
+            this.setState({skipType: 'returned'}, () => this.fetchSkips('returned'))
+        }
     }
 
     handleSkipChange = (type) => {
@@ -83,7 +87,6 @@ class SkipTracePage extends React.Component {
     }
     
     render(){
-    
         return (
             <div>
 
@@ -107,4 +110,4 @@ class SkipTracePage extends React.Component {
     }
 }
 
-export default SkipTracePage
+export default withRouter(SkipTracePage);
