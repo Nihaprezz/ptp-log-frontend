@@ -69,7 +69,9 @@ class AdminSkipTrace extends React.Component {
         return(
             <div>
                 <h1>Pending Skips</h1>
-                < Link className="ui left floated button" to="/skip_trace" >My Skips</Link>
+
+                < Link className="ui primary button" to="/skip_trace" >My Skips</Link>   
+                
                 <div className="skip-trace-table">
                     {this.state.skipData.length === 0 ? <h3>Loading... </h3>: (
                           <table className="ui celled table">

@@ -1,9 +1,11 @@
 import React from "react";
 import SkipTraceTable from "./SkipTraceTable"
+import { Link } from "react-router-dom"
 import NewSkip from "../forms/NewSkip"
 import Swal from "sweetalert2"
 import { encryptSSN } from "../utils/index"
 import "./skiptrace.css"
+
 
 const backend_url = `http://localhost:3001/`
 
@@ -88,6 +90,7 @@ class SkipTracePage extends React.Component {
                 <button className="ui green button" onClick={() => this.toggleForm()}>Add New</button>
                 <button className="ui button" onClick={() => this.handleSkipChange('pending')}>Pending Skips</button>
                 <button className="ui button" onClick={() => this.handleSkipChange('returned')}>Returned Skips</button>
+                {this.props.user.isadmin ? <Link className="ui black button" to="/skip_manager">To Skip Manager</Link> : null}
 
                 {this.state.newSkip ? (
                     < NewSkip 
