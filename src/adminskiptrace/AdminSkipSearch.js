@@ -2,7 +2,10 @@ import React from "react";
 import SkipSearchBar from "./SkipSearchBar"
 import SkipSearchResults from "./SkipSearchResults"
 import SkipReassignForm from "./SkipReassignForm"
+import Swal from "sweetalert2"
 import "./adminskips.css"
+
+const backend_url = `http://localhost:3001/`
 
 class AdminSkipSearch extends React.Component {
     constructor(){
@@ -12,7 +15,6 @@ class AdminSkipSearch extends React.Component {
             startDate: "", 
             endDate: "", 
             showClosed: false,
-            skipType: "", 
             skipRecords: []
         }
     }
@@ -25,7 +27,29 @@ class AdminSkipSearch extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+
+        let { startDate, endDate, showClosed } = this.state
+
+        if(startDate === "" || endDate === ""){
+            Swal.fire('Invalid!', 'Please make sure all fields are filled.', 'warning')
+        } else {
+            fetch(backend_url + `skips/search/${startDate}/${endDate}/${showClosed}`, {
+                headers: {
+                    "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                    "Content-Type": 'application/json',
+                    "Accept": 'application/json'
+                }
+            })
+            .then(resp => resp.json())
+            .then(skips => {
+                if(skips.error){
+                    Swal.fire("Error", 'Unable to find skip records.', 'info')
+                } else {
+                    this.setState({skipRecords: skips})
+                }
+            })
+            .catch(err => alert(err))
+        }
     }
 
     handleCheckbox = (e) => {
@@ -39,7 +63,7 @@ class AdminSkipSearch extends React.Component {
                 handleCheckbox={this.handleCheckbox}/>
 
                 <div className="skip-results-and-form">
-                    < SkipSearchResults />
+                    < SkipSearchResults skipRecords={this.state.skipRecords}/>
 
                     < SkipReassignForm />   
                 </div>

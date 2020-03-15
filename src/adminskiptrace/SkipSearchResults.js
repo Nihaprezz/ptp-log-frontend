@@ -1,4 +1,5 @@
 import React from "react"
+import SkipSearchRecords from "./SkipSearchRecords"
 
 const SkipSearchResult = (props) => {
     return (
@@ -14,6 +15,13 @@ const SkipSearchResult = (props) => {
                         <th>Select All</th>
                     </tr>
                 </thead>
+                <tbody>
+                {props.skipRecords.length !== 0 ? (
+                    props.skipRecords.map(skip => {
+                        return < SkipSearchRecords key={skip.id} skipObj={skip}/>
+                    })
+                ): null}
+                </tbody>
             </table>  
         </div>
     )
