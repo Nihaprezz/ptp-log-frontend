@@ -1,5 +1,5 @@
 import React from "react"
-import { decipherSSN } from "../utils/index"
+import { decipherSSN } from "../../utils/index"
 
 const AdminSkipRecord = (props) => {
     let { id, acct_no, first_name, last_name, data_created, ssn } = props.skipObj

@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import AdminSkipRecord from "./AdminSkipRecord"
-import AdminSkipSearch from "./AdminSkipSearch" 
+import AdminSkipRecord from "./components/AdminSkipRecord"
+import AdminSkipSearch from "./containers/AdminSkipSearch"
 import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`

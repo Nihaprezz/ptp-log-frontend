@@ -1,9 +1,9 @@
 import React from "react";
-import SkipSearchBar from "./SkipSearchBar"
-import SkipSearchResults from "./SkipSearchResults"
-import SkipReassignForm from "./SkipReassignForm"
+import SkipSearchBar from "../components/SkipSearchBar"
+import SkipSearchResults from "../components/SkipSearchResults"
+import SkipReassignForm from "../components/SkipReassignForm"
 import Swal from "sweetalert2"
-import "./adminskips.css"
+import "../adminskips.css"
 
 const backend_url = `http://localhost:3001/`
 
