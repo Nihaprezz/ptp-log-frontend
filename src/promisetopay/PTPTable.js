@@ -9,7 +9,7 @@ class PTPTable extends React.Component {
         if (this.props.ptpData.length){
             allRecords = this.props.ptpData.map(record => {
                 return (
-                    < PTPRecord key={record.id} recordObj={record} />
+                    < PTPRecord key={record.id} recordObj={record} ptpType={this.props.ptpTypes}/>
                 )
             })
         }

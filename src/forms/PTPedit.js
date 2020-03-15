@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class PTPEdit extends React.Component {
     constructor(){
@@ -138,7 +138,7 @@ class PTPEdit extends React.Component {
                 </div>
        
                 <div className="ui button primary" tabIndex="0" onClick={() => this.props.updatePTP(this.state, this.props.ptpObj.id)}>Update PTP</div>
-                <Link className="ui button" to="/">Go Back</Link>
+                <Link className="ui button" to={{pathname: '/', state: `${this.props.location.state}`}}>Go Back</Link>
 
             </form>
         </div>
@@ -146,4 +146,4 @@ class PTPEdit extends React.Component {
     }
 }
 
-export default PTPEdit
+export default withRouter(PTPEdit)

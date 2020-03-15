@@ -1,6 +1,7 @@
 import React from "react"
 import NewPtp from "../forms/NewPtp"
 import PTPTable from "../promisetopay/PTPTable"
+import { withRouter } from "react-router-dom"
 
 const backend_url = `http://localhost:3001/`
 
@@ -17,6 +18,11 @@ class PTPContainer extends React.Component {
     
     componentDidMount(){
         this.fetchBackend(this.state.ptpType)
+
+        if(this.props.location.state){
+            let type = this.props.location.state;
+            this.setState({ptpType: type}, () => this.fetchBackend(type))
+        }
     }
 
     fetchBackend = (type) => {
@@ -55,4 +61,4 @@ class PTPContainer extends React.Component {
     }
 }
 
-export default PTPContainer
+export default withRouter(PTPContainer);
