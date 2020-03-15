@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const SkipRecords = (props) => {
-    console.log(props)
     let { id, acct_no, first_name, last_name, data_created } = props.skipObj
     let cuName = props.skipObj.creditunion.name
 

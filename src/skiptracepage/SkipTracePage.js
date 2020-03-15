@@ -16,7 +16,7 @@ class SkipTracePage extends React.Component {
         this.state = {
             newSkip: false, 
             skipType: "pending", 
-            skipData: []
+            skipData: [], 
         }
     }
 

@@ -6,3 +6,16 @@
     width: 80%;
     margin: 0% 10%;
 }
+
+/* SKIP SHOW PAGE CSS */
+.skip-container {
+    width: 70%;
+    margin: auto !important;
+}
+
+.skip-user-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    font-weight: bold;
+    margin-bottom: 1%;
+}
