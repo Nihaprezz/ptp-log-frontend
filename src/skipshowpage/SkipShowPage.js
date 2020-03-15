@@ -1,5 +1,6 @@
 import React from "react"
 import SkipDetails from "./SkipDetails"
+import Swal from "sweetalert2"
 
 const backend_url = `http://localhost:3001/`
 
@@ -40,8 +41,11 @@ class SkipShowPage extends React.Component {
         })
         .then(resp => resp.json())
         .then(resp => {
-            debugger
-            console.log(resp)
+            if(resp.message){
+                Swal.fire('Success', 'Skip has been updated!', 'success')
+            } else {
+                Swal.fire('Error', 'Unable to update. Try again.', 'error')
+            }
         })
         .catch(err => alert(err))
     }
