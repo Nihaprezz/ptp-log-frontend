@@ -21,10 +21,10 @@ class SkipTracePage extends React.Component {
     }
 
     componentDidMount(){
-        this.fetchSkips('pending')
-
         if(this.props.location.state === 'returned'){
             this.setState({skipType: 'returned'}, () => this.fetchSkips('returned'))
+        } else {
+            this.fetchSkips('pending')
         }
     }
 

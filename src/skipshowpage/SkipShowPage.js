@@ -8,7 +8,8 @@ class SkipShowPage extends React.Component {
         super();
 
         this.state = {
-            skipRecord: []
+            skipRecord: [],
+            foundUser: false
         }
     }
 
@@ -25,15 +26,36 @@ class SkipShowPage extends React.Component {
         .catch(err => alert(err))
     }
 
-    goBack(){
-        this.props.history.goBack();
+    updateSkip = (id) => {
+        fetch(backend_url + `skips/user_update/${id}`, {
+            method: 'PATCH', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json' 
+            }, 
+            body: JSON.stringify({
+                found: this.state.foundUser
+            })
+        })
+        .then(resp => resp.json())
+        .then(resp => {
+            debugger
+            console.log(resp)
+        })
+        .catch(err => alert(err))
+    }
+
+    handleFoundCheck = (e) => {
+        this.setState({foundUser: e.target.checked})
     }
 
     render(){
         return (
             <div>
                 {this.state.skipRecord.length === 0 ? <h3>Loading...</h3> : (
-                    < SkipDetails skipObj={this.state.skipRecord} />
+                    < SkipDetails skipObj={this.state.skipRecord} updateSkip={this.updateSkip} 
+                    handleFoundCheck={this.handleFoundCheck} />
                 )}
                 
             </div>

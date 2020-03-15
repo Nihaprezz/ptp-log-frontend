@@ -17,11 +17,11 @@ class PTPContainer extends React.Component {
     } 
     
     componentDidMount(){
-        this.fetchBackend(this.state.ptpType)
-
         if(this.props.location.state){
             let type = this.props.location.state;
             this.setState({ptpType: type}, () => this.fetchBackend(type))
+        } else {
+            this.fetchBackend(this.state.ptpType)
         }
     }
 

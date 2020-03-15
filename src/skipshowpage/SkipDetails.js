@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 
 const SkipDetails = (props) => {
 
-    console.log(props)
     let {id, acct_no, first_name, last_name, results } = props.skipObj
     let cuName = props.skipObj.creditunion.name
 
@@ -26,10 +25,11 @@ const SkipDetails = (props) => {
 
                     <div className="field">
                         <label>Found User</label>
-                        <input type="checkbox"></input>
+                        <input type="checkbox" onChange={(e) =>  props.handleFoundCheck(e)}></input>
                     </div>
 
-                    <button className="ui primary button">Done</button>
+                    <button className="ui primary button" onClick={() => props.updateSkip(id)}>Done</button>
+
                     <Link className="ui button" to={{
                         pathname: '/skip_trace', 
                         state: 'returned'
