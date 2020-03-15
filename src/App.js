@@ -13,6 +13,7 @@ import AdminPage from "./adminpage/AdminPage"
 import AdminStatsPage from "./adminstats/AdminStatsPage"
 import RegularStatsPage from "./regularstats/RegularStats"
 import SkipTracePage from './skiptracepage/SkipTracePage';
+import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 
 const backend_url = `http://localhost:3001/`
 
@@ -85,6 +86,10 @@ class App extends React.Component {
 
           < Route exact path="/skip_trace" render={() => {
             return Array.isArray(this.props.currentUser) ? <Redirect to="/" />  : < SkipTracePage user={this.props.currentUser} allCUs={this.state.allCUs} />
+          }}/>
+
+          < Route exact path="/skip_manager" render={() => {
+            return this.props.currentUser.isadmin? < AdminSkipTrace /> : < Redirect to="/" />
           }}/>
 
           </Switch>

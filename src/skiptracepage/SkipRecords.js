@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const SkipRecords = (props) => {
-    let { id, acct_no, first_name, last_name, data_created, results } = props.skipObj
+    let { id, acct_no, first_name, last_name, data_created } = props.skipObj
     let cuName = props.skipObj.creditunion.name
 
     return (
@@ -12,7 +12,7 @@ const SkipRecords = (props) => {
             <td>{first_name}</td>
             <td>{last_name}</td>
             <td>{data_created}</td>
-            {results =! "pending" ? (
+            {props.skipObj.results =! "pending" ? (
                 <Link className="ui primary button" to={`/skip/${id}`}> View Results </Link>
             ): null}
         </tr>

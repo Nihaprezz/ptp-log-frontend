@@ -2,7 +2,7 @@ import React from "react";
 import SkipTraceTable from "./SkipTraceTable"
 import NewSkip from "../forms/NewSkip"
 import Swal from "sweetalert2"
-import { encryptSSN, decipherSSN } from "../utils/index"
+import { encryptSSN } from "../utils/index"
 import "./skiptrace.css"
 
 const backend_url = `http://localhost:3001/`
@@ -64,7 +64,9 @@ class SkipTracePage extends React.Component {
     }
 
     fetchSkips = (type) => {
-        fetch(backend_url + `skips/user_${type}/${this.props.user.id}`, {
+        let custom_url = `skips/user_${type}/${this.props.user.id}`
+
+        fetch(backend_url + custom_url, {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
