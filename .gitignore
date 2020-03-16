@@ -24,3 +24,5 @@ yarn-error.log*
 
 # secret key
 .env
+
+yarn.lock
