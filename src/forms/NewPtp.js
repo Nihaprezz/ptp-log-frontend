@@ -2,7 +2,7 @@ import React from "react";
 import Swal from "sweetalert2"
 import { validatePTP } from "../utils/index" 
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class NewPtp extends React.Component {
     constructor(){

@@ -2,7 +2,7 @@ import React from "react"
 import SkipDetails from "./SkipDetails"
 import Swal from "sweetalert2"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class SkipShowPage extends React.Component {
     constructor(){

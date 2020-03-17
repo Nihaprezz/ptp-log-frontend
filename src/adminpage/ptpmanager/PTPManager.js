@@ -4,7 +4,7 @@ import PTPRecordsContainer from "./PTPRecordsContainer"
 import ReassignForm from "./ReassignForm"
 import Swal from "sweetalert2"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class PTPManager extends React.Component {
     constructor(){

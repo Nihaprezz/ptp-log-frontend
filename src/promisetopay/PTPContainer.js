@@ -3,7 +3,7 @@ import NewPtp from "../forms/NewPtp"
 import PTPTable from "../promisetopay/PTPTable"
 import { withRouter } from "react-router-dom"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class PTPContainer extends React.Component {
     constructor(){

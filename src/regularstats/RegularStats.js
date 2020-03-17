@@ -3,7 +3,7 @@ import StatsRecord from "./StatsRecord"
 import "./regularstats.css"
 import { getMonth } from "../utils/index"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class RegularStats extends React.Component {
     constructor(){

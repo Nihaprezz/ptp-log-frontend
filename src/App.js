@@ -16,8 +16,7 @@ import SkipTracePage from './skiptracepage/SkipTracePage';
 import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
 
-const backend_url = `http://localhost:3001/`
-
+const backend_url = process.env.REACT_APP_BACKEND
 
 class App extends React.Component {
   constructor(){

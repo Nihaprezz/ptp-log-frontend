@@ -7,7 +7,7 @@ import { encryptSSN } from "../utils/index"
 import "./skiptrace.css"
 
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class SkipTracePage extends React.Component {
     constructor(){

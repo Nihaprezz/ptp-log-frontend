@@ -1,4 +1,4 @@
-const HOST_URL = `http://localhost:3001/`
+const HOST_URL = process.env.REACT_APP_BACKEND
 
 function setCurrentUser(user) {
     return {type: "CURRENT_USER", payload: user}

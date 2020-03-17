@@ -2,7 +2,7 @@ import React from "react";
 import FilterBar from "./FilterBar"
 import PTPResults from "./PTPResults"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class PTPTracker extends React.Component {
     constructor(){

@@ -1,6 +1,6 @@
 import React from "react"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class NewCU extends React.Component {
     constructor(){

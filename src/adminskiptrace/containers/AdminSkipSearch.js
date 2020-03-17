@@ -5,7 +5,7 @@ import SkipReassignForm from "../components/SkipReassignForm"
 import Swal from "sweetalert2"
 import "../adminskips.css"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class AdminSkipSearch extends React.Component {
     constructor(){

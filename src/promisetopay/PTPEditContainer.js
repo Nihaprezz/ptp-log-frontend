@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PTPEdit from "../forms/PTPedit"
 import Swal from "sweetalert2"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class PTPEditContainer extends React.Component {
     constructor(){

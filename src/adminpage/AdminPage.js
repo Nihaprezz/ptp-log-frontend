@@ -6,7 +6,7 @@ import PTPTracker from "./ptptracker/PTPTracker"
 import ManageUsers from "./manageusers/ManageUsers"
 import PTPManager from "./ptpmanager/PTPManager"
 
-const backend_url = `http://localhost:3001/`
+const backend_url = process.env.REACT_APP_BACKEND
 
 class AdminPage extends React.Component {
     constructor(){
