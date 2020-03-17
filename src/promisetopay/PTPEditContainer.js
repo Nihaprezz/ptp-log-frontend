@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PTPEdit from "../forms/PTPedit"
 import Swal from "sweetalert2"
 
@@ -52,7 +51,6 @@ class PTPEditContainer extends React.Component {
         .then(data => {
             if(data.message === "updated"){
                 Swal.fire('Updated', `PTP has been ${data.message}`, 'success')
-                .then(() => window.history.back());
             } else {
                 Swal.fire('Error', 'Something seemed to go wrong..', 'error')
             }
@@ -66,8 +64,6 @@ class PTPEditContainer extends React.Component {
     
         return(
             <div>
-                PTP CONTAINER
-                <Link className="ui button" to="/">Back Home</Link>
                 {this.state.ptpInfo.length === 0 ? <h3>Loading...</h3> : < PTPEdit ptpObj={this.state.ptpInfo} updatePTP={this.updatePTP} allCUs={this.props.allCUs}/>}
             </div>
         )

@@ -56,7 +56,8 @@ class PTPEdit extends React.Component {
         return (
             <div className="form-container">
             <form className="ui form">
-                <h4 className="ui dividing header">Edit PTP Info</h4>
+                <h3 className="ui dividing header"> Update PTP </h3>
+            
                 <div className="two fields">
                     <div className="field">
                         <label>Account Number</label>
