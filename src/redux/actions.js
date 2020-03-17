@@ -42,7 +42,6 @@ function checkUser(){
             })
             .then(res => res.json())
             .then(data => {
-                debugger
                 if(data.user){
                     dispatch(setCurrentUser(data.user)) 
                 } else {
@@ -58,27 +57,28 @@ function signOut(){
 }
 
 
-//FETCHING PTP DATA FROM BACKEND
-function setPTPDate(data){
-    return {type: "FETCHED_PTP_DATA", payload: data}
+//FETCHING THE CU NAMES FROM THE BACKEND
+function setAllCUs(cuData){
+    return {type: 'SET_ALL_CU', payload: cuData}
 }
-
-function fetchPTPData(type){
-    debugger
-    return (dispatch) => {
-        fetch(HOST_URL + `promisetopays/categeory/${type}`,{
+ 
+function getAllCUs(){
+    return (dispatch => {
+        fetch(HOST_URL + 'creditunions',{
             headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
-                "Accept": 'application/json' 
+                "Accept": 'application/json'
+            }
+          })
+          .then(resp => resp.json())
+          .then(data => {
+            if(data.message){
+              alert(data.message)
+            } else {
+              dispatch(setAllCUs(data))
             }
         })
-        .then(resp => resp.json())
-        .then(data => {
-            dispatch(setPTPDate(data))
-        })
-    }
+    })
 }
 
-
-export { checkUser, logIn, signOut, fetchPTPData}
+export { checkUser, logIn, signOut, getAllCUs}

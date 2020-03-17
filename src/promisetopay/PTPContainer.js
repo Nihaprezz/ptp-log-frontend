@@ -39,6 +39,7 @@ class PTPContainer extends React.Component {
 
     handlePTPChange = (type) => {
         this.setState({newPtp: false, ptpType: type}, () => this.fetchBackend(type))
+        
     }
     
     render(){

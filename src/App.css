@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* PROMISE TO PAY STYLING  */
+.ptp-table-header {
+  padding: 2vh;
+}
+
+.ptp-table-container {
+  width: 95%;
+  margin: auto !important;
+}

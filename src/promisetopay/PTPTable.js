@@ -14,11 +14,22 @@ class PTPTable extends React.Component {
             })
         }
 
+        let tableHdr = "";
+        if(this.props.ptpTypes === "daybefore"){
+            tableHdr = "Day Before"
+        } else if (this.props.ptpTypes === "dayafter"){
+            tableHdr = "Day After"
+        } else if (this.props.ptpTypes === "otptransfers"){
+            tableHdr = "OTP or Tranfer"
+        } else {
+            tableHdr = "Current"
+        }
+
 
         return (
             <div>
-                <h1>{this.props.ptpTypes}</h1>
-                <div>
+                <h3 className="ptp-table-header">{tableHdr} PTP's</h3>
+                <div className="ptp-table-container">
                     {this.props.ptpData.length === 0 ? <h3>Loading...</h3> : (
                         <table className="ui celled table">
                             <thead>

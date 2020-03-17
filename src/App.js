@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { checkUser, signOut } from "./redux/actions"
+import { checkUser, signOut, getAllCUs } from "./redux/actions"
 
 import Login from "./forms/Login"
 import Home from "./homepage/Home"
@@ -16,30 +16,14 @@ import SkipTracePage from './skiptracepage/SkipTracePage';
 import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
 
-const backend_url = process.env.REACT_APP_BACKEND
+// const backend_url = process.env.REACT_APP_BACKEND
 
 class App extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      allCUs: []
-    }
-  }
 
   componentDidMount(){
     if (localStorage.getItem('jwt')){
       this.props.checkUser()
-
-      fetch(backend_url + 'creditunions',{
-        headers: {
-            "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-            "Content-Type": 'application/json',
-            "Accept": 'application/json'
-        }
-      })
-      .then(resp => resp.json())
-      .then(data => this.setState({allCUs: data}))
+      this.props.getAllCUs()
     }
   }
 
@@ -55,24 +39,24 @@ class App extends React.Component {
         <Switch>
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : (
-              < Home user={this.props.currentUser} allCUs={this.state.allCUs}/>  
+              < Home user={this.props.currentUser} allCUs={this.props.allCUs}/>  
             )
           }}/>
 
           {/* CREDIT UNION ADDING AND DELETING  */}
           < Route exact path="/credit_unions" render={() => {
-            return this.props.currentUser.isadmin ? < CreditUnions allCUs={this.state.allCUs}/> : <Redirect to="/" />
+            return this.props.currentUser.isadmin ? < CreditUnions allCUs={this.props.allCUs}/> : <Redirect to="/" />
           }}/>
 
           < Route exact path="/admin_page" render={() => {
-            return this.props.currentUser.isadmin ? < AdminPage allCUs={this.state.allCUs}/> :  <Redirect to="/" />
+            return this.props.currentUser.isadmin ? < AdminPage allCUs={this.props.allCUs}/> :  <Redirect to="/" />
           }}/>
 
           < Route exact path="/promisetopay/:id" render={(props) => {
             let ptpID = props.match.params.id
             
             return Array.isArray(this.props.currentUser) ? < Login/> : (
-              < PTPEditContainer ptpID={ptpID} allCUs={this.state.allCUs}/>  
+              < PTPEditContainer ptpID={ptpID} allCUs={this.props.allCUs}/>  
             )
           }}/>
 
@@ -85,7 +69,7 @@ class App extends React.Component {
           }}/>
 
           < Route exact path="/skip_trace" render={() => {
-            return Array.isArray(this.props.currentUser) ? <Redirect to="/" />  : < SkipTracePage user={this.props.currentUser} allCUs={this.state.allCUs} />
+            return Array.isArray(this.props.currentUser) ? <Redirect to="/" />  : < SkipTracePage user={this.props.currentUser} allCUs={this.props.allCUs} />
           }}/>
 
           < Route exact path="/skip_manager" render={() => {
@@ -107,13 +91,15 @@ class App extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
      checkUser: () => {dispatch(checkUser())},
-     signOut: () => {dispatch(signOut())} 
+     signOut: () => {dispatch(signOut())} , 
+     getAllCUs: () => {dispatch(getAllCUs())}
   }
 }
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser, 
+    allCUs: state.cuData
   }
 }
 
