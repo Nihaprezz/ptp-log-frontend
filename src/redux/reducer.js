@@ -15,6 +15,8 @@ const cuReducer = (state = [], action) => {
     switch(action.type){
         case 'SET_ALL_CU':
             return action.payload
+        case 'ADD_NEW_CU':
+            return [...state, action.payload]
         default: 
             return state;
     }

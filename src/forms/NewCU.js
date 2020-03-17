@@ -1,6 +1,6 @@
 import React from "react"
-
-const backend_url = process.env.REACT_APP_BACKEND
+import { connect } from "react-redux"
+import { addingNewCU } from "../redux/actions"
 
 class NewCU extends React.Component {
     constructor(){
@@ -22,21 +22,7 @@ class NewCU extends React.Component {
     }
 
     handleSubmit = () => {
-        fetch(backend_url + 'creditunions', {
-            method: 'POST', 
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            },
-            body: JSON.stringify({
-                creditUnion: this.state
-            })
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data.name, ' has been added!')
-        })
+       this.props.addingNewCU(this.state)
     }
 
     render(){
@@ -138,4 +124,10 @@ class NewCU extends React.Component {
     }
 }
 
-export default NewCU;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addingNewCU: (cuInfo) => {dispatch(addingNewCU(cuInfo))}
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewCU);

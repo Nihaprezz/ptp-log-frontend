@@ -1,3 +1,5 @@
+import Swal from "sweetalert2"
+
 const HOST_URL = process.env.REACT_APP_BACKEND
 
 function setCurrentUser(user) {
@@ -81,4 +83,33 @@ function getAllCUs(){
     })
 }
 
-export { checkUser, logIn, signOut, getAllCUs}
+function addNewCU(creditunion){
+    return {type: 'ADD_NEW_CU', payload: creditunion}
+}
+
+function addingNewCU(creditUnion){
+    return (dispatch => {
+        fetch(HOST_URL + 'creditunions', {
+            method: 'POST', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify({
+                creditUnion: creditUnion
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if(data.message){
+                Swal.fire('Error', `${data.message}`, 'warning')
+            } else {
+                Swal.fire('Added', `${data.name} has been added!`, 'success')
+                dispatch(addNewCU(data))
+            }
+        })
+    })
+}
+
+export { checkUser, logIn, signOut, getAllCUs, addingNewCU}
