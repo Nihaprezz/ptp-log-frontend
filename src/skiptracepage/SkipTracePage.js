@@ -61,7 +61,8 @@ class SkipTracePage extends React.Component {
         .then(data => {
             if(data.id){
                 Swal.fire('Success', 'Skip has been added!', 'success')
-                this.setState({skipData: [...this.state.skipData, data]})
+                let updatedData = [...this.state.skipData]
+                this.setState({skipData: [...updatedData, data]})
             } else {
                 Swal.fire('Error', `${data.error}`, 'error')
             }

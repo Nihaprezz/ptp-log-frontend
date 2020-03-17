@@ -55,7 +55,7 @@ class AdminSkipTrace extends React.Component {
                 .then(skipRecord => {
                     if(skipRecord.id){
                         let filtered = [...this.state.skipData].filter(record => record.id !== skipRecord.id)
-                        this.setState({skipData: filtered})
+                        this.setState({skipData: filtered}, () => this.checkEmptyData(filtered))
                         Swal.fire('Success', 'Results have been entered', 'success');
                     } else  {
                         Swal.fire('Error', `${skipRecord.message}`, 'error')
@@ -65,6 +65,12 @@ class AdminSkipTrace extends React.Component {
             }
         })
     
+    }
+
+    checkEmptyData = (dataArray) => {
+        if (dataArray.length === 0){
+            this.setState({ skipData: {message: 'No More Pending Skips!'}})
+        }
     }
 
     toggleSearch = () => {
