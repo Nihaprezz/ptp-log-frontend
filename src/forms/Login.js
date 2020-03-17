@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { logIn } from "../redux/actions"
+import { logIn, getAllCUs } from "../redux/actions"
 import "./form.css"
 
 class Login extends React.Component {
@@ -11,6 +11,10 @@ class Login extends React.Component {
             username: "",
             password: ""
         }
+    }
+
+    componentDidMount(){
+        this.props.getAllCUs()
     }
 
     handleChange = (e) => {
@@ -49,7 +53,8 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    logIn: (info) => {dispatch(logIn(info))}
+    logIn: (info) => {dispatch(logIn(info))}, 
+    getAllCUs: () => {dispatch(getAllCUs())}
 })
 
 export default connect(null, mapDispatchToProps)(Login)

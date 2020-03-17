@@ -20,7 +20,7 @@ class PTPTable extends React.Component {
         } else if (this.props.ptpTypes === "dayafter"){
             tableHdr = "Day After"
         } else if (this.props.ptpTypes === "otptransfers"){
-            tableHdr = "OTP or Tranfer"
+            tableHdr = "OTP/Transfer"
         } else {
             tableHdr = "Current"
         }
