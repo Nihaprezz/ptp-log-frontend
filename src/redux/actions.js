@@ -6,7 +6,7 @@ function setCurrentUser(user) {
 
 function logIn(userInfo) {
     return (dispatch) => {
-        fetch(`${HOST_URL}/api/v1/login`, {
+        fetch(HOST_URL + `api/v1/login`, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
@@ -33,13 +33,16 @@ function logIn(userInfo) {
 
 function checkUser(){
         return (dispatch) => {
-            fetch(`${HOST_URL}/api/v1/profile`, {
+            fetch(HOST_URL + `api/v1/profile`, {
                 headers: {
-                    "Authorization" : `Bearer ${localStorage.getItem('jwt')}`
+                    "Authorization" : `Bearer ${localStorage.getItem('jwt')}`, 
+                    'Content-Type' : 'application/json',
+                    'Accept': 'application/json'
                 }
             })
             .then(res => res.json())
             .then(data => {
+                debugger
                 if(data.user){
                     dispatch(setCurrentUser(data.user)) 
                 } else {
@@ -63,7 +66,7 @@ function setPTPDate(data){
 function fetchPTPData(type){
     debugger
     return (dispatch) => {
-        fetch(HOST_URL + `/promisetopays/categeory/${type}`,{
+        fetch(HOST_URL + `promisetopays/categeory/${type}`,{
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
