@@ -10,7 +10,8 @@ class RegularStats extends React.Component {
         super()
 
         this.state = {
-            userStats: []
+            userStats: [],
+            
         }
     }
 
@@ -27,6 +28,9 @@ class RegularStats extends React.Component {
         return (
             <div>
                 <h1>Stats for {getMonth()}</h1>
+
+                
+
                 <table className="ui celled table stats-table">
                     <thead>
                     <tr>

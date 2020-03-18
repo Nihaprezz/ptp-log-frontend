@@ -75,9 +75,10 @@ function getAllCUs(){
           .then(resp => resp.json())
           .then(data => {
             if(data.message){
-              alert(data.message)
+                alert(data.message)
             } else {
-              dispatch(setAllCUs(data))
+                let sorted = [...data].sort((a, b) => a.name > b.name ? 1 : -1)
+                dispatch(setAllCUs(sorted))
             }
         })
     })
