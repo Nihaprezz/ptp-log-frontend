@@ -26,7 +26,7 @@ class AdminStatsPage extends React.Component {
         fetch(backend_url + `stats/admin/${month}`)
         .then(resp => resp.json())
         .then(data => {
-            let sorted = [...data].sort((a, b) => a.name > b.name ? 1 : -1)
+            let sorted = [...data].sort((a, b) => a.cuname > b.cuname ? 1 : -1)
             this.setState({monthStats: sorted})
         })
         .catch(err => console.log(err))
