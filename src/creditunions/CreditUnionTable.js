@@ -10,7 +10,7 @@ const CreditUnionTable = (props) => {
 
 
     return (
-        <div>
+        <div className="cu-table-container">
             <br></br>
             <table className="ui celled table">
                 <thead>
@@ -19,7 +19,7 @@ const CreditUnionTable = (props) => {
                         <th>Street Address</th>
                         <th>City</th>
                         <th>State</th>
-                        <th>Name</th>
+                        <th>Zip Code</th>
                     </tr>
                 </thead>
                 <tbody>

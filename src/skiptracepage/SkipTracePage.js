@@ -104,6 +104,7 @@ class SkipTracePage extends React.Component {
                 <button className="ui button" onClick={() => this.handleSkipChange('returned')}>Returned Skips</button>
                 {this.props.user.isadmin ? <Link className="ui black button" to="/skip_manager">To Skip Manager</Link> : null}
 
+
                 {this.state.newSkip ? (
                     < NewSkip 
                     submitSkip={this.submitSkip}

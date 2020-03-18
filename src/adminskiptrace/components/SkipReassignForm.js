@@ -22,7 +22,8 @@ const SkipReassignForm = (props) => {
                         })}
                     </select>
                 </div>
-
+            
+                <br></br>
                 <button className="ui primary button" onClick={(e) =>  props.handleUpdate(e)}>Submit</button>
             </form>
             

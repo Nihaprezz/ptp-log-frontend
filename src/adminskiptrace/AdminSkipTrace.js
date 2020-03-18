@@ -87,7 +87,8 @@ class AdminSkipTrace extends React.Component {
                 <button className="ui button" onClick={() =>  this.toggleSearch()}>
                     {this.state.showSearchPage ? "Pending Skips" : "Search Returned Skips"}
                 </button>
-                
+
+
                 {this.state.showSearchPage ? (
                     < AdminSkipSearch />
                 ) : (
