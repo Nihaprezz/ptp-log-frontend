@@ -1,7 +1,8 @@
 import React from "react"
 
 const ResultsPTPRecord = (props) => {
-    let {id, first_name, last_name, acct_no, ptp_date, date_created } = props.ptpObj;
+    console.log(props)
+    let {id, first_name, last_name, acct_no, ptp_date, date_created, ptp_amt, collected_amt } = props.ptpObj;
     let cuName, userName;
 
     props.ptpObj.user ? userName = props.ptpObj.user.username : userName = 'User Deleted'
@@ -14,6 +15,8 @@ const ResultsPTPRecord = (props) => {
             <td>{acct_no}</td>
             <td>{`${first_name} ${last_name}`}</td>
             <td>{ptp_date}</td>
+            <td>$ {ptp_amt}</td>
+            <td>$ {collected_amt}</td>
             <td>{date_created}</td>
             <td>
                 <input onChange={(e) => props.handleCheckbox(e, id)}

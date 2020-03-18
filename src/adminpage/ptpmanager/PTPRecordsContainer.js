@@ -13,6 +13,8 @@ const PTPRecordsContainer = (props) => {
                         <th>Account No</th>
                         <th>Member Name</th>
                         <th>PTP Date</th>
+                        <th>PTP Amt</th>
+                        <th>Collected Amt</th>
                         <th>Created On</th>
                         <th>
                             <label className="select-all">Select All</label>
