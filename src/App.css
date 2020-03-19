@@ -55,3 +55,12 @@
   width: 90%;
   margin: auto;
 }
+
+
+/* ADMIN STATS QUICK EDIT */
+.admin-stats-toggle {
+  text-align: left;
+  width: 90%;
+  margin: auto !important;
+  padding-bottom: 1%;
+}

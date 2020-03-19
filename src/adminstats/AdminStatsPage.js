@@ -1,5 +1,6 @@
 import React from "react";
-import StatsRecord from "../regularstats/StatsRecord"  //Re-using component from regular stats
+import PTPAdminTable from "./PTPAdminTable"
+import AdminSkipTable from "./AdminSkipTable"
 import { monthNames } from "../utils/index"
 
 const backend_url =process.env.REACT_APP_BACKEND
@@ -9,8 +10,10 @@ class AdminStatsPage extends React.Component {
         super();
 
         this.state = {
-            monthStats: [],
-            selectedMonth: 0
+            monthPTPStats: [],
+            monthSkipStats: [],
+            selectedMonth: 0, 
+            showSkips: false
         }
     }
 
@@ -26,10 +29,11 @@ class AdminStatsPage extends React.Component {
         fetch(backend_url + `stats/admin/${month}`)
         .then(resp => resp.json())
         .then(data => {
-            let sorted = [...data].sort((a, b) => a.cuname > b.cuname ? 1 : -1)
-            this.setState({monthStats: sorted})
+            let sortedSkips = this.sortCUs(data.skipStats)
+            let sortedPtps = this.sortCUs(data.ptpStats)
+            this.setState({monthPTPStats: sortedPtps, monthSkipStats: sortedSkips})
         })
-        .catch(err => console.log(err))
+        .catch(err => alert(err))
     }
     
     handleMonthChange = (e) => {
@@ -40,6 +44,14 @@ class AdminStatsPage extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.getMonthStats(this.state.selectedMonth)
+    }
+
+    toggleTable = () => {
+        this.setState({showSkips: !this.state.showSkips})
+    }
+
+    sortCUs = (arrayOfCUs) => {
+        return [...arrayOfCUs].sort((a, b) => a.cuname > b.cuname ? 1 : -1)
     }
 
     render(){
@@ -63,26 +75,19 @@ class AdminStatsPage extends React.Component {
 
                     <button className="ui primary button" onClick={(e) => this.handleSubmit(e)}>Submit</button>
                 </form>
+                
+                <div className="admin-stats-toggle">
+                    <button onClick={() => this.toggleTable()} className="ui button">
+                        {this.state.showSkips ? "Switch to PTP Data" : "Switch to Skip Data" }
+                    </button>   
+                </div>
 
-                <table className="ui celled table stats-table">
-                    <thead>
-                        <tr>
-                            <th>Credit Union</th>
-                            <th>Total PTP's Taken</th>
-                            <th>Total Closed PTPs</th>
-                            <th>Total Amount Promised</th>
-                            <th>Total Amount Collected</th>
-                            <th>Percentage of Amount Collected</th> 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.monthStats.length === 0 ? <tr><td>Loading...</td></tr> : (
-                            this.state.monthStats.map(data => {
-                                return < StatsRecord key={data.cuname} dataObj={data} />
-                            })
-                        )}
-                    </tbody>
-                </table>
+
+                {this.state.showSkips ? (
+                    < AdminSkipTable skipStats={this.state.monthSkipStats}/> 
+                ): (
+                   < PTPAdminTable monthStats={this.state.monthPTPStats}/>  
+                )}     
             </div>
         )
     }
