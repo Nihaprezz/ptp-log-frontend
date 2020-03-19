@@ -24,6 +24,8 @@ class NewUser extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        let userInfo = this.state
+
         if(this.state.isadmin){
             Swal.fire({
                 title: 'Are you sure?',
@@ -35,11 +37,11 @@ class NewUser extends React.Component {
                 confirmButtonText: 'Yes!'
             }).then((result) => {
                 if(result.value){
-                    this.props.submitUser(this.state)
+                    this.props.submitUser(userInfo)
                 }
             })
         } else {
-          this.props.submitUser(this.state)  
+          this.props.submitUser(userInfo)  
         }
         
         this.setState({username: "", password: "", isadmin: false})

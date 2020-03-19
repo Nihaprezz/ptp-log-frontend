@@ -12,8 +12,14 @@ class ManageUsers extends React.Component {
 
         this.state = {
             editForm: false,
-            editUser: []
+            editUser: [],
+            allUsers: [], 
+            searchText: ""
         }
+    }
+
+    componentDidMount(){
+        this.setState({allUsers: this.props.allUsers})
     }
 
     changeToEdit = (user) => {
@@ -107,9 +113,13 @@ class ManageUsers extends React.Component {
         })
     }
 
+    handleSearchText = (e) => {
+        this.setState({searchText: e.currentTarget.value})
+    }
 
     render(){
-        console.log(this.state)
+        let usersArray = this.state.allUsers.filter(user => user.username.includes(this.state.searchText))
+
         return (
             <div className="user-page-container">
 
@@ -117,7 +127,8 @@ class ManageUsers extends React.Component {
                 <h1>Manage Users</h1>
 
                     <div className="ui icon input">
-                        <input type="text" placeholder="Search..."/>
+                        <input onChange={(e) => this.handleSearchText(e)} 
+                        type="text" placeholder="Search..."/>
                         <i className="circular search link icon"></i>
                     </div>
 
@@ -131,7 +142,7 @@ class ManageUsers extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.allUsers.map(user => {
+                            {usersArray.map(user => {
                                 return < UserRecord key={user.id} userObj={user} changeToEdit={this.changeToEdit}
                                 deleteUser={this.deleteUser}/>
                             })}
