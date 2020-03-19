@@ -2,7 +2,6 @@ import React from "react"
 import SkipStatRecord from "./SkipStatRecord"
 
 const AdminSkipTable = (props) => {
-    console.log(props)
     return (
         <table className="ui celled table stats-table">
         <thead>
