@@ -7,6 +7,7 @@ function setCurrentUser(user) {
 }
 
 function logIn(userInfo) {
+    Swal.showLoading();
     return (dispatch) => {
         fetch(HOST_URL + `api/v1/login`, {
             method: 'POST',
@@ -24,9 +25,11 @@ function logIn(userInfo) {
         .then(resp => resp.json())
         .then(data => {
             if (data.user){
+                Swal.close();
                 dispatch(setCurrentUser(data.user));
                 localStorage.setItem("jwt", data.jwt) 
             } else {
+                Swal.close();
                 alert(data.message)
             }
         })
@@ -34,6 +37,7 @@ function logIn(userInfo) {
 }
 
 function checkUser(){
+        Swal.showLoading();
         return (dispatch) => {
             fetch(HOST_URL + `api/v1/profile`, {
                 headers: {
@@ -45,8 +49,10 @@ function checkUser(){
             .then(res => res.json())
             .then(data => {
                 if(data.user){
+                    Swal.close();
                     dispatch(setCurrentUser(data.user)) 
                 } else {
+                    Swal.close();
                     alert('error : unable to retrieve info')
                 }
             })
