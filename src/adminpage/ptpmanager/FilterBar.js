@@ -11,6 +11,7 @@ const FilterBar = (props) => {
 
                     <select className="ui fluid dropdown" name="user" onChange={(e) => props.handleChange(e)}>
                         <option value="">Choose User</option>>
+                        <option value="all">All Users</option>
                         {props.allUsers.map(user => {
                             return <option key={user} value={user}> {user} </option>
                         })}

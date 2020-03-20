@@ -40,10 +40,17 @@ class PTPManager extends React.Component {
 
         if(searchType === "user"){
             endpoint = `promisetopays/user/${user}/${showClosed}/${startDate}/${endDate}`
+
+            user === "" ? Swal.fire('Warning', 'Make sure all fields are filled', 'warning') : this.fetchData(endpoint)
         } else {
             endpoint = `promisetopays/creditunon/${creditunion}/${showClosed}/${startDate}/${endDate}`
-        }
 
+            creditunion === "" ? Swal.fire('Warning', 'Make sure all fields are filled', 'warning') : (
+                this.fetchData(endpoint) )
+        }
+    }
+
+    fetchData = (endpoint) => {
         fetch(backend_url + endpoint, {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
@@ -55,6 +62,7 @@ class PTPManager extends React.Component {
         .then(data => {
             this.setState({searchResults: data})
         })
+        .catch(err => alert(err))
     }
 
     handleCheckbox = (e, id) => {
