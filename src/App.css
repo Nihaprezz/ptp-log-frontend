@@ -64,3 +64,8 @@
   margin: auto !important;
   padding-bottom: 1%;
 }
+
+/* PTP RECORDS CONTAINER UNDER PTP MANAGER */
+.addpointer {
+  cursor: pointer !important;
+}

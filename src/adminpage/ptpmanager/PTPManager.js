@@ -83,6 +83,9 @@ class PTPManager extends React.Component {
     }
     
     handleUpdate = () => {
+        // Loader will show
+        Swal.showLoading();
+
         let recordsToChange = [];
 
         if(this.state.selectedAll){
@@ -90,6 +93,7 @@ class PTPManager extends React.Component {
         } else {
             recordsToChange = this.state.selectedPTPs
         }
+
 
         fetch(backend_url + 'promisetopays/update_batch/1', {
             method: "PATCH",
@@ -105,6 +109,9 @@ class PTPManager extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
+            // Close loader once response comes back
+            Swal.close();
+            
             if(data.error){
                 Swal.fire('Error', `${data.error}`, 'error')
             } else {
@@ -147,6 +154,21 @@ class PTPManager extends React.Component {
         .catch(err => console.log(err))
     }
 
+    handleSortBy = (type) => {
+        if (type === 'user'){
+            let sortedByUser = [...this.state.searchResults].sort((a, b) => {
+                return a.user.username.toLowerCase() > b.user.username.toLowerCase() ? 1 : -1
+            })
+
+            this.setState({searchResults: sortedByUser})
+        } else if (type === 'cu') {
+            let sortByCu = [...this.state.searchResults].sort((a, b) => {
+                return  a.creditunion.name.toLowerCase() > b.creditunion.name.toLowerCase() ? 1 : -1
+            })
+            this.setState({searchResults: sortByCu})
+        }
+    }
+
     render(){
         return (
             <div>
@@ -167,8 +189,10 @@ class PTPManager extends React.Component {
                 submitPTPSearch={this.submitPTPSearch} />
 
                 <div className="records-form-container container">
-                    < PTPRecordsContainer ptpData={this.state.searchResults} handleSelectAll={this.handleSelectAll} 
-                    handleCheckbox={this.handleCheckbox}/>
+                    < PTPRecordsContainer ptpData={this.state.searchResults} 
+                    handleSelectAll={this.handleSelectAll} 
+                    handleCheckbox={this.handleCheckbox}
+                    handleSortBy={this.handleSortBy}/>
 
                     < ReassignForm 
                     allUsers={this.props.allUsers.map(user => user.username)}

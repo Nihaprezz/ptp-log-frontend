@@ -8,8 +8,8 @@ const PTPRecordsContainer = (props) => {
             <table className="ui celled table">
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>CU Name</th>
+                        <th className="addpointer" onClick={() => props.handleSortBy('user')}>User</th>
+                        <th className="addpointer" onClick={() => props.handleSortBy('cu')}>CU Name</th>
                         <th>Account No</th>
                         <th>Member Name</th>
                         <th>PTP Date</th>
