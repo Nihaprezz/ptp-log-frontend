@@ -15,8 +15,8 @@ const ResultsPTPRecord = (props) => {
             <td>{acct_no}</td>
             <td>{`${first_name} ${last_name}`}</td>
             <td>{ptp_date}</td>
-            <td>$ {ptp_amt}</td>
-            <td>$ {collected_amt}</td>
+            <td>$ {ptp_amt.toFixed(2)}</td>
+            <td>$ {collected_amt.toFixed(2)}</td>
             <td>{date_created}</td>
             <td>
                 <input onChange={(e) => props.handleCheckbox(e, id)}
