@@ -17,6 +17,9 @@ const cuReducer = (state = [], action) => {
             return action.payload
         case 'ADD_NEW_CU':
             return [...state, action.payload]
+        case 'DELETE_CU':
+            let filtered = [...state].filter(cu => cu.id !== action.payload.id)
+            return filtered
         default: 
             return state;
     }

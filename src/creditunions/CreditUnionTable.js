@@ -20,10 +20,11 @@ const CreditUnionTable = (props) => {
                         <th>City</th>
                         <th>State</th>
                         <th>Zip Code</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {allCu.map(cu => < TableRow key={cu.id} cu={cu}/>)}
+                    {allCu.map(cu => < TableRow key={cu.id} cu={cu} deleteCU={props.deleteCU}/>)}
                 </tbody>
             </table>
         </div>

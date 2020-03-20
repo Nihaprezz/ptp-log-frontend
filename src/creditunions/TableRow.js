@@ -1,7 +1,7 @@
 import React from "react"
 
 const TableRow = (props) => {
-    let {name, street_address, city, state, zip_code} = props.cu
+    let {id, name, street_address, city, state, zip_code} = props.cu
 
     return (
         <tr>
@@ -10,6 +10,9 @@ const TableRow = (props) => {
             <td>{city}</td>
             <td>{state}</td>
             <td>{zip_code}</td>
+            <td>
+                <button className="ui red button" onClick={() => props.deleteCU(id)}>Delete</button>
+            </td>
         </tr>
     )
 }

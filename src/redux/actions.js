@@ -113,4 +113,32 @@ function addingNewCU(creditUnion){
     })
 }
 
-export { checkUser, logIn, signOut, getAllCUs, addingNewCU}
+//DELETING CU 
+function removeCU(cuData){
+    return {type: 'DELETE_CU', payload: cuData}
+}
+
+function deleteCU(cu){
+    return (dispatch => {
+        fetch(HOST_URL + `creditunions/${cu}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(deletedCU => {
+            if (deletedCU.id){
+                dispatch(removeCU(deletedCU))
+            } else {
+                alert('Unable to delete this time.')
+            }
+        })
+        .catch(err => alert(err))   
+    })
+ 
+}
+
+export { checkUser, logIn, signOut, getAllCUs, addingNewCU, deleteCU}

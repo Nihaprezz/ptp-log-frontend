@@ -1,7 +1,6 @@
 import React from "react"
 
 const ResultsPTPRecord = (props) => {
-    console.log(props)
     let {id, first_name, last_name, acct_no, ptp_date, date_created, ptp_amt, collected_amt } = props.ptpObj;
     let cuName, userName;
 
