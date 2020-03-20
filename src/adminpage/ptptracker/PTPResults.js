@@ -12,7 +12,7 @@ const PTPResults = (props) => {
     }
 
     return (
-        <div>
+        <div className="cu-table-container">
             <br></br>
             <table className="ui celled table">
                 <thead>

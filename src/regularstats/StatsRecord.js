@@ -11,7 +11,7 @@ const StatsRecord = (props) => {
             <td>{ptpTotal}</td>
             <td>{ptpTotalClosed}</td>
             <td>{ptpPromised ? `$ ${ptpPromised.toFixed(2)}` : 0}</td>
-            <td>{ptpCollected ? `$ ${ptpCollected.toFixed(2)}` : '0%'}</td>
+            <td>{ptpCollected ? `$ ${ptpCollected.toFixed(2)}` : 0}</td>
             <td>{percentage ? `${percentage.toFixed(2)}%` : '0%'}</td>
         </tr>
     )

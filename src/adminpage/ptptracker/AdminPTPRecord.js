@@ -13,9 +13,9 @@ const AdminPTPRecord = (props) => {
             <td>{creditunion}</td>
             <td>{acct_no}</td>
             <td>{`${first_name} ${last_name}`}</td>
-            <td>${ptp_amt}</td>
+            <td>${ptp_amt.toFixed(2)}</td>
             <td>{ptp_date}</td>
-            <td>{collected_amt}</td>
+            <td>${collected_amt.toFixed(2)}</td>
             <td>{followed_up > 0 ? "Yes" : "No"}</td>
             <td>{date_created}</td>
             <td onClick={() => showCommentBox(comments)}>{comments.substr(0,10) + "..."}</td>
