@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 const PTPRecord = (props) => {
     
     let {id, acct_no, first_name, last_name, ptp_amt, ptp_date } = props.recordObj
-    let cuName = props.recordObj.creditunion.name
-
+    let cuName;
+    
+    props.recordObj.creditunion.name ? cuName = props.recordObj.creditunion.name : cuName = 'CU Deleted!'
 
     return (
         <tr>

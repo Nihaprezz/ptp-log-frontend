@@ -3,7 +3,9 @@ import { Link } from "react-router-dom"
 
 const SkipRecords = (props) => {
     let { id, acct_no, first_name, last_name, data_created } = props.skipObj
-    let cuName = props.skipObj.creditunion.name
+    let cuName;
+
+    props.skipObj.creditunion.name ? cuName = props.skipObj.creditunion.name : cuName = 'CU Deleted'
 
     return (
         <tr>

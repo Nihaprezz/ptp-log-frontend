@@ -3,10 +3,10 @@ import { decipherSSN } from "../../utils/index"
 
 const AdminSkipRecord = (props) => {
     let { id, acct_no, first_name, last_name, data_created, ssn } = props.skipObj
-    let cuName = props.skipObj.creditunion.name
-    let user = props.skipObj.user.username
+    let cuName, user;
 
-
+    props.skipObj.creditunion.name ? cuName = props.skipObj.creditunion.name : cuName = "CU Deleted"
+    props.skipObj.user.username ? user = props.skipObj.user.username : user = "User Deleted"
 
     return (
         <tr>

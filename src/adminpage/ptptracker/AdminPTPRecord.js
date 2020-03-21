@@ -3,7 +3,8 @@ import Swal from "sweetalert2";
 
 const AdminPTPRecord = (props) => {
     let {acct_no, first_name, last_name, ptp_amt, ptp_date, collected_amt, followed_up, date_created, comments} = props.data
-    let creditunion = props.data.creditunion.name
+    let creditunion; 
+    props.data.creditunion.name ? creditunion = props.data.creditunion.name : creditunion = 'CU Deleted'
 
     function showCommentBox(comments){
         Swal.fire(`${comments}`)
