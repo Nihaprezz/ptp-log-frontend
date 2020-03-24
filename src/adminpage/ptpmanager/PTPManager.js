@@ -158,18 +158,29 @@ class PTPManager extends React.Component {
     }
 
     handleSortBy = (type) => {
+        let newlySorted = []
+
         if (type === 'user'){
             let sortedByUser = [...this.state.searchResults].sort((a, b) => {
                 return a.user.username.toLowerCase() > b.user.username.toLowerCase() ? 1 : -1
             })
 
-            this.setState({searchResults: sortedByUser})
+            newlySorted = sortedByUser;
         } else if (type === 'cu') {
             let sortByCu = [...this.state.searchResults].sort((a, b) => {
                 return  a.creditunion.name.toLowerCase() > b.creditunion.name.toLowerCase() ? 1 : -1
             })
-            this.setState({searchResults: sortByCu})
+
+            newlySorted = sortByCu;
+        } else if (type === 'date') {
+            let sortByDate = [...this.state.searchResults].sort((a, b) => {
+                return a.ptp_date > b.ptp_date ? 1 : -1
+            })
+
+            newlySorted = sortByDate;
         }
+
+        this.setState({searchResults: newlySorted})
     }
 
     render(){

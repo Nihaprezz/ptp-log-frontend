@@ -12,7 +12,7 @@ const PTPRecordsContainer = (props) => {
                         <th className="addpointer" onClick={() => props.handleSortBy('cu')}>CU Name</th>
                         <th>Account No</th>
                         <th>Member Name</th>
-                        <th>PTP Date</th>
+                        <th className="addpointer" onClick={() => props.handleSortBy('date')}>PTP Date</th>
                         <th>PTP Amt</th>
                         <th>Collected Amt</th>
                         <th>Created On</th>
