@@ -51,6 +51,8 @@ class PTPManager extends React.Component {
     }
 
     fetchData = (endpoint) => {
+        Swal.isLoading()
+        
         fetch(backend_url + endpoint, {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
@@ -60,6 +62,7 @@ class PTPManager extends React.Component {
         })
         .then(resp => resp.json())
         .then(data => {
+            Swal.close();
             this.setState({searchResults: data})
         })
         .catch(err => alert(err))
