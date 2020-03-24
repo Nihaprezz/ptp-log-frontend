@@ -51,8 +51,8 @@ class PTPManager extends React.Component {
     }
 
     fetchData = (endpoint) => {
-        Swal.isLoading()
-        
+        Swal.showLoading();
+
         fetch(backend_url + endpoint, {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
