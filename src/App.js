@@ -7,6 +7,8 @@ import { checkUser, signOut, getAllCUs } from "./redux/actions"
 import Login from "./forms/Login"
 import Home from "./homepage/Home"
 import Navbar from "./homepage/Navbar"
+import RecoveryNavBar from "./homepage/RecoveryNavBar"
+import RecoveryHome from "./recoveryhome/RecoveryHome"
 import CreditUnions from "./creditunions/CreditUnionContainer"
 import PTPEditContainer from "./promisetopay/PTPEditContainer"
 import AdminPage from "./adminpage/AdminPage"
@@ -16,7 +18,6 @@ import SkipTracePage from './skiptracepage/SkipTracePage';
 import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
 
-// const backend_url = process.env.REACT_APP_BACKEND
 
 class App extends React.Component {
 
@@ -34,12 +35,18 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Navbar signOut={this.signOut} user={this.props.currentUser}/>
-
+        {this.props.currentUser.isrecovery ? (
+          < RecoveryNavBar signOut={this.signOut} user={this.props.currentUser}/> 
+        ) : (
+          <Navbar signOut={this.signOut} user={this.props.currentUser}/>
+        )}
+      
         <Switch>
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : (
-              < Home user={this.props.currentUser} allCUs={this.props.allCUs}/>  
+              this.props.currentUser.isrecovery ? < RecoveryHome /> : (
+                  < Home user={this.props.currentUser} allCUs={this.props.allCUs}/> 
+              )  
             )
           }}/>
 
