@@ -8,7 +8,8 @@ class NewUser extends React.Component {
         this.state = {
             username:"", 
             password: "", 
-            isadmin: false
+            isadmin: false,
+            isrecovery: false
         }
     }
 
@@ -19,32 +20,22 @@ class NewUser extends React.Component {
     }
 
     handleCheckbox = (e) => {
-        this.setState({isadmin: e.currentTarget.checked})
+        this.setState({
+            [e.target.name]: e.currentTarget.checked
+        })
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         let userInfo = this.state
 
-        if(this.state.isadmin){
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'User will be an Admin', 
-                icon: 'warning', 
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes!'
-            }).then((result) => {
-                if(result.value){
-                    this.props.submitUser(userInfo)
-                }
-            })
+        if(this.state.username === "" || this.state.password === ""){
+            Swal.fire('Error', 'Make sure all fields are filled.', 'warning')
         } else {
-          this.props.submitUser(userInfo)  
+            this.props.submitUser(userInfo)
+            this.setState({username: "", password: "", isadmin: false, isrecovery: false})
         }
         
-        this.setState({username: "", password: "", isadmin: false})
     }
 
     render(){
@@ -62,12 +53,20 @@ class NewUser extends React.Component {
                     <input onChange ={(e) => this.handleChange(e)}
                     type="password" name="password" placeholder="Password" value={this.state.password} required/>
                 </div>
+                
+                <div className="two fields">
+                    <div className="field">
+                        <label>Admin</label>
+                        <input onChange ={(e) => this.handleCheckbox(e)}
+                        type="checkbox" name="isadmin" value={this.state.isadmin}/>
+                    </div>   
 
-                <div className="field">
-                    <label>Admin</label>
-                    <input onChange ={(e) => this.handleCheckbox(e)}
-                    type="checkbox" name="isadmin"/>
-                </div>   
+                    <div className="field">
+                        <label>Recovery</label>
+                        <input onChange ={(e) => this.handleCheckbox(e)}
+                        type="checkbox" name="isrecovery" value={this.state.isrecovery}/>
+                    </div> 
+                </div> 
 
 
                 <div>

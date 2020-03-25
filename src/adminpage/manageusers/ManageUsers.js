@@ -11,7 +11,6 @@ class ManageUsers extends React.Component {
         super();
 
         this.state = {
-            editForm: false,
             editUser: [],
             allUsers: [], 
             searchText: ""
@@ -42,7 +41,8 @@ class ManageUsers extends React.Component {
                 user: {
                     username: user.username, 
                     password: user.password, 
-                    isadmin: user.isadmin
+                    isadmin: user.isadmin,
+                    isrecovery: user.isrecovery
                 }
             })
         })
@@ -52,7 +52,8 @@ class ManageUsers extends React.Component {
                 Swal.fire('Failed', `Error: ${data.error}`, 'error')
             } else {
                 Swal.fire('Created', `User: ${data.user.username} was created!`, 'success')
-                this.props.updateUsersArray(data, "newuser")
+                this.props.updateUsersArray(data, "newuser") //updates container.
+                this.setState({allUsers: [...this.state.allUsers, data.user]}) //updates this comp.
             }   
         })
     }
@@ -107,7 +108,10 @@ class ManageUsers extends React.Component {
                })
                .then(resp =>  resp.json())
                .then(data => {
-                   this.props.updateUsersArray(data, "deleted")
+                   this.props.updateUsersArray(data, "deleted") //updates container
+
+                   let filtered = this.state.allUsers.filter(record => record.id !== data.id)
+                    this.setState({allUsers: filtered}) //updates component
                })
             }
         })
@@ -136,7 +140,8 @@ class ManageUsers extends React.Component {
                         <thead>
                             <tr>
                                 <th> User Name </th>
-                                <th> Is Admin </th>
+                                <th> Admin </th>
+                                <th> Recovery Team </th>
                                 <th> Edit </th>
                                 <th> Delete </th>
                             </tr>
@@ -151,9 +156,11 @@ class ManageUsers extends React.Component {
                 </div>
 
                 <div className="users-form-container">
-                    {this.state.editForm ? < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm} update={this.updateUser}/> : (
+                    {/* {this.state.editForm ? < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm} update={this.updateUser}/> : (
                         < NewUser submitUser={this.submitUser}/>
-                    )}
+                    )} */}
+
+                    < NewUser submitUser={this.submitUser}/>
                 </div>
             </div>
         )
