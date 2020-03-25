@@ -1,0 +1,13 @@
+.recovery-home-btn-cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.out-for-repo-table {
+    width: 98%;
+    margin: auto;
+    padding-top: 2%;
+}
