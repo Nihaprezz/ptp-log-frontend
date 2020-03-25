@@ -28,13 +28,24 @@
 
 .user-edit-form-container {
     /* border: 3px solid red; */
+    padding-top: 3%;
     width: 45vw;
+    margin: auto;
+
 }
 
 .user-edit-form-container h1 {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
+.user-edit-form-container form {
+    width: 60%;
+    margin: auto;
+}
+
+.users-info-container table {
+    text-align: center !important;
+}
 
 /* PTP Tracker Page ! */
 .filter-bar-container {

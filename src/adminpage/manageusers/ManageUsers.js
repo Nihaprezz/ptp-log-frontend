@@ -11,6 +11,7 @@ class ManageUsers extends React.Component {
         super();
 
         this.state = {
+            editForm: false,
             editUser: [],
             allUsers: [], 
             searchText: ""
@@ -71,13 +72,20 @@ class ManageUsers extends React.Component {
                 user : {
                     username: user.user, 
                     password: user.password, 
-                    isadmin: user.isadmin
+                    isadmin: user.isadmin,
+                    isrecovery: user.isrecovery
                 }
             })
         })
         .then(resp => resp.json())
         .then(data => {
             if(data.id){
+                //remove old record with filter and then add the new updated record.
+                let updatedArr = [...this.state.allUsers].filter(user => user.id !== data.id)
+                updatedArr.push(data)
+  
+                this.setState({allUsers: updatedArr})
+
                 Swal.fire('Updated', 'User has been updated!', 'success')
             } else {
                 Swal.fire('Error!', `${data.message}`, 'error')
@@ -108,9 +116,9 @@ class ManageUsers extends React.Component {
                })
                .then(resp =>  resp.json())
                .then(data => {
-                   this.props.updateUsersArray(data, "deleted") //updates container
+                    this.props.updateUsersArray(data, "deleted") //updates container
 
-                   let filtered = this.state.allUsers.filter(record => record.id !== data.id)
+                    let filtered = this.state.allUsers.filter(record => record.id !== data.id)
                     this.setState({allUsers: filtered}) //updates component
                })
             }
@@ -125,8 +133,13 @@ class ManageUsers extends React.Component {
         let usersArray = this.state.allUsers.filter(user => user.username.includes(this.state.searchText))
 
         return (
-            <div className="user-page-container">
+            <div>
 
+            {this.state.editForm ? (
+                < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm} update={this.updateUser}/>
+            ) : (
+                <div className="user-page-container">
+                
                 <div className="users-info-container">
                 <h1>Manage Users</h1>
 
@@ -153,15 +166,15 @@ class ManageUsers extends React.Component {
                             })}
                         </tbody>
                     </table>
-                </div>
+                </div> 
 
                 <div className="users-form-container">
-                    {/* {this.state.editForm ? < EditForm userObj={this.state.editUser} toggleForm={this.toggleForm} update={this.updateUser}/> : (
-                        < NewUser submitUser={this.submitUser}/>
-                    )} */}
-
                     < NewUser submitUser={this.submitUser}/>
                 </div>
+
+                </div>
+            )}
+
             </div>
         )
     }
