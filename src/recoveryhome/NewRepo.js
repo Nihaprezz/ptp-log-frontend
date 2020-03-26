@@ -5,8 +5,34 @@ class NewRepo extends React.Component {
         super();
 
         this.state = {
-            
+            acct_no: "",
+            creditunion_id: "",
+            first_name: "", 
+            last_name: "",
+            veh_make: "", 
+            veh_model: "",
+            veh_vin: "",
+            repo_company: "",
+            user_id: "",
+            comments: ""
         }
+    }
+
+    componentDidMount(){
+        if(this.props.currentUser.isadmin){ //users like ann and amy will not be able to create accounts under themselves.
+            this.setState({user_id: this.props.currentUser.id})
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();      
+        console.log('submitting new repo order', this.state)
     }
 
     render(){
@@ -17,14 +43,17 @@ class NewRepo extends React.Component {
                     <div className="two fields">
                         <div className="field">
                             <label>Acct Number</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.acct_no} name="acct_no" required/>
                         </div>
 
                         <div className="field">
                             <label>Credit Union</label>
-                            <select className="ui fluid dropdown">
+                            <select onChange={(e) => this.handleChange(e)}
+                            className="ui fluid dropdown" value={this.state.creditunion_id} name="creditunion_id" required>
+                                <option value="">Select CU</option>
                                 {this.props.allCUs.map(cu => {
-                                    return <option key={cu.id}>{cu.name}</option>
+                                    return <option key={cu.id} value={cu.id}>{cu.name}</option>
                                 })}
                             </select>
                         </div>
@@ -33,12 +62,14 @@ class NewRepo extends React.Component {
                     <div className="two fields">
                         <div className="field">
                             <label>First Name</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.first_name} name="first_name" required/>
                         </div>
 
                         <div className="field">
                             <label>Last Name</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.last_name} name="last_name" required/>
                         </div>
                     </div>
 
@@ -47,31 +78,37 @@ class NewRepo extends React.Component {
                     <div className="three fields">
                         <div className="field">
                             <label>Make</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.veh_make} name="veh_make" required/>
                         </div>
 
                         <div className="field">
                             <label>Model</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.veh_model} name="veh_model" required/>
                         </div>
 
                         <div className="field">
                             <label>Vin</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.veh_vin} name="veh_vin" required/>
                         </div>
                     </div>
 
                     <div className="two fields">
                         <div className="field">
                             <label>Repo Company</label>
-                            <input type="text"/>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.repo_company} name="repo_company" required/>
                         </div>
 
                         <div className="field">
                             <label>Recovery Specialist</label>
-                            <select className="ui fluid dropdown">
+                            <select onChange={(e) => this.handleChange(e)}
+                            className="ui fluid dropdown" name="user_id" value={this.state.user_id} required>
+                                <option value="">Select User</option>
                                 {this.props.recoveryUsers.map(user => {
-                                    return <option key={user.id}>{user.username}</option>
+                                    return <option key={user.id} value={user.id}>{user.username}</option>
                                 })}
                             </select>
                         </div>
@@ -79,12 +116,13 @@ class NewRepo extends React.Component {
 
                     <div className="field">
                         <label>Comments</label>
-                        <textarea />
+                        <textarea onChange={(e) => this.handleChange(e)}
+                        name="comments" value={this.state.comments} />
                     </div>
 
                     <div className="new-repo-btns">
-                        <button className="ui secondary button">Submit</button>
-                        <button className="ui button">Cancel</button>
+                        <button className="ui secondary button" onClick={(e) => this.handleSubmit(e)}>Submit</button>
+                        <button className="ui button" onClick={() => this.props.cancelForm()}>Cancel</button>
                     </div>
 
                 </form>

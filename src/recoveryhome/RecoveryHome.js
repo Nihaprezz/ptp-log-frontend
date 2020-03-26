@@ -29,8 +29,8 @@ class RecoveryHome extends React.Component {
         this.setState({newRepo: !this.state.newRepo})
     }
 
+
     render(){
-   
         return (
             <div>
                 <h1>Out for Repo</h1>
@@ -41,7 +41,11 @@ class RecoveryHome extends React.Component {
                 </div>
 
                 {this.state.newRepo ? (
-                    < NewRepo allCUs={this.props.allCUs} recoveryUsers={this.state.recoveryUsers}/>
+                    < NewRepo 
+                    currentUser={this.props.user}
+                    allCUs={this.props.allCUs} 
+                    recoveryUsers={this.state.recoveryUsers}
+                    cancelForm={this.toggleForm}/>
                 ): (
                     < OutForRepoTable />
                 )}
