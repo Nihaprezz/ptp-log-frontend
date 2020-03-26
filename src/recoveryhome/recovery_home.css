@@ -11,3 +11,14 @@
     margin: auto;
     padding-top: 2%;
 }
+
+.new-repo-form {
+    padding-top: 2%;
+    width: 60%;
+    margin: auto;
+    text-align: left;
+}
+
+.new-repo-btns {
+    text-align: center;
+}

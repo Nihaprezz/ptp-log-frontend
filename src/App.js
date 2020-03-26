@@ -44,8 +44,10 @@ class App extends React.Component {
         <Switch>
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : (
-              this.props.currentUser.isrecovery ? < RecoveryHome /> : (
-                  < Home user={this.props.currentUser} allCUs={this.props.allCUs}/> 
+              this.props.currentUser.isrecovery ? (
+                < RecoveryHome user={this.props.currentUser} allCUs={this.props.allCUs} />
+              ) : (
+                < Home user={this.props.currentUser} allCUs={this.props.allCUs}/> 
               )  
             )
           }}/>
