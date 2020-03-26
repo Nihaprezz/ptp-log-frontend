@@ -1,6 +1,14 @@
 import React from "react";
 
 class NewRepo extends React.Component {
+    constructor(){
+        super();
+
+        this.state = {
+            
+        }
+    }
+
     render(){
         return (
             <div className="new-repo-form">
@@ -61,7 +69,11 @@ class NewRepo extends React.Component {
 
                         <div className="field">
                             <label>Recovery Specialist</label>
-                            <input type="text"/>
+                            <select className="ui fluid dropdown">
+                                {this.props.recoveryUsers.map(user => {
+                                    return <option key={user.id}>{user.username}</option>
+                                })}
+                            </select>
                         </div>
                     </div>
 

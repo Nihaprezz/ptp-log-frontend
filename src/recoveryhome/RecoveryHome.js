@@ -19,7 +19,8 @@ class RecoveryHome extends React.Component {
         fetch(backend_url + 'users/recovery')
         .then(resp => resp.json())
         .then(usersArray => {
-            this.setState({recoveryUsers: usersArray})
+            let sorted = usersArray.sort((a,b) => a.username > b.username ? 1 : -1)
+            this.setState({recoveryUsers: sorted})
         })
         .catch(err => alert(err))
     }
