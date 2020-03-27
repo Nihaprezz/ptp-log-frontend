@@ -183,7 +183,6 @@ class AdminSkipSearch extends React.Component {
         this.setState({skipRecords: newlySorted})
     }
 
-    }
     
     render(){
         return (
