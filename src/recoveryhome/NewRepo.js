@@ -1,4 +1,7 @@
 import React from "react";
+import Swal from "sweetalert2"
+
+const backend_url = process.env.REACT_APP_BACKEND
 
 class NewRepo extends React.Component {
     constructor(){
@@ -12,6 +15,7 @@ class NewRepo extends React.Component {
             veh_make: "", 
             veh_model: "",
             veh_vin: "",
+            veh_year: "",
             repo_company: "",
             user_id: "",
             comments: ""
@@ -31,8 +35,38 @@ class NewRepo extends React.Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault();      
-        console.log('submitting new repo order', this.state)
+        e.preventDefault();
+        let {acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
+        repo_company, user_id, comments} = this.state      
+        
+        fetch(backend_url + 'repo_orders',{
+            method: 'POST', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
+                repo_company, user_id, comments
+            })
+        })
+        .then(resp => resp.json())
+        .then(newRepo => {
+            if(newRepo.id){
+                Swal.fire('Created', 'Repo Order has been added', 'success')
+                console.log(newRepo)
+                this.resetFields()
+            } else {
+                Swal.fire('Error', 'Cannot Create. Try Again', 'warning')
+            }
+        })
+        .catch(err => Swal.fire('Error', `Cannot Create. Error: ${err} `, 'warning'))
+    }
+
+    resetFields = () => {
+        this.setState({acct_no: "", creditunion_id: "", first_name: "", last_name: "", veh_year: "",
+        veh_make: "", veh_model: "", veh_vin: "", repo_company: "", user_id: "", comments: "" })
     }
 
     render(){
@@ -75,7 +109,13 @@ class NewRepo extends React.Component {
 
                     <h4 className="ui dividing header">Vehicle Information</h4>
 
-                    <div className="three fields">
+                    <div className="four fields">
+                        <div className="field">
+                            <label>Year</label>
+                            <input onChange={(e) => this.handleChange(e)}
+                            type="text" value={this.state.veh_year} name="veh_year" required/>
+                        </div>
+
                         <div className="field">
                             <label>Make</label>
                             <input onChange={(e) => this.handleChange(e)}
