@@ -10,8 +10,9 @@ class RecoveryHome extends React.Component {
         super();
 
         this.state = {
-            newRepo: true, 
-            recoveryUsers: []
+            newRepo: false, 
+            recoveryUsers: [],
+            activeRepos: []
         }
     }
 
@@ -23,10 +24,28 @@ class RecoveryHome extends React.Component {
             this.setState({recoveryUsers: sorted})
         })
         .catch(err => alert(err))
+
+        this.getActiveRepos()
     }
 
     toggleForm = () => {
         this.setState({newRepo: !this.state.newRepo})
+    }
+
+    getActiveRepos = () => {
+        
+        fetch(backend_url + 'repo_orders', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(activeRepos => {
+            this.setState({activeRepos: activeRepos})
+        })
+        .catch(err => alert(err));
     }
 
 
@@ -47,7 +66,8 @@ class RecoveryHome extends React.Component {
                     recoveryUsers={this.state.recoveryUsers}
                     cancelForm={this.toggleForm}/>
                 ): (
-                    < OutForRepoTable />
+                    < OutForRepoTable 
+                    activeRepos={this.state.activeRepos}/>
                 )}
 
             </div>

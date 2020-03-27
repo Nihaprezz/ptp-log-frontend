@@ -1,6 +1,13 @@
 import React from "react";
+import OutRecord from "./OutRecords"
 
 const OutRecordsTable = (props) => {
+    let records;
+    records = props.activeRepos.map(record => {
+        return < OutRecord key={record.id} repoObj={record} />
+    })
+
+    
     return (
         <div className="out-for-repo-table">
             <table className="ui celled table">
@@ -16,6 +23,9 @@ const OutRecordsTable = (props) => {
                         <th>Edit</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {records}
+                </tbody>
             </table>
         </div>
     )
