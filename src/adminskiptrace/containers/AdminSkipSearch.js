@@ -162,6 +162,28 @@ class AdminSkipSearch extends React.Component {
         })
         .catch(err => console.log(err))
     }
+
+    handleSortBy = (type) => {
+        let newlySorted = []
+
+        if (type === 'user'){
+            let sortedByUser = [...this.state.skipRecords].sort((a, b) => {
+                return a.user.username.toLowerCase() > b.user.username.toLowerCase() ? 1 : -1
+            })
+
+            newlySorted = sortedByUser;
+        } else if (type === 'cu') {
+            let sortByCu = [...this.state.skipRecords].sort((a, b) => {
+                return  a.creditunion.name.toLowerCase() > b.creditunion.name.toLowerCase() ? 1 : -1
+            })
+
+            newlySorted = sortByCu;
+        }
+
+        this.setState({skipRecords: newlySorted})
+    }
+
+    }
     
     render(){
         return (
@@ -174,7 +196,8 @@ class AdminSkipSearch extends React.Component {
                     < SkipSearchResults 
                     skipRecords={this.state.skipRecords}
                     handleSelectAll={this.handleSelectAll}
-                    handleCheckbox={this.handleCheckbox}/>
+                    handleCheckbox={this.handleCheckbox}
+                    handleSortBy={this.handleSortBy}/>
 
                     < SkipReassignForm 
                     allUsers={this.state.allUsers} 

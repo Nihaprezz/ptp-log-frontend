@@ -7,8 +7,8 @@ const SkipSearchResult = (props) => {
             <table className="ui celled table">
                 <thead>
                     <tr>
-                        <th>User</th>
-                        <th>Credit Union</th>
+                        <th className="addpointer" onClick={() => props.handleSortBy('user')}>User</th>
+                        <th className="addpointer" onClick={() => props.handleSortBy('cu')}>Credit Union</th>
                         <th>Member Name</th>
                         <th>Found User</th>
                         <th>Date Submitted</th>
