@@ -10,6 +10,16 @@ const OutRecordsTable = (props) => {
     
     return (
         <div className="out-for-repo-table">
+            <div className="ui tabular menu">
+                <a className={props.showHold ? 'item' : 'item active'} onClick={() => props.toggleActiveRepos(false)}>
+                    Active
+                </a>
+
+                <a className={props.showHold ? 'item active' : 'item'} onClick={() => props.toggleActiveRepos(true)}>
+                    On Hold
+                </a>
+            </div>
+
             <table className="ui celled table">
                 <thead>
                     <tr>

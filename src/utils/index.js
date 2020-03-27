@@ -47,4 +47,18 @@ function decipherSSN(cipherText){
     return decipherText
 }
 
-export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN };
+function daysInBetween(str_date){
+    const one_day = 1000*60*60*24
+    let today = new Date()
+    let created = new Date(str_date)
+    let days = (today - created) / one_day
+    days = Math.round(days)
+
+    if (days > 0 ){
+        return days
+    } else {
+        return 1
+    }
+}
+
+export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN, daysInBetween };

@@ -12,7 +12,9 @@ class RecoveryHome extends React.Component {
         this.state = {
             newRepo: false, 
             recoveryUsers: [],
-            activeRepos: []
+            activeRepos: [],
+            activeHolds: [],
+            showHold: false,
         }
     }
 
@@ -33,7 +35,6 @@ class RecoveryHome extends React.Component {
     }
 
     getActiveRepos = () => {
-        
         fetch(backend_url + 'repo_orders', {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
@@ -48,8 +49,34 @@ class RecoveryHome extends React.Component {
         .catch(err => alert(err));
     }
 
+    getActiveHolds = () => {
+        fetch(backend_url + 'repo_orders/active/holds', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json' 
+            }
+        })
+        .then(resp => resp.json())
+        .then(activeHolds => {
+            this.setState({activeHolds: activeHolds})
+        })
+    }
+
+    updateRepos = (newRepo) => {
+        this.setState({activeRepos: [...this.state.activeRepos, newRepo]})
+    }
+
+    toggleActiveRepos = (status) => {
+        this.setState({showHold: status}, function(){
+            if(status){
+                this.getActiveHolds()
+            }
+        })
+    }
 
     render(){
+
         return (
             <div>
                 <h1>Out for Repo</h1>
@@ -64,10 +91,13 @@ class RecoveryHome extends React.Component {
                     currentUser={this.props.user}
                     allCUs={this.props.allCUs} 
                     recoveryUsers={this.state.recoveryUsers}
-                    cancelForm={this.toggleForm}/>
+                    cancelForm={this.toggleForm}
+                    updateRepos={this.updateRepos}/>
                 ): (
                     < OutForRepoTable 
-                    activeRepos={this.state.activeRepos}/>
+                    activeRepos={this.state.activeRepos}
+                    showHold={this.state.showHold}
+                    toggleActiveRepos={this.toggleActiveRepos}/>
                 )}
 
             </div>

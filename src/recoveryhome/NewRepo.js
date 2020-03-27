@@ -55,7 +55,7 @@ class NewRepo extends React.Component {
         .then(newRepo => {
             if(newRepo.id){
                 Swal.fire('Created', 'Repo Order has been added', 'success')
-                console.log(newRepo)
+                this.props.updateRepos(newRepo)
                 this.resetFields()
             } else {
                 Swal.fire('Error', 'Cannot Create. Try Again', 'warning')

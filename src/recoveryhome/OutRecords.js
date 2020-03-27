@@ -1,6 +1,5 @@
 import React from "react";
-
-//need to figure out how to show how many dates its been out by subtracting the day it was placed out with todays date
+import { daysInBetween } from "../utils/index"
 
 const OutRecord = (props) => {
     let {acct_no, first_name, last_name, veh_info, veh_vin, created_on } = props.repoObj
@@ -17,6 +16,10 @@ const OutRecord = (props) => {
             <td>{veh_info}</td>
             <td>{veh_vin}</td>
             <td>{created_on}</td>
+            <td>{daysInBetween(created_on)}</td>
+            <td>
+                <button className="ui button"> Edit </button>
+            </td>
         </tr>
     )
 }
