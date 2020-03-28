@@ -17,6 +17,7 @@ import RegularStatsPage from "./regularstats/RegularStats"
 import SkipTracePage from './skiptracepage/SkipTracePage';
 import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
+import RecoveryRecord from "./recoveryshowpage/RecoveryRecordCont"
 
 
 class App extends React.Component {
@@ -90,6 +91,14 @@ class App extends React.Component {
 
             return < SkipShowPage skipID={skipID} />
           }} />
+
+          {/* RECOVERY ROUTES */}
+          < Route exact path="/repo_record/:id" render={(props) => {
+            let recoveryId = props.match.params.id
+
+            return < RecoveryRecord recoveryId={recoveryId} />
+          }} />
+   
 
           </Switch>
       </div>

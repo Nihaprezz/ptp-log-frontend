@@ -1,8 +1,9 @@
 import React from "react";
 import { daysInBetween } from "../utils/index"
+import { Link } from "react-router-dom"
 
 const OutRecord = (props) => {
-    let {acct_no, first_name, last_name, veh_info, veh_vin, created_on } = props.repoObj
+    let {id, acct_no, first_name, last_name, veh_info, veh_vin, created_on } = props.repoObj
     let cuName, user;
 
     props.repoObj.creditunion.name ? cuName = props.repoObj.creditunion.name : cuName = "CU Deleted"
@@ -18,7 +19,7 @@ const OutRecord = (props) => {
             <td>{created_on}</td>
             <td>{daysInBetween(created_on)}</td>
             <td>
-                <button className="ui button"> Edit </button>
+                <Link className="ui button" to={`repo_record/${id}`}>Edit</Link>
             </td>
         </tr>
     )
