@@ -2,6 +2,7 @@ import React from "react";
 import OutForRepoTable from "./OutRecordsTable";
 import NewRepo from "./NewRepo"
 import "./recovery_home.css"
+import Swal from "sweetalert2"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -35,21 +36,18 @@ class RecoveryHome extends React.Component {
     }
 
     getActiveRepos = () => {
-        fetch(backend_url + 'repo_orders', {
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }
-        })
+        Swal.showLoading()
+        fetch(backend_url + 'repo_orders')
         .then(resp => resp.json())
-        .then(activeRepos => {
+        .then(activeRepos => {  
+            Swal.close()          
             this.setState({activeRepos: activeRepos})
         })
         .catch(err => alert(err));
     }
 
     getActiveHolds = () => {
+        Swal.showLoading()
         fetch(backend_url + 'repo_orders/active/holds', {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
@@ -59,6 +57,7 @@ class RecoveryHome extends React.Component {
         })
         .then(resp => resp.json())
         .then(activeHolds => {
+            Swal.close()  
             this.setState({activeHolds: activeHolds})
         })
     }
@@ -76,7 +75,6 @@ class RecoveryHome extends React.Component {
     }
 
     render(){
-
         return (
             <div>
                 <h1>Out for Repo</h1>
@@ -97,7 +95,8 @@ class RecoveryHome extends React.Component {
                     < OutForRepoTable 
                     activeRepos={this.state.activeRepos}
                     showHold={this.state.showHold}
-                    toggleActiveRepos={this.toggleActiveRepos}/>
+                    toggleActiveRepos={this.toggleActiveRepos}
+                    activeHolds={this.state.activeHolds}/>
                 )}
 
             </div>

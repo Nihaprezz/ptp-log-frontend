@@ -3,11 +3,23 @@ import OutRecord from "./OutRecords"
 
 const OutRecordsTable = (props) => {
     let records;
-    records = props.activeRepos.map(record => {
-        return < OutRecord key={record.id} repoObj={record} />
-    })
+    if(props.activeRepos.message){
+        records = <tr><td>{props.activeRepos.message}</td></tr>
+    } else {
+        records = props.activeRepos.map(record => {
+            return < OutRecord key={record.id} repoObj={record} />
+        })
+    }
 
-    
+    let holdrecords; 
+    if(props.activeHolds.message){
+        holdrecords = <tr><td>{props.activeHolds.message}</td></tr>
+    } else {
+        holdrecords = props.activeHolds.map(record => {
+            return < OutRecord key={record.id} repoObj={record} />
+        })
+    }
+
     return (
         <div className="out-for-repo-table">
             <div className="ui tabular menu">
@@ -34,7 +46,7 @@ const OutRecordsTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {records}
+                    {props.showHold ? holdrecords : records}
                 </tbody>
             </table>
         </div>
