@@ -1,5 +1,8 @@
 import React from "react";
 import MemberVehInfo from "./components/MemberVehInfo"
+import UpdateOutinfo from "./components/UpdateOutInfo"
+import UpdateToRepo from "./components/UpdateToRepo"
+import HoldRepo from "./components/HoldRepo"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -28,19 +31,38 @@ class RecoveryRecordCont extends React.Component {
     }
     
     render(){
-        console.log(this.state)
         return (
             <div>
+
                 {this.state.recoveryRecord.length === 0 ? <h2>Loading....</h2> : (
-                    < MemberVehInfo recordObj={this.state.recoveryRecord} /> 
+                    <React.Fragment>
+                        
+                        < MemberVehInfo recordObj={this.state.recoveryRecord} /> 
+
+                        <hr></hr>
+
+                        {/* update section for recovery  */}
+                        < UpdateOutinfo recordObj={this.state.recoveryRecord} />
+
+                        <hr></hr>
+                        {/* Section to update to repo */}
+                        < UpdateToRepo recordObj={this.state.recoveryRecord} />
+
+                        <hr></hr>
+                        {/* Section to place repo on hold with follow up date */}
+                        < HoldRepo />
+
+                    </React.Fragment>
                 )}
 
                 <hr></hr>
-                {/* update section for recovery  */}
+                
+                <form className="ui form">
+                    <div className="field">
+                        <button className="ui secondary button">Close Repo</button>
+                    </div>
+                </form>
 
-                {/* Section to update to repo */}
-
-                {/* Section to place repo on hold with follow up date */}
 
                 {/* Section to close repo */}
             </div>
