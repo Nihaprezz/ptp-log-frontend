@@ -1,5 +1,7 @@
 import React from "react";
 
+const backend_url = process.env.REACT_APP_BACKEND
+
 class HoldRepo extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,8 @@ class HoldRepo extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('Vehicle Placed on hold for and bc: ', this.state)
+
+        console.log('holding the repo', this.state)
     }
     
     render(){
