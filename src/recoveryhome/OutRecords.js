@@ -4,10 +4,10 @@ import { Link } from "react-router-dom"
 
 const OutRecord = (props) => {
     let {id, acct_no, first_name, last_name, veh_info, veh_vin, created_on } = props.repoObj
-    let cuName, user;
+    let cuName; //removed user for now.
 
     props.repoObj.creditunion.name ? cuName = props.repoObj.creditunion.name : cuName = "CU Deleted"
-    props.repoObj.user.username ? user = props.repoObj.user.username : user = 'User Deleted'
+    // props.repoObj.user.username ? user = props.repoObj.user.username : user = 'User Deleted'
  
     return (
         <tr>

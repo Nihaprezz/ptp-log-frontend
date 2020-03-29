@@ -1,11 +1,18 @@
 import React from "react";
-//need to figure out how to show the static info and that info needs to be updated.
+
 const MemberVehInfo = (props) => {
-    let { first_name, last_name, veh_info } = props.recordObj
-  
+    let { acct_no, first_name, last_name, veh_info, veh_vin } = props.recordObj;
+    let cuName = props.recordObj.creditunion.name
+
     return (
         <div>
-            This will be the container for the member and vehicle info.
+            <div>
+                <h2>Acct No: {acct_no}</h2>
+                <h2>Credit Union: {cuName}</h2>
+                <h2>Member: {`${first_name} ${last_name}`}</h2>
+                <h2>Vehicle: {veh_info}</h2>
+                <h2>Vin: {veh_vin}</h2>
+            </div>
         </div>
     )
 }

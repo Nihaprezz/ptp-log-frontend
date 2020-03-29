@@ -23,17 +23,26 @@ class RecoveryRecordCont extends React.Component {
         .then(resp => resp.json())
         .then(repoRecord => {
             this.setState({recoveryRecord: repoRecord})
-            console.log(repoRecord)
         })
         .catch(err => console.log(err))
     }
     
     render(){
-        console.log(this.props)
+        console.log(this.state)
         return (
-            <div>Recovery record container
+            <div>
+                {this.state.recoveryRecord.length === 0 ? <h2>Loading....</h2> : (
+                    < MemberVehInfo recordObj={this.state.recoveryRecord} /> 
+                )}
 
-                < MemberVehInfo recordObj={this.state.recoveryRecord}/>
+                <hr></hr>
+                {/* update section for recovery  */}
+
+                {/* Section to update to repo */}
+
+                {/* Section to place repo on hold with follow up date */}
+
+                {/* Section to close repo */}
             </div>
         )
     }
