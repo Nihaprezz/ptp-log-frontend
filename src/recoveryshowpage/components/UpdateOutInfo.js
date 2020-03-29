@@ -1,4 +1,7 @@
 import React from "react";
+import Swal from "sweetalert2";
+
+const backend_url = process.env.REACT_APP_BACKEND
 
 class UpdateOutInfo extends React.Component {
     constructor(props){
@@ -19,7 +22,33 @@ class UpdateOutInfo extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('updating the repo info', this.state)
+
+        let recordId = this.props.recordObj.id;
+        let {repo_company, created_on, comments} = this.state;
+
+        fetch(backend_url + `repo_orders/${recordId}`, {
+            method: 'PATCH', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                repo_company, 
+                created_on, 
+                comments
+            })
+        })
+        .then(resp => resp.json())
+        .then(record => {
+            if (record.message){
+                Swal.fire('Updated', 'Repo Order has been updated.', 'success')
+            } else {
+                Swal.fire('Error', 'Was unable to update record.', 'warning')
+            }
+        })
+        .catch(err => alert(err))
+
     }
 
     render(){
@@ -39,7 +68,7 @@ class UpdateOutInfo extends React.Component {
                     <div className="field">
                         <label>Placed Out On</label>
                         <input onChange={(e) => this.handleChange(e)}
-                        name="created_on" type="date" value={created_on}/>
+                        name="created_on" type="date" value={created_on} required/>
                     </div>
 
                     <div className="field">

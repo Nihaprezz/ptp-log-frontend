@@ -6,6 +6,11 @@ import HoldRepo from "./components/HoldRepo"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
+const testStyle = {
+    width: '90%',
+    margin: 'auto'
+}
+
 class RecoveryRecordCont extends React.Component {
     constructor(){
         super();
@@ -32,7 +37,7 @@ class RecoveryRecordCont extends React.Component {
     
     render(){
         return (
-            <div>
+            <div style={testStyle}>
 
                 {this.state.recoveryRecord.length === 0 ? <h2>Loading....</h2> : (
                     <React.Fragment>
