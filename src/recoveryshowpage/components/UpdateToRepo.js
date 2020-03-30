@@ -60,7 +60,7 @@ class UpdateToRepo extends React.Component {
         let {repod_on, repo_company} = this.state
 
         return (
-            <div>
+            <div className="recovery-record-form-conts">
                 <form className="ui form">
                     <h4 className="ui dividing header">Update To Repossession Status</h4>
 

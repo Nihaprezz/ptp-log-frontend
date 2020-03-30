@@ -5,13 +5,16 @@ const MemberVehInfo = (props) => {
     let cuName = props.recordObj.creditunion.name
 
     return (
-        <div>
+        <div className="repo-order-details-cont">
             <div>
-                <h2>Acct No: {acct_no}</h2>
-                <h2>Credit Union: {cuName}</h2>
-                <h2>Member: {`${first_name} ${last_name}`}</h2>
-                <h2>Vehicle: {veh_info}</h2>
-                <h2>Vin: {veh_vin}</h2>
+                <p>Acct No: {acct_no}</p>
+                <p>Credit Union: {cuName}</p>
+            </div>
+
+            <div>
+                <p>Member: {`${first_name} ${last_name}`}</p>
+                <p>Vehicle: {veh_info}</p>
+                <p>Vin: {veh_vin}</p> 
             </div>
         </div>
     )

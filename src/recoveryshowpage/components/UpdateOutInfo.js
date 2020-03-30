@@ -55,7 +55,7 @@ class UpdateOutInfo extends React.Component {
         let {repo_company, created_on, comments} = this.state
 
         return (
-            <div>
+            <div className="recovery-record-form-conts">
                 <h4 className="ui dividing header">Recovery Info</h4>
 
                 <form className="ui form"> 

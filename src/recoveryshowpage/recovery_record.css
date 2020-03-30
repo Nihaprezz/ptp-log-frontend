@@ -1,0 +1,60 @@
+.recovery-record-cont {
+    width: 90% !important;
+    margin: auto !important;
+    margin-bottom: 2% !important;
+}
+
+.recovery-record-cont .close-repo-form {
+    border: 3px solid red !important;
+    text-align: left;
+    width: 70%;
+    margin: auto;
+}
+
+.repo-order-details-cont {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+    background: #1b1c1d;
+    color: white;
+}
+
+.repo-order-details-cont div {
+    text-align: left;
+    font-size: 2.2vh;
+    font-weight: bold;
+}
+
+/* UPDATE OUT INFO CONTAINER */
+.recovery-record-form-conts {
+    width: 80%;
+    margin: auto;
+    text-align: left;
+    /* border: 3px solid red !important; */
+    padding: 2%;
+}
+
+.recovery-record-form-conts h4 {
+    font-size: 3vh !important;
+}
+
+/* RECOVERY BUTTONS RECORD CONT */
+.recovery-record-btns-cont { 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+}
+
+.close-repo-btn {
+    justify-self: start;
+}
+
+.back-repo-btn {
+    justify-self: end;
+}
+

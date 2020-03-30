@@ -60,7 +60,7 @@ class HoldRepo extends React.Component {
     render(){
 
         return (
-            <div>
+            <div className="recovery-record-form-conts">
                 <form className="ui form">
                     <h4 className="ui dividing header">Hold Repo Order</h4>
 

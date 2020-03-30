@@ -3,15 +3,11 @@ import MemberVehInfo from "./components/MemberVehInfo"
 import UpdateOutinfo from "./components/UpdateOutInfo"
 import UpdateToRepo from "./components/UpdateToRepo"
 import HoldRepo from "./components/HoldRepo"
+import { Link } from "react-router-dom"
 import Swal from "sweetalert2";
 import "./recovery_record.css"
 
 const backend_url = process.env.REACT_APP_BACKEND
-
-const testStyle = {
-    width: '90%',
-    margin: 'auto'
-}
 
 class RecoveryRecordCont extends React.Component {
     constructor(){
@@ -67,39 +63,36 @@ class RecoveryRecordCont extends React.Component {
     
     render(){
         return (
-            <div style={testStyle}>
+            <div className="recovery-record-cont ui card">
 
                 {this.state.recoveryRecord.length === 0 ? <h2>Loading....</h2> : (
                     <React.Fragment>
                         
                         < MemberVehInfo recordObj={this.state.recoveryRecord} /> 
 
-                        <hr></hr>
-
                         {/* update section for recovery  */}
                         < UpdateOutinfo recordObj={this.state.recoveryRecord} />
 
-                        <hr></hr>
                         {/* Section to update to repo */}
                         < UpdateToRepo recordObj={this.state.recoveryRecord} />
-
-                        <hr></hr>
+             
                         {/* Section to place repo on hold with follow up date */}
                         < HoldRepo recordObj={this.state.recoveryRecord} />
 
+                        <div className="recovery-record-form-conts">
+                            <form className="ui form">
+                                <div className="field recovery-record-btns-cont">
+                                    <button className="ui red button close-repo-btn" onClick={(e) => this.closeRepoOrder(e)}>
+                                        Close Repo
+                                    </button>
+
+                                    < Link className="ui button back-repo-btn" to="/" > Back </Link>
+                                </div>
+                            </form>
+                        </div>
+
                     </React.Fragment>
                 )}
-
-                <hr></hr>
-                
-                <form className="ui form">
-                    <div className="field">
-                        <button className="ui secondary button" onClick={(e) => this.closeRepoOrder(e)}>
-                            Close Repo
-                        </button>
-                    </div>
-                </form>
-
 
              
             </div>
