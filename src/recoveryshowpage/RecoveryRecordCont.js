@@ -6,6 +6,7 @@ import HoldRepo from "./components/HoldRepo"
 import { Link } from "react-router-dom"
 import Swal from "sweetalert2";
 import "./recovery_record.css"
+import RemoveHold from "./components/RemoveHold";
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -77,7 +78,12 @@ class RecoveryRecordCont extends React.Component {
                         < UpdateToRepo recordObj={this.state.recoveryRecord} />
              
                         {/* Section to place repo on hold with follow up date */}
-                        < HoldRepo recordObj={this.state.recoveryRecord} />
+                        {this.state.recoveryRecord.hold_order ? (
+                            < RemoveHold recordObj={this.state.recoveryRecord} />
+                        ) : (
+                           < HoldRepo recordObj={this.state.recoveryRecord} /> 
+                        )}
+                        
 
                         <div className="recovery-record-form-conts">
                             <form className="ui form">
