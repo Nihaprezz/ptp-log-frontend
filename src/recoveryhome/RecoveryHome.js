@@ -63,7 +63,13 @@ class RecoveryHome extends React.Component {
     }
 
     updateRepos = (newRepo) => {
-        this.setState({activeRepos: [...this.state.activeRepos, newRepo]})
+        if (this.state.activeRepos.message){
+            let newArr = []
+            newArr.push(newRepo)
+            this.setState({activeRepos: newArr})
+        } else {
+            this.setState({activeRepos: [...this.state.activeRepos, newRepo]})
+        }
     }
 
     toggleActiveRepos = (status) => {

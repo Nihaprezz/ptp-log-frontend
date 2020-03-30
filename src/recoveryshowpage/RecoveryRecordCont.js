@@ -4,6 +4,7 @@ import UpdateOutinfo from "./components/UpdateOutInfo"
 import UpdateToRepo from "./components/UpdateToRepo"
 import HoldRepo from "./components/HoldRepo"
 import Swal from "sweetalert2";
+import "./recovery_record.css"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -100,7 +101,7 @@ class RecoveryRecordCont extends React.Component {
                 </form>
 
 
-                {/* Section to close repo */}
+             
             </div>
         )
     }
