@@ -1,5 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2"
+import { validateNewRepo } from "../utils/index"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -23,7 +24,8 @@ class NewRepo extends React.Component {
     }
 
     componentDidMount(){
-        if(this.props.currentUser.isadmin){ //users like ann and amy will not be able to create accounts under themselves.
+        //users like ann and amy will not be able to create accounts under themselves.
+        if(this.props.currentUser.isadmin){ 
             this.setState({user_id: this.props.currentUser.id})
         }
     }
@@ -39,29 +41,34 @@ class NewRepo extends React.Component {
         let {acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
         repo_company, user_id, comments} = this.state      
         
-        fetch(backend_url + 'repo_orders',{
-            method: 'POST', 
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            }, 
-            body: JSON.stringify({
-                acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
-                repo_company, user_id, comments
+        if(validateNewRepo(acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
+            repo_company, user_id)){
+            fetch(backend_url + 'repo_orders',{
+                method: 'POST', 
+                headers: {
+                    "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                    "Content-Type": 'application/json',
+                    "Accept": 'application/json'
+                }, 
+                body: JSON.stringify({
+                    acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
+                    repo_company, user_id, comments
+                })
             })
-        })
-        .then(resp => resp.json())
-        .then(newRepo => {
-            if(newRepo.id){
-                Swal.fire('Created', 'Repo Order has been added', 'success')
-                this.props.updateRepos(newRepo)
-                this.resetFields()
-            } else {
-                Swal.fire('Error', 'Cannot Create. Try Again', 'warning')
-            }
-        })
-        .catch(err => Swal.fire('Error', `Cannot Create. Error: ${err} `, 'warning'))
+            .then(resp => resp.json())
+            .then(newRepo => {
+                if(newRepo.id){
+                    Swal.fire('Created', 'Repo Order has been added', 'success')
+                    this.props.updateRepos(newRepo)
+                    this.resetFields()
+                } else {
+                    Swal.fire('Error', 'Cannot Create. Try Again', 'warning')
+                }
+            })
+            .catch(err => Swal.fire('Error', `Cannot Create. Error: ${err} `, 'warning'))
+        } else {
+            Swal.fire('Cannot Sumit', 'Make sure all fields are filled.', 'warning')
+        }
     }
 
     resetFields = () => {

@@ -61,4 +61,18 @@ function daysInBetween(str_date){
     }
 }
 
-export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN, daysInBetween };
+function validateNewRepo(acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
+    repo_company, user_id){
+
+    if(acct_no === "" || creditunion_id === "" || first_name === "" || 
+    last_name === "" || veh_year === "" || veh_make === "" || veh_model === "" || veh_vin === "" ||
+    repo_company === "" || user_id === ""){
+        return false
+    } else {
+        return true
+    }
+}
+
+
+export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN, daysInBetween,
+    validateNewRepo };

@@ -39,6 +39,9 @@ class RemoveHold extends React.Component {
         .then(updatedRepo => {
             if(updatedRepo.message){
                 Swal.fire('Success', 'Vehicle has been placed back out.', 'success')
+                .then(() => {
+                    window.history.back();
+                })
             } else {
                 Swal.fire('Error', 'Unable to update record.', 'warning')
             }
