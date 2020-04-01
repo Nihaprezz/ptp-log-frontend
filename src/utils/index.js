@@ -47,6 +47,8 @@ function decipherSSN(cipherText){
     return decipherText
 }
 
+//RECOVERY FEATURES
+
 function daysInBetween(str_date){
     const one_day = 1000*60*60*24
     let today = new Date()

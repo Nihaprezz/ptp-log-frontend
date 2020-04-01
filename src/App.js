@@ -18,6 +18,7 @@ import SkipTracePage from './skiptracepage/SkipTracePage';
 import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
 import RecoveryRecord from "./recoveryshowpage/RecoveryRecordCont"
+import RepodPage from "./recoveryrepodpage/RepodPage"
 
 
 class App extends React.Component {
@@ -98,7 +99,12 @@ class App extends React.Component {
 
             return < RecoveryRecord recoveryId={recoveryId} />
           }} />
-   
+
+          < Route exact path="/repossessed" render={() => {
+             return this.props.currentUser.isrecovery ? < RepodPage user={this.props.currentUser} /> : 
+             ( <Redirect to="/" /> )
+          }} />
+
 
           </Switch>
       </div>
