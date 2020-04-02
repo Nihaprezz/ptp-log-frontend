@@ -1,6 +1,6 @@
 import React from "react"
 import RepossessedTable from "./components/ReposessedTable"
-import RepodFilterBar from "./components/RepodFilterBar"
+
 
 const backend_url = process.env.REACT_APP_BACKEND;
 
@@ -80,8 +80,6 @@ class RepodPage extends React.Component {
                             </button>
                     ) : null}
                 </div>
-
-                < RepodFilterBar />
 
                 < RepossessedTable repoRecords={this.state.repoRecords} isadmin={isadmin} />
             </div>

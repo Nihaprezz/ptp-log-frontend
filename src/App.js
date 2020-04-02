@@ -19,6 +19,7 @@ import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
 import RecoveryRecord from "./recoveryshowpage/RecoveryRecordCont"
 import RepodPage from "./recoveryrepodpage/RepodPage"
+import AuctionPage from "./recoveryauctionpage/AuctionPage"
 
 
 class App extends React.Component {
@@ -105,6 +106,9 @@ class App extends React.Component {
              ( <Redirect to="/" /> )
           }} />
 
+          < Route exact path="/auction" render={() => {
+            return this.props.currentUser.isrecovery ? < AuctionPage /> : <Redirect to="/" />  
+          }} />
 
           </Switch>
       </div>
