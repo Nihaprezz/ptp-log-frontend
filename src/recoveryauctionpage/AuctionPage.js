@@ -58,7 +58,7 @@ class AuctionPage extends React.Component {
     }
 
     getAllAuction = () => {
-        fetch(backend_url + 'auction_records/all/at_action', {
+        fetch(backend_url + 'auction_records/all/at_auction', {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
@@ -74,7 +74,7 @@ class AuctionPage extends React.Component {
 
     getUserAuction = () => {
         let id = this.props.user.id
-        fetch(backend_url + `auction_records/user/at_action/${id}`, {
+        fetch(backend_url + `auction_records/user/at_auction/${id}`, {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
