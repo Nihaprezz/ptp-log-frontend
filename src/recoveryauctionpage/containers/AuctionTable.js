@@ -8,7 +8,7 @@ const AuctionTable = (props) => {
         auctionRecords = <tr><td>No Auction Records Found</td></tr>
     } else {
         auctionRecords = props.auctionRecords.map(record => {
-            return < AuctionTableRow key={record.id} auctionObj={record} />
+            return < AuctionTableRow key={record.id} auctionObj={record} isadmin={props.userAdmin} />
         })
     }
 
@@ -25,7 +25,9 @@ const AuctionTable = (props) => {
                         <th>Auction</th>
                         <th>Floor</th>
                         <th>Sale Date</th>
-                        <th></th>
+                        {props.userAdmin ? (
+                            <th></th>
+                        ): null}
                     </tr>
                 </thead>
                 <tbody>

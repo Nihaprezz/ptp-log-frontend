@@ -16,10 +16,11 @@ const AuctionTableRow = (props) => {
             <td>{auction_name}</td>
             <td>{floor ? floor : '$0'}</td>
             <td>{sale_date ? sale_date : 'TBD'}</td>
-            <td>
-                <button className="ui button">Update</button>
-            </td>
-
+            {props.isadmin ? (
+                <td>
+                    <button className="ui button">Update</button>
+                </td>
+            ): null}
         </tr>
     )
 }

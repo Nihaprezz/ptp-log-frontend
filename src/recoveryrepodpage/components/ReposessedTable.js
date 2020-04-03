@@ -7,7 +7,7 @@ const RepossessedTable = (props) => {
         records = <tr><td>No Vehicles Repossessed</td></tr>
     } else {
         records = props.repoRecords.map(record => {
-            return < RepoRecord key={record.id} repoObj={record} isadmin={props.isadmin}/>
+            return < RepoRecord key={record.id} repoObj={record} isadmin={props.isadmin} update={props.update}/>
         })
     }
 

@@ -63,6 +63,16 @@ class RepodPage extends React.Component {
        })
     }
 
+    updateRepoTable = (updatedRepo) => {
+        let filtered = [...this.state.repoRecords].filter(record => record.id !== updatedRepo)
+
+        if(filtered.length){
+            this.setState({repoRecords: filtered})
+        } else {
+            this.setState({repoRecords: {message: 'No Vehicles'}})
+        }
+    }
+
     render(){
         let { isadmin } = this.props.user;
         let btnText = this.state.showAll ? 'Show Your Repos' : 'Show All'
@@ -81,7 +91,7 @@ class RepodPage extends React.Component {
                     ) : null}
                 </div>
 
-                < RepossessedTable repoRecords={this.state.repoRecords} isadmin={isadmin} />
+                < RepossessedTable repoRecords={this.state.repoRecords} isadmin={isadmin} update={this.updateRepoTable}/>
             </div>
         )
     }

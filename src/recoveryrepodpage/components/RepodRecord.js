@@ -10,8 +10,6 @@ const RepodRecord = (props) => {
     props.repoObj.creditunion ? cuName = props.repoObj.creditunion.name : cuName = 'Credit Union Deleted'
 
     const showForm = (id) => {
-        console.log('attempting to show form');
-
         Swal.fire({
             title: 'Enter Auction Name',
             input: 'text',
@@ -48,8 +46,9 @@ const RepodRecord = (props) => {
             },
             allowOutsideClick: () => !Swal.isLoading()
           }).then((record) => {
-              if(record.id){
+              if(record.value.id){
                   Swal.fire('Success', 'Repo Order has been updated.', 'success')
+                  props.update(record.value.repo_order_id)
               }
           })
 
