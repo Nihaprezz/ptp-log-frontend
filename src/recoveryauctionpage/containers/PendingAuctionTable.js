@@ -5,7 +5,7 @@ const PendingAuctionTable = (props) => {
   
     let tableRows;
     tableRows = props.repoRecords.map(repo => {
-        return < PendingTableRow key={repo.id} repoObj={repo} isadmin={props.userAdmin}/>
+        return < PendingTableRow key={repo.id} repoObj={repo} isadmin={props.userAdmin} update={props.update}/>
     })
 
 

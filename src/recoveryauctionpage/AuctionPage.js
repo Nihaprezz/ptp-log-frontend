@@ -97,6 +97,20 @@ class AuctionPage extends React.Component {
         })
     }
 
+    handleTransitUpdate =  (updatedRecord) => {
+        let filtered = [...this.state.repoRecords].filter(record => record.id !== updatedRecord.id)
+
+        let updatedAuction;
+        if(Array.isArray(this.state.auctionRecords)){
+            updatedAuction = [...this.state.auctionRecords, updatedRecord]
+        } else {
+            updatedAuction = []
+            updatedAuction.push(updatedRecord)
+        }
+     
+        this.setState({repoRecords: filtered, auctionRecords: updatedAuction})
+    }
+
     render(){
         let { showAuction } = this.state;
         let { isadmin } = this.props.user;
@@ -120,8 +134,16 @@ class AuctionPage extends React.Component {
 
                 </div>
 
-                {showAuction ? < AuctionTable auctionRecords={this.state.auctionRecords} userAdmin={isadmin}/> : (
-                    < PendingAuctionTable repoRecords={this.state.repoRecords} userAdmin={isadmin}/>
+                {showAuction ? (
+                    < AuctionTable 
+                    auctionRecords={this.state.auctionRecords} 
+                    userAdmin={isadmin}
+                    />
+                ) : (
+                    < PendingAuctionTable 
+                    repoRecords={this.state.repoRecords} 
+                    userAdmin={isadmin}
+                    update={this.handleTransitUpdate}/>
                 )}
 
             </div>
