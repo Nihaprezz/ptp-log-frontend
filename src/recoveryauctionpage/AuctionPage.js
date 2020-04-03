@@ -1,10 +1,111 @@
 import React from "react";
+import AuctionTable from "./containers/AuctionTable";
+import PendingAuctionTable from "./containers/PendingAuctionTable"
+import Swal from "sweetalert2"
+
+const backend_url = process.env.REACT_APP_BACKEND;
 
 class AuctionPage extends React.Component {
+    constructor(){
+        super();
+
+        this.state = {
+            repoRecords: [],
+            auctionRecords: [],
+            showAuction: false
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.user.isadmin){
+            this.getUserPending();
+            this.getAllAuction();
+        } else {
+            this.getAllPending();
+        }
+    }
+
+    getAllPending(){
+        fetch(backend_url + 'auction_records', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(pendingTransport => {
+            this.setState({repoRecords: pendingTransport})
+        })
+    }
+
+    getUserPending(){
+        Swal.showLoading()
+        let id = this.props.user.id
+        fetch(backend_url + `auction_records/user/${id}`, {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(pendingTransport => {
+            Swal.close()
+            this.setState({repoRecords: pendingTransport})
+        })
+    }
+
+    getAllAuction = () => {
+        fetch(backend_url + 'auction_records/auction', {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(atAuction => {
+            console.log(atAuction)
+            this.setState({auctionRecords: atAuction})
+        })
+    }
+
+    toggleTable = (status) => {
+        this.setState({showAuction: status}, () => {
+            if(status && this.state.auctionRecords.length === 0){
+                this.setState({auctionRecords: {new: 'record'}})
+                console.log('attempting to get auction records')
+            }
+        })
+    }
+
     render(){
-        return (
+        let { showAuction } = this.state
+
+        return (    
             <div>
-                This is the auction page
+                <h1 style={{textAlign: 'left', width: '98%', margin: 'auto'}} className="ui dividing header">
+                        Auction Vehicles
+                </h1> 
+
+                <div style={{width: '98%', margin: 'auto', paddingTop: '2vh'}} className="ui tabular menu">
+                    <p style={{cursor: "pointer"}}
+                    className={showAuction ? 'item' : 'item active'} onClick={() => this.toggleTable(false)}>
+                        In Transit
+                    </p>
+
+                    <p style={{cursor: "pointer"}}
+                    className={showAuction ? 'item active' : 'item'} onClick={() => this.toggleTable(true)}>
+                        At Auction
+                    </p>
+
+                </div>
+
+                {showAuction ? < AuctionTable /> : (
+                    < PendingAuctionTable repoRecords={this.state.repoRecords} />
+                )}
+
             </div>
         )
     }

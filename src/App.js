@@ -107,7 +107,7 @@ class App extends React.Component {
           }} />
 
           < Route exact path="/auction" render={() => {
-            return this.props.currentUser.isrecovery ? < AuctionPage /> : <Redirect to="/" />  
+            return this.props.currentUser.isrecovery ? < AuctionPage user={this.props.currentUser} /> : <Redirect to="/" />  
           }} />
 
           </Switch>
