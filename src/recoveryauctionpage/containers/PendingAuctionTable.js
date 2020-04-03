@@ -5,8 +5,9 @@ const PendingAuctionTable = (props) => {
   
     let tableRows;
     tableRows = props.repoRecords.map(repo => {
-        return < PendingTableRow key={repo.id} repoObj={repo}/>
+        return < PendingTableRow key={repo.id} repoObj={repo} isadmin={props.userAdmin}/>
     })
+
 
     return (
         <div style={{width: "98%", margin: "auto", paddingTop: '1vh'}}>
@@ -20,6 +21,9 @@ const PendingAuctionTable = (props) => {
                         <th>Vin</th>
                         <th>Transport Set On</th>
                         <th>Auction</th>
+                        {props.userAdmin ? (
+                            <th>Update</th>
+                        ): null}
                     </tr>
                 </thead>
                 <tbody>

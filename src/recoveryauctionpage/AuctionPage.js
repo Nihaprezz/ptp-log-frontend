@@ -19,9 +19,10 @@ class AuctionPage extends React.Component {
     componentDidMount(){
         if(this.props.user.isadmin){
             this.getUserPending();
-            this.getAllAuction();
+            this.getUserAuction();
         } else {
             this.getAllPending();
+            this.getAllAuction();
         }
     }
 
@@ -57,7 +58,7 @@ class AuctionPage extends React.Component {
     }
 
     getAllAuction = () => {
-        fetch(backend_url + 'auction_records/auction', {
+        fetch(backend_url + 'auction_records/all/at_action', {
             headers: {
                 "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
                 "Content-Type": 'application/json',
@@ -66,9 +67,25 @@ class AuctionPage extends React.Component {
         })
         .then(resp => resp.json())
         .then(atAuction => {
-            console.log(atAuction)
             this.setState({auctionRecords: atAuction})
         })
+        .catch(err => alert(err))
+    }
+
+    getUserAuction = () => {
+        let id = this.props.user.id
+        fetch(backend_url + `auction_records/user/at_action/${id}`, {
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }
+        })
+        .then(resp => resp.json())
+        .then(atAuction => {
+            this.setState({auctionRecords: atAuction})
+        })
+        .catch(err => alert(err))
     }
 
     toggleTable = (status) => {
@@ -81,7 +98,8 @@ class AuctionPage extends React.Component {
     }
 
     render(){
-        let { showAuction } = this.state
+        let { showAuction } = this.state;
+        let { isadmin } = this.props.user;
 
         return (    
             <div>
@@ -102,8 +120,8 @@ class AuctionPage extends React.Component {
 
                 </div>
 
-                {showAuction ? < AuctionTable /> : (
-                    < PendingAuctionTable repoRecords={this.state.repoRecords} />
+                {showAuction ? < AuctionTable auctionRecords={this.state.auctionRecords} userAdmin={isadmin}/> : (
+                    < PendingAuctionTable repoRecords={this.state.repoRecords} userAdmin={isadmin}/>
                 )}
 
             </div>
