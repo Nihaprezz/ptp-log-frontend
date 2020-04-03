@@ -4,10 +4,13 @@ import PendingTableRow from "../components/PendingTableRow"
 const PendingAuctionTable = (props) => {
   
     let tableRows;
-    tableRows = props.repoRecords.map(repo => {
-        return < PendingTableRow key={repo.id} repoObj={repo} isadmin={props.userAdmin} update={props.update}/>
-    })
-
+    if(props.repoRecords.error){
+        tableRows = <tr><td>No Auction Records Found</td></tr>
+    } else {
+        tableRows = props.repoRecords.map(repo => {
+            return < PendingTableRow key={repo.id} repoObj={repo} isadmin={props.userAdmin} update={props.update}/>
+        })
+    }
 
     return (
         <div style={{width: "98%", margin: "auto", paddingTop: '1vh'}}>
@@ -22,7 +25,7 @@ const PendingAuctionTable = (props) => {
                         <th>Transport Set On</th>
                         <th>Auction</th>
                         {props.userAdmin ? (
-                            <th>Update</th>
+                            <th></th>
                         ): null}
                     </tr>
                 </thead>
