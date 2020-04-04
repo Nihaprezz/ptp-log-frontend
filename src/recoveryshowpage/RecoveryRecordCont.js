@@ -34,9 +34,7 @@ class RecoveryRecordCont extends React.Component {
         .catch(err => console.log(err))
     }
 
-    closeRepoOrder = (e) => {
-        e.preventDefault();
-        
+    closeRepoOrder = (reason) => {
         let id = this.state.recoveryRecord.id
         fetch(backend_url + `/repo_orders/update_to_close/${id}`, {
             method: 'PATCH', 
@@ -46,7 +44,8 @@ class RecoveryRecordCont extends React.Component {
                 "Accept": 'application/json'
             }, 
             body: JSON.stringify({
-                closed_repo: true
+                closed_repo: true, 
+                closed_reason: reason
             })
         })
         .then(resp => resp.json())
@@ -58,6 +57,30 @@ class RecoveryRecordCont extends React.Component {
                 })
             } else {
                 Swal.fire('Error', 'Unable to update repo.', 'error')
+            }
+        })
+    }
+
+    getCloseReason = (e) => {
+        e.preventDefault();
+        
+        Swal.fire({
+            title: 'Enter Reason for Closing',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Close Repo',
+            showLoaderOnConfirm: true,
+            preConfirm: (reason) => {
+                if(reason === ""){
+                    Swal.showValidationMessage(
+                        `Failed: Enter a reason for closing.`
+                    )
+                } else {
+                    this.closeRepoOrder(reason)
+                }
             }
         })
     }
@@ -88,7 +111,7 @@ class RecoveryRecordCont extends React.Component {
                         <div className="recovery-record-form-conts">
                             <form className="ui form">
                                 <div className="field recovery-record-btns-cont">
-                                    <button className="ui red button close-repo-btn" onClick={(e) => this.closeRepoOrder(e)}>
+                                    <button className="ui red button close-repo-btn" onClick={(e) => this.getCloseReason(e)}>
                                         Close Repo
                                     </button>
 
