@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AuctionTableRow = (props) => {
 
     let { acct_no, first_name, last_name, veh_info, veh_vin } = props.auctionObj;
-    let { auction_name, floor, sale_date } = props.auctionObj.auction_record;
+    let { id, auction_name, floor, sale_date } = props.auctionObj.auction_record;
     let { name } = props.auctionObj.creditunion;
 
     return (
@@ -18,7 +19,7 @@ const AuctionTableRow = (props) => {
             <td>{sale_date ? sale_date : 'TBD'}</td>
             {props.isadmin ? (
                 <td>
-                    <button className="ui button">Update</button>
+                    <Link className="ui button" to={`/auction_record/${id}`}>Update</Link>
                 </td>
             ): null}
         </tr>

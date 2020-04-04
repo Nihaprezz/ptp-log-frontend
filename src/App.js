@@ -20,6 +20,7 @@ import SkipShowPage from "./skipshowpage/SkipShowPage"
 import RecoveryRecord from "./recoveryshowpage/RecoveryRecordCont"
 import RepodPage from "./recoveryrepodpage/RepodPage"
 import AuctionPage from "./recoveryauctionpage/AuctionPage"
+import AuctionShowPage from "./auctionshowpage/AuctionShowPage"
 
 
 class App extends React.Component {
@@ -108,6 +109,12 @@ class App extends React.Component {
 
           < Route exact path="/auction" render={() => {
             return this.props.currentUser.isrecovery ? < AuctionPage user={this.props.currentUser} /> : <Redirect to="/" />  
+          }} />
+
+          < Route exact path="/auction_record/:id" render={(props) => {
+            let auctionID = props.match.params.id
+
+            return < AuctionShowPage auctionID={auctionID} />
           }} />
 
           </Switch>
