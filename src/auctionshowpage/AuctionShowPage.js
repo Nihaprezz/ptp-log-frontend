@@ -1,4 +1,6 @@
 import React from "react";
+import AuctionInfoHeader from "./components/AuctionInfoHeader"
+import UpdateAuction from "./components/UpdateAuction"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -25,15 +27,26 @@ class AuctionShowPage extends React.Component {
         .catch(err => alert(err))
     }
 
+    updatedRecord = (updatedRecord) => {
+        this.setState(updatedRecord)
+    }
+
     render(){
-        console.log(this.state)
+        let { showRecord } = this.state
+
         return (
-            <div>
-                This be the auction page
-                {/* RECORD DETAIL HEADER */}
-                {/* UPDATE AUCTION FORM SECTION */}
-                {/* SOLD AUCTION FORM SECTION */}
-                {/* CLOSE REPO SECTION WITH A REASON WHY */}
+            <div className="recovery-record-cont ui card">
+
+                {this.state.showRecord.length === 0 ? <h2> Loading... </h2> : (
+                    <React.Fragment>
+                        < AuctionInfoHeader record={showRecord}/>
+                    
+                    {/* UPDATE AUCTION FORM SECTION */}
+                        < UpdateAuction record={showRecord} update={this.updatedRecord}/>
+                    {/* SOLD AUCTION FORM SECTION */}
+                    {/* CLOSE REPO SECTION WITH A REASON WHY */}
+                    </React.Fragment>
+                )}
             </div>
         )
     }
