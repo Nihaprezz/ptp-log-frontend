@@ -23,7 +23,8 @@ class RecoveryHome extends React.Component {
         fetch(backend_url + 'users/recovery')
         .then(resp => resp.json())
         .then(usersArray => {
-            let sorted = usersArray.sort((a,b) => a.username > b.username ? 1 : -1)
+            let filtered = usersArray.filter(user => user.isadmin === true)
+            let sorted = filtered.sort((a,b) => a.username > b.username ? 1 : -1)
             this.setState({recoveryUsers: sorted})
         })
         .catch(err => alert(err))
