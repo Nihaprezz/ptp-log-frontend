@@ -2,6 +2,7 @@ import React from "react";
 import AuctionInfoHeader from "./components/AuctionInfoHeader"
 import UpdateAuction from "./components/UpdateAuction"
 import UpdateSold from "./components/UpdateSold"
+import CloseOrder from "./components/CloseOrder"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -47,6 +48,7 @@ class AuctionShowPage extends React.Component {
                     {/* SOLD AUCTION FORM SECTION */}
                         < UpdateSold record={showRecord} />
                     {/* CLOSE REPO SECTION WITH A REASON WHY */}
+                        < CloseOrder record={showRecord}/>
                     </React.Fragment>
                 )}
             </div>

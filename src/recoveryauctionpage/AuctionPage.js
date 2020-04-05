@@ -2,6 +2,7 @@ import React from "react";
 import AuctionTable from "./containers/AuctionTable";
 import PendingAuctionTable from "./containers/PendingAuctionTable"
 import Swal from "sweetalert2"
+import { withRouter } from "react-router-dom"
 
 const backend_url = process.env.REACT_APP_BACKEND;
 
@@ -17,6 +18,10 @@ class AuctionPage extends React.Component {
     }
 
     componentDidMount(){
+        if(this.props.location.state){
+            this.setState({showAuction: true})
+        }
+
         if(this.props.user.isadmin){
             this.getUserPending();
             this.getUserAuction();
@@ -151,4 +156,4 @@ class AuctionPage extends React.Component {
     }
 }
 
-export default AuctionPage
+export default withRouter(AuctionPage);
