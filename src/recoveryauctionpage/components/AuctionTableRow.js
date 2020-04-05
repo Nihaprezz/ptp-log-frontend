@@ -15,7 +15,7 @@ const AuctionTableRow = (props) => {
             <td>{veh_info}</td>
             <td>{veh_vin}</td>
             <td>{auction_name}</td>
-            <td>{floor ? floor : '$0'}</td>
+            <td>{floor ? '$' + floor.toLocaleString() : '$0'}</td>
             <td>{sale_date ? sale_date : 'TBD'}</td>
             {props.isadmin ? (
                 <td>
