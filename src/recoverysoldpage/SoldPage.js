@@ -1,4 +1,5 @@
 import React from "react";
+import SoldTable from './components/SoldTable'
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -48,10 +49,14 @@ class SoldPage extends React.Component {
     }
 
     render(){
-        console.log(this.state)
         return (
             <div>
-                Sold Page will be rendered here
+                <h1 style={{textAlign: 'left', width: '98%', margin: 'auto'}} className="ui dividing header">
+                    Sold Vehicles
+                </h1> 
+
+                <SoldTable isadmin={this.props.user.isadmin} soldRecords={this.state.soldRecords}/>
+
             </div>
         )
     }

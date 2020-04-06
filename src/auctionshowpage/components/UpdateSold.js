@@ -61,7 +61,7 @@ class UpdateSold extends React.Component {
 
                     <div className="three fields">
                         <div className="field">
-                            <label>Sale Date</label>
+                            <label>Sold Date</label>
                             <input onChange={(e) => this.onChange(e)}
                             type="date" value={sale_date ? sale_date : ""} name="sale_date"/>
                         </div>
