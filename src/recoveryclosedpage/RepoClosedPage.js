@@ -1,4 +1,5 @@
 import React from "react";
+import ClosedRepoTable from './components/ClosedRepoTable'
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -7,7 +8,8 @@ class RepoClosedPage extends React.Component {
         super();
 
         this.state = {
-            closedRepos: []
+            closedRepos: [], 
+            showAll: false,
         }
     }
 
@@ -46,11 +48,24 @@ class RepoClosedPage extends React.Component {
         .catch(err => alert(err))
     }
 
+    toggleAll = (status) => {
+        if(status){
+            this.getAllClosed();
+        } else {
+            this.getUserClosed();
+        }
+
+        this.setState({showAll: status})
+    }
+
     render(){
-        console.log(this.state.closedRepos)
         return (
             <div>
-                This is the repo close page
+                < ClosedRepoTable 
+                isadmin={this.props.user.isadmin} 
+                closedRepos={this.state.closedRepos}
+                showAll={this.state.showAll}
+                toggleAll={this.toggleAll}/>
             </div>
         )
     }
