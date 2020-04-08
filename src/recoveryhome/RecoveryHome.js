@@ -103,7 +103,8 @@ class RecoveryHome extends React.Component {
                     activeRepos={this.state.activeRepos}
                     showHold={this.state.showHold}
                     toggleActiveRepos={this.toggleActiveRepos}
-                    activeHolds={this.state.activeHolds}/>
+                    activeHolds={this.state.activeHolds}
+                    currentUser={this.props.user}/>
                 )}
 
             </div>

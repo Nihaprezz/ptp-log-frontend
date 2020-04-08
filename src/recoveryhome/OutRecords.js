@@ -8,7 +8,7 @@ const OutRecord = (props) => {
 
     props.repoObj.creditunion.name ? cuName = props.repoObj.creditunion.name : cuName = "CU Deleted"
     // props.repoObj.user.username ? user = props.repoObj.user.username : user = 'User Deleted'
- 
+
     return (
         <tr>
             <td>{acct_no}</td>
@@ -18,9 +18,11 @@ const OutRecord = (props) => {
             <td>{veh_vin}</td>
             <td>{created_on}</td>
             <td>{daysInBetween(created_on)}</td>
-            <td>
-                <Link className="ui button" to={`repo_record/${id}`}>Edit</Link>
-            </td>
+            {props.isadmin ? (
+                <td>
+                    <Link className="ui button" to={`repo_record/${id}`}>Edit</Link>
+                </td>   
+            ): null}
         </tr>
     )
 }

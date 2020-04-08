@@ -7,7 +7,7 @@ const OutRecordsTable = (props) => {
         records = <tr><td>{props.activeRepos.message}</td></tr>
     } else {
         records = props.activeRepos.map(record => {
-            return < OutRecord key={record.id} repoObj={record} />
+            return < OutRecord key={record.id} repoObj={record} isadmin={props.currentUser.isadmin}/>
         })
     }
 
@@ -16,7 +16,7 @@ const OutRecordsTable = (props) => {
         holdrecords = <tr><td>{props.activeHolds.message}</td></tr>
     } else {
         holdrecords = props.activeHolds.map(record => {
-            return < OutRecord key={record.id} repoObj={record} />
+            return < OutRecord key={record.id} repoObj={record} isadmin={props.currentUser.isadmin}/>
         })
     }
 
@@ -45,7 +45,9 @@ const OutRecordsTable = (props) => {
                         <th>Vin</th>
                         <th>Placed Out On</th>
                         <th>Days</th>
-                        <th>Edit</th>
+                        {props.currentUser.isadmin ? (
+                           <th>Edit</th> 
+                        ): null}
                     </tr>
                 </thead>
                 <tbody>
