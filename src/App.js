@@ -23,6 +23,7 @@ import AuctionPage from "./recoveryauctionpage/AuctionPage"
 import AuctionShowPage from "./auctionshowpage/AuctionShowPage"
 import SoldPage from "./recoverysoldpage/SoldPage"
 import SoldShowPage from "./soldshowpage/SoldShowPage"
+import RepoClosedPage from "./recoveryclosedpage/RepoClosedPage"
 
 
 class App extends React.Component {
@@ -126,6 +127,11 @@ class App extends React.Component {
           < Route exact path="/sold_record/:id" render={(props) => {
             let soldID = props.match.params.id
             return < SoldShowPage soldID={soldID}/>
+          }} />
+
+          < Route exact path="/closed" render={() => {
+            return this.props.currentUser.isrecovery ? < RepoClosedPage user={this.props.currentUser} /> : (
+            <Redirect to="/" />  )
           }} />
 
           </Switch>
