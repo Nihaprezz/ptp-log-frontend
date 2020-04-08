@@ -17,8 +17,8 @@ const SoldRecord = (props) => {
             <td>{veh_vin}</td>
             <td>{sale_location}</td>
             <td>${sold_amt.toLocaleString()}</td>
-            <td>{cu_check_sent ? cu_check_sent : "No"}</td>
-            <td>{deficiency_amt ? deficiency_amt : "$0"}</td>
+            <td>{cu_check_sent ? "Yes" : "No"}</td>
+            <td>{deficiency_amt ? "$" + deficiency_amt.toLocaleString() : "$0"}</td>
             <td>{deficiency_sent ? deficiency_sent : "No"}</td>
             {props.isadmin ? (
                 <td>

@@ -1,5 +1,8 @@
 import React from "react";
 import SoldInfoHeader from "./components/SoldInfoHeader"
+import UpdateSoldInfo from "./components/UpdateSoldInfo"
+import ArchiveRecord from "./components/ArchiveRecord"
+import { Link } from "react-router-dom"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -32,8 +35,20 @@ class SoldShowPage extends React.Component {
         return (
             <div className="recovery-record-cont ui card">
                 {this.state.soldRecord.length === 0 ? <h2>Loading...</h2> : (
-                    < SoldInfoHeader soldRecord={soldRecord}/>
+                    <React.Fragment>
+                        < SoldInfoHeader soldRecord={soldRecord}/>
+
+                        < UpdateSoldInfo soldRecord={soldRecord} />
+
+                        < ArchiveRecord soldRecord={soldRecord} />
+                    </React.Fragment>
                 )}
+                <div className="recovery-record-form-conts" style={{textAlign: "right"}}>
+                
+                    <Link to="/sold" className="ui button">Back</Link>
+
+                </div>
+ 
             </div>
         )
     }
