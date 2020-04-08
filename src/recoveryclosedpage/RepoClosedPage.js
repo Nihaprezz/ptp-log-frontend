@@ -1,5 +1,6 @@
 import React from "react";
 import ClosedRepoTable from './components/ClosedRepoTable'
+import Swal from "sweetalert2"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -58,6 +59,35 @@ class RepoClosedPage extends React.Component {
         this.setState({showAll: status})
     }
 
+    archiveRepo = (id) => {
+        fetch(backend_url + `repo_orders/archive/${id}`, {
+            method: 'PATCH', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                archive_record: true
+            })
+        })
+        .then(resp => resp.json())
+        .then(updated => {
+            if(updated.id){
+                let filtered = [...this.state.closedRepos].filter(record => record.id !== updated.id)
+                if(filtered.length === 0){  //catches anytime the filtered removes all 
+                    filtered = {message: 'No Vehicles Closed'}
+                }
+                this.setState({closedRepos: filtered})
+
+                Swal.fire('Success', 'Vehicle has been archived', 'success')
+            } else {
+                Swal.fire('Error', 'Unable to update record', 'error')
+            }
+        })
+        .catch(err => alert(err))
+    }
+
     render(){
         return (
             <div>
@@ -65,7 +95,8 @@ class RepoClosedPage extends React.Component {
                 isadmin={this.props.user.isadmin} 
                 closedRepos={this.state.closedRepos}
                 showAll={this.state.showAll}
-                toggleAll={this.toggleAll}/>
+                toggleAll={this.toggleAll}
+                archiveRepo={this.archiveRepo}/>
             </div>
         )
     }

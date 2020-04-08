@@ -2,7 +2,7 @@ import React from "react";
 
 const ClosedRepoRow = (props) => {
 
-    let { acct_no, first_name, last_name, veh_info, veh_vin, repo_company, closed_reason} = props.repoObj
+    let { id, acct_no, first_name, last_name, veh_info, veh_vin, repo_company, closed_reason} = props.repoObj
     let { name } = props.repoObj.creditunion
     
     return (
@@ -16,7 +16,8 @@ const ClosedRepoRow = (props) => {
             <td>{closed_reason}</td>
             {props.isadmin ? (
                 <td>
-                    <button className="ui button">Update</button>
+                    <button onClick={() => props.archiveRepo(id)}
+                    className="ui button">Archive</button>
                 </td>
             ): null}
         </tr>

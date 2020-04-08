@@ -7,8 +7,10 @@ const ClosedRepoTable = (props) => {
         tableRows = <tr><td>No Closed Vehicles</td></tr>
     } else {
         tableRows = props.closedRepos.map(repo => {
-            return < ClosedRepoRow repoObj={repo} key={repo.id}
-            isadmin={props.isadmin}/>
+            return < ClosedRepoRow 
+            repoObj={repo} key={repo.id}
+            isadmin={props.isadmin}
+            archiveRepo={props.archiveRepo}/>
         })
     }
 
