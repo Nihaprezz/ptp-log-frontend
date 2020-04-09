@@ -14,20 +14,18 @@ const ClosedRepoTable = (props) => {
         })
     }
 
+    let toggleButton = <button className="ui secondary button" onClick={() => props.toggleAll(!props.showAll)}> 
+        {props.showAll ? "Show Yours Only" : "Show All" }
+        </button>
+
     return (
         <div style={{width: '98%', margin: 'auto'}}>
             <div style={{textAlign: 'left'}}>
                 <h1 className="ui dividing header">Closed Repossessions</h1>
 
-                {props.showAll ? (
-                    <button className="ui secondary button" onClick={() => props.toggleAll(false)}>
-                        Show Yours Only
-                    </button>
-                ):(
-                    <button className="ui secondary button" onClick={() => props.toggleAll(true)}>
-                        Show All
-                    </button>  
-                )}
+                {props.isadmin ? (
+                    toggleButton
+                ): null }
             </div>
 
             <table className="ui celled table">
