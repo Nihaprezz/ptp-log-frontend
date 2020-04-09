@@ -25,6 +25,7 @@ const RecoveryNavBar = (props) => {
                 </div>
             </div>
 
+            <Link className="item" to="/recovery_stats">Recovery Stats</Link>
 
             <div className="right menu">
                 {/* eslint-disable-next-line*/}
