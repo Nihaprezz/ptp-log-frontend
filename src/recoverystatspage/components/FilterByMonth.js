@@ -16,7 +16,8 @@ const FilterByMonth = (props) => {
                 </select>
             </div>
 
-            <button className="ui secondary button">Submit</button>
+            <button onClick={(e) => props.handleSearch(e)}
+            className="ui secondary button">Submit</button>
         </form>
     )
 }

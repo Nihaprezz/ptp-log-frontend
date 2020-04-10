@@ -1,18 +1,16 @@
 import React from "react";
-import StatsRecord from "./StatsRecord"
+import StatsRecord from "./StatsRecord";
 
-const StatsTable = (props) => {
-
+const CUCStatsTable = (props) => {
     return (
-        <div>
+        <div style={{marginBottom: '2%'}}>
             <div style={{width: '98%', margin: 'auto', textAlign: 'left', paddingBottom: '1%'}}>
-                    <h3 className="ui dividing header">Repossession Stats Per CU: </h3>
+                    <h3 className="ui dividing header">CUC Overall Stats: </h3>
             </div>
 
             <table style={{width: '98%', margin: 'auto'}} className="ui celled table">
                 <thead>
                     <tr>
-                        <th>Credit Union</th>
                         <th>Total Vehicles Placed Out</th>
                         <th>Total Vehicles Repossessed</th>
                         <th>Total Vehicles Sold</th>
@@ -21,16 +19,15 @@ const StatsTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.cuStats.length === 0 ? <tr><td>Loading...</td></tr> : (
-                        props.cuStats.map((cu, index) => {
-                            return < StatsRecord key={index} cuObj={cu}/>
-                        })
+                    {props.cucStats.length === 0 ? (
+                        <tr><td>Loading...</td></tr>
+                    ) : (
+                        < StatsRecord cuObj={props.cucStats}/>
                     )}
                 </tbody>
             </table>
         </div>
-
     )
 }
 
-export default StatsTable
+export default CUCStatsTable
