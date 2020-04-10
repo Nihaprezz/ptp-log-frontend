@@ -25,6 +25,7 @@ import SoldPage from "./recoverysoldpage/SoldPage"
 import SoldShowPage from "./soldshowpage/SoldShowPage"
 import RepoClosedPage from "./recoveryclosedpage/RepoClosedPage"
 import RecoveryStats from "./recoverystatspage/RecoveryStats"
+import RecoverySearch from "./recoverysearchpage/RecoverySearch"
 
 
 class App extends React.Component {
@@ -138,6 +139,10 @@ class App extends React.Component {
           < Route exact path="/recovery_stats" render={() => {
             return this.props.currentUser.isrecovery ? < RecoveryStats user={this.props.currentUser} /> : (
             <Redirect to="/" />  )
+          }} />
+
+        < Route exact path="/search_repo" render={() => {
+            return this.props.currentUser.isrecovery ? < RecoverySearch /> : <Redirect to="/" />  
           }} />
 
           </Switch>

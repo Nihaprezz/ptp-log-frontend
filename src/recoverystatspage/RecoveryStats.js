@@ -54,11 +54,10 @@ class RecoveryStatsPage extends React.Component {
     }
 
     render(){
-        console.log(this.state)
         return (
             <div>
                 <div style={{width: '95%', margin: 'auto'}}>
-                    <h2 className="ui dividing header">Recovery Stats per Month</h2>
+                    <h2 className="ui dividing header">Recovery Stats Per Month</h2>
                 </div>
 
                 <FilterByMonth month={this.state.month} 
