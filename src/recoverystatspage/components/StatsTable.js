@@ -4,7 +4,7 @@ import StatsRecord from "./StatsRecord"
 const StatsTable = (props) => {
 
     return (
-        <div>
+        <div style={{marginBottom: '2%'}}>
             <div style={{width: '98%', margin: 'auto', textAlign: 'left', paddingBottom: '1%'}}>
                     <h3 className="ui dividing header">Repossession Stats Per CU: </h3>
             </div>

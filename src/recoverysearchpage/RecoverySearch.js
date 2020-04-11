@@ -1,4 +1,6 @@
 import React from "react";
+import RegularSearch from "./containers/RegularSearch"
+import "./recovery_search.css"
 
 class RecoverySearch extends React.Component {
     constructor(){
@@ -12,7 +14,11 @@ class RecoverySearch extends React.Component {
     render(){
         return (
             <div>
-                This is the recovery search page
+                <div className="recovery-search-button-cont">
+                    <button className="ui secondary button">Other Search</button>   
+                </div>
+
+                <RegularSearch/>
             </div>
         )
     }

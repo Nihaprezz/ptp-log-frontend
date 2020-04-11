@@ -1,0 +1,15 @@
+.recovery-search-button-cont {
+    width: 60%;
+    margin: auto !important;
+    text-align: left;
+}
+
+.regular-search-header p {
+    font-weight: bold;
+}
+
+.regular-search-form {
+    width: 60%;
+    margin: auto !important;
+    padding-top: 2%;
+}
