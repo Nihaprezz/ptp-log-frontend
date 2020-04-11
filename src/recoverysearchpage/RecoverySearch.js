@@ -3,14 +3,6 @@ import RegularSearch from "./containers/RegularSearch"
 import "./recovery_search.css"
 
 class RecoverySearch extends React.Component {
-    constructor(){
-        super();
-
-        this.state = {
-
-        }
-    }
-
     render(){
         return (
             <div>
