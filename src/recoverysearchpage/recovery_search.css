@@ -13,3 +13,24 @@
     margin: auto !important;
     padding-top: 2%;
 }
+
+.regular-results-conts {
+    width: 95%;
+    margin: auto !important;
+    height: 65vh;
+    overflow: auto;
+}
+
+/* STYLING FOR RESULTS CONTAINERS. */
+.results-card-container {
+    text-align: left !important;
+}
+
+.results-repo-section span {
+    display: block;
+    font-weight: 400;
+}
+
+.results-repo-section p {
+    font-weight: bold;
+}

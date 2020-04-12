@@ -1,5 +1,6 @@
 import React from "react"
 import RegularSearchForm from "../components/RegularSearchForm"
+import SearchResults from "../components/RegularSearchResults"
 import Swal from "sweetalert2"
 
 const backend_url = process.env.REACT_APP_BACKEND
@@ -11,6 +12,7 @@ class RegularSearch extends React.Component{
         this.state = {
             searchText: "",
             searchType: "vin",
+            results: []
         }
     }
 
@@ -43,15 +45,20 @@ class RegularSearch extends React.Component{
             })
             .then(resp => resp.json())
             .then(foundRecords => {
-                
+                this.setState({results: foundRecords})
                 console.log(foundRecords)
             })
             .catch(err => alert(err))
         }
     }
 
-
     render(){
+        let results = this.state.results.message ? <h1> No Repos Found </h1> : (
+            this.state.results.map(repo => {
+                return <SearchResults key={repo.id} repoObj={repo}/>
+            })
+        )        
+
         return (
             <div>
                 <div className="regular-search-header">
@@ -61,6 +68,13 @@ class RegularSearch extends React.Component{
 
                 < RegularSearchForm handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}/>
+                
+                <div className="ui segment regular-results-conts">
+                    {this.state.results.length !== 0 ? (
+                        results
+                    ): null}
+                </div>
+                
             </div>
         )
     }
