@@ -4,6 +4,15 @@
     text-align: left;
 }
 
+.results-card-container p {
+    font-weight: bold;
+}
+
+.results-card-container p span {
+    font-weight: 400;
+    display: block;
+}
+
 .regular-search-header p {
     font-weight: bold;
 }
@@ -21,16 +30,31 @@
     overflow: auto;
 }
 
+
 /* STYLING FOR RESULTS CONTAINERS. */
 .results-card-container {
     text-align: left !important;
 }
 
-.results-repo-section span {
-    display: block;
-    font-weight: 400;
+/* REPO INFORMATION SECTION */
+
+.results-repo-section .results-repo-main-section {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
 }
 
-.results-repo-section p {
-    font-weight: bold;
+
+/* SOLD INFORMATION SECTION */
+.results-sold-section {
+    padding-top: 2%;
+}
+
+.results-auction-section div:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+/* AUCTION INFORMATION SECTION */
+.results-auction-section {
+    padding-top: 2%;
 }
