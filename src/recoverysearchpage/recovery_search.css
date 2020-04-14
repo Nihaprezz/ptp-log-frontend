@@ -77,3 +77,14 @@
 #results-toggle {
     cursor: pointer;
 }
+
+/* ADVANCED SEARCH STYLING */
+.repo-adv-search-form-cont form {
+    width: 50%;
+    margin: auto !important;
+    padding-top: 1%;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-items: center;
+    align-items: center;
+}
