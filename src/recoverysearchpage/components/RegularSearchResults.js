@@ -1,10 +1,22 @@
-import React from "react"
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
 
 const RegularSearchResults  = (props) => {
+    //toggle states
+    const [toggleAuction, SetToggleAuction] = useState(false)
+    const [toggleSold, SetToggleSold] = useState(false)
+
+    //toggle functions
+    const showAuction = () => SetToggleAuction(!toggleAuction);
+    const showSold = () => SetToggleSold(!toggleSold);
+
     //Initial Repo Object deconstructing
     let {id, acct_no, archive_record, closed_reason, closed_repo, created_on, first_name, hold_order, 
     last_name, repo_company, repod, repod_on, veh_info, veh_vin } = props.repoObj;
     
+    //Renaming repo ID
+    const mainID = id;
+
     //Checking to see if the CU is still available and not deleted.
     let cuName; 
     props.repoObj.creditunion ? cuName = props.repoObj.creditunion.name : cuName = 'CU Deleted'
@@ -12,24 +24,27 @@ const RegularSearchResults  = (props) => {
     //Auction Info rendering if there is any auction info
     let auctionInfo;
     if(props.repoObj.auction_record){
-        let { auction_name, floor, id, in_transit, sale_date, sold, transport_date } = props.repoObj.auction_record;
+        let { auction_name, floor, in_transit, sale_date, transport_date } = props.repoObj.auction_record;
 
         auctionInfo = (
             <div className="results-auction-section">
-                <h3 class="ui dividing header">Auction Information</h3>
+                <h3 id="results-toggle" className="ui dividing header" onClick={() => showAuction()}>
+                    Auction Information
+                    {toggleAuction ? <i className="caret down icon"></i> : <i className="caret right icon"></i>}
+                </h3>
 
-                <div>
+                <div style={{display: toggleAuction ? 'grid' : 'none'}}>
                     <p> Auction: <span>{auction_name}</span></p>
                     <p> Transport Date: <span>{transport_date}</span></p>
                     <p> In Transit: <span>{in_transit ? 'Yes' : 'No, Arrived at Auction.'}</span></p>
-                    <p> Floor: <span>{floor ? floor : 'TBD'}</span></p>
+                    <p> Floor: <span>{floor ? '$' + floor.toLocaleString() : 'TBD'}</span></p>
                     <p> Sale Date: <span>{sale_date ? sale_date : 'TBD'}</span></p>   
                 </div>
                 
-                <div>
+                <div style={{display: toggleAuction ? 'block' : 'none'}}>
                     {/* IF VEHICLE IS  ARCHIVED THEN DO NOT SHOW EDIT FOR AUCTION BUTTON 
                     ELSE SHOW EDIT FOR AUCTION. EVEN IF CLOSE ITS FINE TO UPDATE.*/}
-                    {sold ? `Button to Sold Edit record will be here ${id}` : 'else button to auction edit record'}
+                    {!archive_record ? <Link to={`/auction_record/${mainID}`} className="ui button">Edit</Link> : null}
                 </div>
             </div>
         )
@@ -38,24 +53,27 @@ const RegularSearchResults  = (props) => {
     //Sold Info rendering if there is any sold info to show
     let soldInfo;
     if(props.repoObj.sold_record){
-        let { cu_check_sent, deficiency_amt, deficiency_sent, id, sale_location, sold_amt} = props.repoObj.sold_record;
+        let { cu_check_sent, deficiency_amt, deficiency_sent, sale_location, sold_amt} = props.repoObj.sold_record;
 
         soldInfo = (
             <div className="results-sold-section">
-                <h3 class="ui dividing header">Sold Information</h3>
+                <h3 id="results-toggle" className="ui dividing header" onClick={() => showSold()}>
+                    Sold Information
+                    {toggleSold ? <i className="caret down icon"></i> : <i className="caret right icon"></i>}
+                </h3>
                 
-                <div>
-                    <p>Sold Amt: {sold_amt}</p>
-                    <p>Sale Location: {sale_location}</p>
-                    <p>CU Check Sent: {cu_check_sent ? 'Yes' : 'No'}</p>
-                    <p>Deficiency Amount: {deficiency_amt ? deficiency_amt : 'TBD'}</p>
-                    <p>Deficiency Ltr Sent: {deficiency_sent ? 'Yes' : 'No'}</p>  
+                <div style={{display: toggleSold ? 'grid' : 'none'}}>
+                    <p>Sold Amt: <span>{sold_amt ? '$' + sold_amt.toLocaleString() : 'TBD'}</span></p>
+                    <p>Sale Location: <span>{sale_location}</span></p>
+                    <p>CU Check Sent: <span>{cu_check_sent ? 'Yes' : 'No'}</span></p>
+                    <p>Deficiency Amount: <span>{deficiency_amt ? '$' + deficiency_amt.toLocaleString() : 'TBD'}</span></p>
+                    <p>Deficiency Ltr Sent: <span>{deficiency_sent ? 'Yes' : 'No'}</span></p>  
                 </div>
                 
-                <div>
+                <div style={{display: toggleSold ? 'block' : 'none'}}>
                     {/* IF VEHICLE IS ARCHIVED THEN DO NOT SHOW EDIT FOR AUCTION
                     ELSE SHOW AUCTION BUTTON */}
-                    <p>{`button will go here to edit if it hasnt been archived yet ${id}`}</p>
+                    {!archive_record ? <Link to={`/sold_record/${mainID}`} className="ui button">Edit</Link> : null}
                 </div>
             </div>
 
@@ -63,15 +81,20 @@ const RegularSearchResults  = (props) => {
     }
 
     //HTML Element for repo edit button
-    let repoEditBtn;
-    if(archive_record || !closed_repo){
-        repoEditBtn = <button className="ui button">Edit</button>
+    const showRepoEdit = () => {
+        let repoEditBtn;
+        if(archive_record || closed_repo){
+            repoEditBtn = <h4 style={{textDecoration: 'underline'}}>Unable to Edit Due to being Archived or Closed</h4>
+        } else {
+            repoEditBtn = <Link to={`/repo_record/${mainID}`} className="ui button">Edit</Link>
+        } 
+        return repoEditBtn
     }
 
     return (
         <div className="ui segment results-card-container">
             <div className="results-repo-section">
-                <h3 class="ui dividing header">Repo Information</h3>
+                <h3 className="ui dividing header">Repo Information</h3>
 
                 <div className='results-repo-main-section'>
                     <p>Acct No: <span>{acct_no}</span></p>
@@ -94,7 +117,7 @@ const RegularSearchResults  = (props) => {
                 ) : null}
 
                 {/* IF VEHICLE IS ARCHIVED OR IF VEHICLE IS CLOSED DO NOT SHOW EDIT FOR REPO */}
-                {repoEditBtn}
+                {showRepoEdit()}
             </div>
 
             {props.repoObj.auction_record ? (

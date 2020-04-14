@@ -30,6 +30,13 @@
     overflow: auto;
 }
 
+/* Results Text */
+.regular-results-count-txt {
+    text-align: left;
+    margin: auto !important;
+    width: 94%;
+    font-weight: bold;
+}
 
 /* STYLING FOR RESULTS CONTAINERS. */
 .results-card-container {
@@ -49,12 +56,23 @@
     padding-top: 2%;
 }
 
+.results-sold-section div:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+
+/* AUCTION INFORMATION SECTION */
+.results-auction-section {
+    padding-top: 2%;
+}
+
 .results-auction-section div:first-of-type {
     display: grid;
     grid-template-columns: repeat(3, auto);
 }
 
-/* AUCTION INFORMATION SECTION */
-.results-auction-section {
-    padding-top: 2%;
+/* TOGGLE STYLING FOR SECTIONS */
+#results-toggle {
+    cursor: pointer;
 }
