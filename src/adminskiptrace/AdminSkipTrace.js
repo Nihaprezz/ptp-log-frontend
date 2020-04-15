@@ -77,6 +77,26 @@ class AdminSkipTrace extends React.Component {
         this.setState({showSearchPage: !this.state.showSearchPage})
     }
 
+    sortByCU = () => {
+        if(this.state.skipData.length > 0){
+            let sorted = [...this.state.skipData].sort((a,b) => {
+                return a.creditunion.name > b.creditunion.name ? 1 : -1
+            })
+
+            this.setState({skipData: sorted})
+        }
+    }
+
+    sortByDate = () => {
+        if(this.state.skipData.length > 0 ){
+            let sorted = [...this.state.skipData].sort((a,b) => {
+                return a.data_created > b.data_created ? 1 : -1
+            })
+
+            this.setState({skipData: sorted})
+        }
+    }
+
     render(){
         return(
             <div>
@@ -98,11 +118,11 @@ class AdminSkipTrace extends React.Component {
                             <thead>
                                 <tr>
                                     <th>User</th>
-                                    <th>Credit Union</th>
+                                    <th onClick={() => this.sortByCU()} style={{cursor: 'pointer'}}>Credit Union</th>
                                     <th>Acct No</th>
                                     <th>Member Name</th>
                                     <th>SSN</th>
-                                    <th>Date Submitted</th>
+                                    <th onClick={() => this.sortByDate()} style={{cursor: 'pointer'}}>Date Submitted</th>
                                     <th>Update</th>
                                 </tr>
                             </thead>
