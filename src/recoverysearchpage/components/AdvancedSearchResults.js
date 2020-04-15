@@ -7,7 +7,7 @@ const AdvancedSearchResults = (props) => {
         tableRows = <tr><td>No Repo Records Found</td></tr>
     } else {
         tableRows = props.results.map(record => {
-            return <AdvResultsRow key={record.id} repoObj={record}/>
+            return <AdvResultsRow key={record.id} repoObj={record} selectRecord={props.selectRecord}/>
         })
     }
 
@@ -26,7 +26,7 @@ const AdvancedSearchResults = (props) => {
                             <th>Repo'd</th>
                             <th>Archived</th>
                             <th>Select All
-                                <input style={{marginLeft: '4%'}} type="checkbox"/>
+                                <input style={{marginLeft: '4%'}} onClick={(e) => props.selectedAll(e)} type="checkbox"/>
                             </th>
                         </tr>
                     </thead>
@@ -37,6 +37,11 @@ const AdvancedSearchResults = (props) => {
             </div>
 
             <div style={{textAlign:'right', paddingTop: '1%', width: '98%', margin: 'auto'}}>
+                {props.selectAll ? (
+                    <div>{props.results.length} Records Selected (ALL) </div>
+                ):(
+                    <div>{props.selectedRecords.length} Records Selected</div>
+                )}
                 <button className="ui red button">Delete</button>
             </div>
         </div>

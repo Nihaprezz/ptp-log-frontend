@@ -13,7 +13,9 @@ class AdvancedSearch extends React.Component {
             startDate: "", 
             endDate: "", 
             selectedCU: "", 
-            results: []
+            results: [],
+            selectedRecords: [],
+            selectAll: false, 
         }
     }
 
@@ -51,6 +53,20 @@ class AdvancedSearch extends React.Component {
         .catch(err => console.log(err)) 
     }
 
+    selectRecord = (e, id) => {
+        if(e.target.checked){
+            let updatedRecords = [...this.state.selectedRecords, id]
+            this.setState({selectedRecords: updatedRecords})
+        } else {
+            let filteredRecords = [...this.state.selectedRecords].filter(record => record !== id)
+            this.setState({selectedRecords: filteredRecords})
+        }
+    }
+
+    selectedAll = (e) => {
+        e.target.checked ? this.setState({selectAll: true}) : this.setState({selectAll: false})
+    }
+
     render(){
         return (
             <div>
@@ -62,7 +78,11 @@ class AdvancedSearch extends React.Component {
                 allCUs={this.props.allCUs}/>
 
                 <AdvancedSearchResults 
-                results={this.state.results}/>
+                results={this.state.results}
+                selectRecord={this.selectRecord}
+                selectedAll={this.selectedAll}
+                selectedRecords={this.state.selectedRecords}
+                selectAll={this.state.selectAll}/>
             </div>
         )
     }

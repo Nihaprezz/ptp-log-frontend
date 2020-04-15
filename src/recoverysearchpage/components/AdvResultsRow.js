@@ -1,7 +1,7 @@
 import React from "react"
 
 const AdvResultsRow = (props) => {
-    let {acct_no, archive_record, created_on, first_name, last_name, repod, repod_on, veh_info, veh_vin} = props.repoObj
+    let {id, acct_no, archive_record, created_on, first_name, last_name, repod, repod_on, veh_info, veh_vin} = props.repoObj
 
     let cuName; 
     props.repoObj.creditunion ? cuName = props.repoObj.creditunion.name : cuName = 'CU Deleted'
@@ -17,7 +17,7 @@ const AdvResultsRow = (props) => {
             <td>{repod ? repod_on : 'No'}</td>
             <td>{archive_record ? 'Yes' : 'No'}</td>
             <td>
-                <input type="checkbox"/>
+                <input type="checkbox" onClick={(e) => props.selectRecord(e, id)}/>
             </td>
         </tr>
     )
