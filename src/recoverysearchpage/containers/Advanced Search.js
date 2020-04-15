@@ -1,6 +1,9 @@
 import React from "react"
 import AdvancedSearchForm from "../components/AdvancedSearchForm"
 import AdvancedSearchResults from "../components/AdvancedSearchResults"
+import Swal from "sweetalert2"
+
+const backend_url = process.env.REACT_APP_BACKEND
 
 class AdvancedSearch extends React.Component {
     constructor(){
@@ -8,7 +11,9 @@ class AdvancedSearch extends React.Component {
 
         this.state = {
             startDate: "", 
-            endDate: ""
+            endDate: "", 
+            selectedCU: "", 
+            results: []
         }
     }
 
@@ -20,18 +25,44 @@ class AdvancedSearch extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submitting the following info: ', this.state)
+        let {startDate, endDate, selectedCU } = this.state
+        
+        Swal.showLoading();
+        fetch(backend_url + 'repo_orders/search_by_date', {
+            method: 'POST', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            }, 
+            body: JSON.stringify({
+                startDate, endDate, selectedCU
+            })
+        })
+        .then(resp => resp.json())
+        .then(searchResults => {
+            Swal.close();
+            if(searchResults.error){
+                this.setState({results: {message: 'No Results Found'}})
+            } else {
+                this.setState({results: searchResults})
+            }
+        })
+        .catch(err => console.log(err)) 
     }
 
     render(){
         return (
             <div>
                 <h2>Search by Dates</h2>
+
                 <AdvancedSearchForm 
                 handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}/>
+                handleSubmit={this.handleSubmit}
+                allCUs={this.props.allCUs}/>
 
-                <AdvancedSearchResults/>
+                <AdvancedSearchResults 
+                results={this.state.results}/>
             </div>
         )
     }

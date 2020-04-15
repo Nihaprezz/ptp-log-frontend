@@ -142,7 +142,7 @@ class App extends React.Component {
           }} />
 
         < Route exact path="/search_repo" render={() => {
-            return this.props.currentUser.isrecovery ? < RecoverySearch /> : <Redirect to="/" />  
+            return this.props.currentUser.isrecovery ? < RecoverySearch allCUs={this.props.allCUs}/> : <Redirect to="/" />  
           }} />
 
           </Switch>

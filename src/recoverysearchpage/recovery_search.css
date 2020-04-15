@@ -80,11 +80,20 @@
 
 /* ADVANCED SEARCH STYLING */
 .repo-adv-search-form-cont form {
-    width: 50%;
+    width: 65%;
     margin: auto !important;
     padding-top: 1%;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
     justify-items: center;
     align-items: center;
 }
+
+.repo-adv-segment-cont {
+    /* border: 2px solid red !important; */
+    overflow: auto;
+    height: 65vh;
+    width: 98%;
+    margin: auto !important;
+}
+

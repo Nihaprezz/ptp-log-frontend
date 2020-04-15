@@ -31,7 +31,7 @@ class RecoverySearch extends React.Component {
                     )}
                 </div>
 
-                {otherSearch ? <AdvancedSearch/> : <RegularSearch/>}
+                {otherSearch ? <AdvancedSearch allCUs={this.props.allCUs}/> : <RegularSearch/>}
             </div>
         )
     }
