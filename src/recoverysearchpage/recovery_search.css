@@ -97,3 +97,9 @@
     margin: auto !important;
 }
 
+.adv-search-selected-box {
+    /* border: 3px solid red; */
+    display: inline-block;
+    margin-right: 2%;
+    font-weight: bold;
+}

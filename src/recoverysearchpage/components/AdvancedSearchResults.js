@@ -11,6 +11,15 @@ const AdvancedSearchResults = (props) => {
         })
     }
 
+    let amtVehsOut, amtVehsRepod;
+    if(!props.results.message && props.results.length !== 0){
+        amtVehsOut = props.results.length;
+        amtVehsRepod = props.results.filter(record => record.repod).length
+    } else {
+        amtVehsOut = 0
+        amtVehsRepod = 0
+    }
+
     return (
         <div>
             <div className="ui segment repo-adv-segment-cont">
@@ -37,11 +46,19 @@ const AdvancedSearchResults = (props) => {
             </div>
 
             <div style={{textAlign:'right', paddingTop: '1%', width: '98%', margin: 'auto'}}>
+                {props.results.length !== 0 ? (
+                    <React.Fragment>
+                        <div className="adv-search-selected-box"> Amount of Vehicles Placed Out: {`${amtVehsOut}`}</div>
+                        <div className="adv-search-selected-box"> Amount of Vehicles Repo'd: {`${amtVehsRepod}`}</div>
+                    </React.Fragment>
+                ): null}
+
                 {props.selectAll ? (
-                    <div>{props.results.length} Records Selected (ALL) </div>
+                    <div className="adv-search-selected-box">{props.results.length} Records Selected (ALL) </div>
                 ):(
-                    <div>{props.selectedRecords.length} Records Selected</div>
+                    <div className="adv-search-selected-box">{props.selectedRecords.length} Records Selected</div>
                 )}
+
                 <button className="ui red button">Delete</button>
             </div>
         </div>
