@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import OutForRepoTable from "./OutRecordsTable";
 import NewRepo from "./NewRepo"
 import "./recovery_home.css"
@@ -88,7 +89,7 @@ class RecoveryHome extends React.Component {
 
                 <div className="recovery-home-btn-cont">
                     <button className="ui primary button" onClick={() => this.toggleForm()}>New Repo Order</button>
-                    <button className="ui button">Follow Ups</button>
+                    <Link className="ui button" to="/repo_follow_ups">Follow Ups</Link>
                 </div>
 
                 {this.state.newRepo ? (
