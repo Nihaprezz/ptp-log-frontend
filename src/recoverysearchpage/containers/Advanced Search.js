@@ -83,6 +83,8 @@ class AdvancedSearch extends React.Component {
         let records = [];
         selectAll ? records = results : records = selectedRecords
 
+        Swal.showLoading()
+        //1 is pased just to make the delete request work..
         fetch(backend_url + 'repo_orders/delete_by_batch/1', {
             method: 'DELETE', 
             headers: {
@@ -96,8 +98,10 @@ class AdvancedSearch extends React.Component {
         })
         .then(resp => resp.json())
         .then(resp => {
+            Swal.close();
             if(resp.message){
                 Swal.fire('Sucess', 'Records have been deleted', 'success')
+                this.setState({results: []}) //resetting the results record if the delete batch was successful
             } else {
                 Swal.fire('Error', 'Error occurred. Try again', 'error')
             }
