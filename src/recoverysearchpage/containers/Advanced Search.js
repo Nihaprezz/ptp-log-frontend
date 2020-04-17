@@ -48,9 +48,18 @@ class AdvancedSearch extends React.Component {
                 this.setState({results: {message: 'No Results Found'}})
             } else {
                 this.setState({results: searchResults})
+                this.checkResultsCheckbox()
             }
+
+            this.setState({selectedRecords: []}) //resetting the selected records just in case
         })
         .catch(err => console.log(err)) 
+    }
+
+    checkResultsCheckbox = () => {
+        //resetting the value for checkboxes..
+        let checkboxes = document.querySelectorAll("#adv-results-row-chkbx")
+        checkboxes.forEach(checkbox => checkbox.checked = false);
     }
 
     selectRecord = (e, id) => {
@@ -65,6 +74,37 @@ class AdvancedSearch extends React.Component {
 
     selectedAll = (e) => {
         e.target.checked ? this.setState({selectAll: true}) : this.setState({selectAll: false})
+    }
+
+    submitDelete = (e) => {
+        e.preventDefault();
+
+        let {results, selectedRecords, selectAll} = this.state;
+        let records = [];
+        selectAll ? records = results : records = selectedRecords
+
+        fetch(backend_url + 'repo_orders/delete_by_batch/1', {
+            method: 'DELETE', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'  
+            }, 
+            body: JSON.stringify({
+                records
+            })
+        })
+        .then(resp => resp.json())
+        .then(resp => {
+            if(resp.message){
+                Swal.fire('Sucess', 'Records have been deleted', 'success')
+            } else {
+                Swal.fire('Error', 'Error occurred. Try again', 'error')
+            }
+
+            this.setState({selectedRecords: []}) //resetting the records selected
+        })
+        .catch(err => alert(err))
     }
 
     render(){
@@ -82,7 +122,8 @@ class AdvancedSearch extends React.Component {
                 selectRecord={this.selectRecord}
                 selectedAll={this.selectedAll}
                 selectedRecords={this.state.selectedRecords}
-                selectAll={this.state.selectAll}/>
+                selectAll={this.state.selectAll}
+                submitDelete={this.submitDelete}/>
             </div>
         )
     }

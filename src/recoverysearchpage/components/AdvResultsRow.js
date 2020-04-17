@@ -1,6 +1,7 @@
 import React from "react"
 
 const AdvResultsRow = (props) => {
+
     let {id, acct_no, archive_record, created_on, first_name, last_name, repod, repod_on, veh_info, veh_vin} = props.repoObj
 
     let cuName; 
@@ -17,7 +18,7 @@ const AdvResultsRow = (props) => {
             <td>{repod ? repod_on : 'No'}</td>
             <td>{archive_record ? 'Yes' : 'No'}</td>
             <td>
-                <input type="checkbox" onClick={(e) => props.selectRecord(e, id)}/>
+                <input id="adv-results-row-chkbx" type="checkbox" onClick={(e) => props.selectRecord(e, id)}/>
             </td>
         </tr>
     )

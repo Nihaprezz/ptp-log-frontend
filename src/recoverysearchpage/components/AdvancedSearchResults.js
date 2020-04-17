@@ -39,7 +39,7 @@ const AdvancedSearchResults = (props) => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="repo-adv-results-body">
                         {props.results === 0 ? null : tableRows}
                     </tbody>
                 </table>
@@ -59,7 +59,7 @@ const AdvancedSearchResults = (props) => {
                     <div className="adv-search-selected-box">{props.selectedRecords.length} Records Selected</div>
                 )}
 
-                <button className="ui red button">Delete</button>
+                <button className="ui red button" onClick={(e) => props.submitDelete(e)}>Delete</button>
             </div>
         </div>
     )
