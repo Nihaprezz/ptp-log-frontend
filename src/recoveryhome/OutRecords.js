@@ -8,8 +8,20 @@ const OutRecord = (props) => {
 
     props.repoObj.creditunion.name ? cuName = props.repoObj.creditunion.name : cuName = "CU Deleted"
   
+    const getColorStyle = () => {
+        let daysOut = daysInBetween(created_on)
+
+        if(daysOut >= 30 && daysOut <= 59){
+            return "green-repo-style"
+        } else if (daysOut >= 60 && daysOut <= 89){
+            return "yellow-repo-style"
+        } else if(daysOut >= 90){
+            return "red-repo-style"
+        }
+    }
+
     return (
-        <tr>
+        <tr className={getColorStyle()}>
             <td>{acct_no}</td>
             <td>{cuName}</td>
             <td>{`${first_name} ${last_name}`}</td>

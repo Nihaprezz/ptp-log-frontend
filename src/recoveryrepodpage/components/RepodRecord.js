@@ -54,8 +54,18 @@ const RepodRecord = (props) => {
 
     }
 
+    const getColorStyle = () => {
+      let daysOut = daysInBetween(repod_on)
+
+     if (daysOut >= 5 && daysOut <= 7){
+          return "yellow-repo-style" //this is the yellow class styling
+      } else if(daysOut >= 8){
+          return "red-repo-style" //this is the red class styling
+      }
+    }
+
     return (
-        <tr>
+        <tr className={getColorStyle()}>
             <td>{acct_no}</td>
             <td>{cuName}</td>
             <td>{`${first_name} ${last_name}`}</td>

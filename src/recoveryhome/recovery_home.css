@@ -22,3 +22,20 @@
 .new-repo-btns {
     text-align: center;
 }
+
+/* COLOR STYLING FOR THE AMOUNT OF DAYS OUT */
+.green-repo-style {
+    background: #21ba45;
+    font-weight: bold;
+}
+
+.yellow-repo-style {
+    background: #ffe21f;
+    font-weight: bold;
+}
+
+.red-repo-style {
+    background: red;
+    font-weight: bold;
+    color: white;
+}
