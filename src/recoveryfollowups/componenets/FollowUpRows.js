@@ -1,8 +1,9 @@
 import React from "react";
 import Swal from "sweetalert2"
+import { Link } from "react-router-dom"
 
 const FollowUpRows = (props) => {
-    let { acct_no, first_name, last_name, veh_info, veh_vin, follow_up_date, repo_company, comments} = props.repoObj;
+    let { id, acct_no, first_name, last_name, veh_info, veh_vin, follow_up_date, repo_company, comments} = props.repoObj;
     let cuName; 
     props.repoObj.creditunion ? cuName = props.repoObj.creditunion.name : cuName = 'CU Deleted'
 
@@ -29,7 +30,9 @@ const FollowUpRows = (props) => {
             <td>{repo_company}</td>
             <td onClick={() => showFullCommt()} style={{cursor: 'pointer'}}>{shortenComment(comments)}</td>
             <td>
-                <button className="ui button">Edit</button>
+            {/* to={{pathname: `/auction`, state: {showAuction: true}}} */}
+            {/* to={`repo_record/${id}`} */}
+                <Link className="ui button" to={{pathname: `/repo_record/${id}`, state: 'follow_ups'}}>Edit</Link>
             </td>
         </tr>
     )

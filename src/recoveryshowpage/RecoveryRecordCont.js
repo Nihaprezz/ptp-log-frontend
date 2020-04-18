@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import Swal from "sweetalert2";
 import "./recovery_record.css"
 import RemoveHold from "./components/RemoveHold";
+import { withRouter } from "react-router-dom"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -85,6 +86,16 @@ class RecoveryRecordCont extends React.Component {
         })
     }
     
+    renderBackBtn = () => {
+        if(this.props.location.state === 'follow_ups'){
+            return <Link className="ui button back-repo-btn" to="/repo_follow_ups">Back</Link>
+        } else if (this.props.location.state === 'hold_repo'){
+            return <Link className="ui button back-repo-btn" to={{pathname: "/", state: 'hold_status'}}>Back</Link> 
+        } else {
+            return <Link className="ui button back-repo-btn" to="/" > Back </Link> 
+        }
+    }
+
     render(){
         return (
             <div className="recovery-record-cont ui card">
@@ -115,7 +126,7 @@ class RecoveryRecordCont extends React.Component {
                                         Close Repo
                                     </button>
 
-                                    < Link className="ui button back-repo-btn" to="/" > Back </Link>
+                                    {this.renderBackBtn()}
                                 </div>
                             </form>
                         </div>
@@ -129,4 +140,4 @@ class RecoveryRecordCont extends React.Component {
     }
 }
 
-export default RecoveryRecordCont;
+export default withRouter(RecoveryRecordCont);

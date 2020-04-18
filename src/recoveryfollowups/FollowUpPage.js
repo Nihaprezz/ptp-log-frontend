@@ -26,12 +26,10 @@ const FollowUpPage = (props) => {
         .catch(err => alert(err))
     }, [props.user.id])
     
-    //query where repo order's follow up date is not nil and archive_record is false and repo'd is false
-    console.log(followUps)
     return (
-        <div>
-            <h1>Follow Ups</h1>
-
+        <div style={{width: '98%', margin: 'auto'}}>
+            <h1 className="ui dividing header" style={{textAlign: 'left'}}>Follow Ups</h1>
+            
             {followUps.length === 0 ? <h2>Loading...</h2> : (
                 <table className="ui celled table">
                     <thead>

@@ -4,6 +4,7 @@ import OutForRepoTable from "./OutRecordsTable";
 import NewRepo from "./NewRepo"
 import "./recovery_home.css"
 import Swal from "sweetalert2"
+import { withRouter } from "react-router-dom"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -30,7 +31,13 @@ class RecoveryHome extends React.Component {
         })
         .catch(err => alert(err))
 
-        this.getActiveRepos()
+        //state will change depending on what comes in from the router.
+        if(this.props.location.state === "hold_status"){
+            this.getActiveHolds()
+            this.setState({showHold: true})
+        } else {
+            this.getActiveRepos()
+        }
     }
 
     toggleForm = () => {
@@ -78,6 +85,8 @@ class RecoveryHome extends React.Component {
         this.setState({showHold: status}, function(){
             if(status){
                 this.getActiveHolds()
+            } else {
+                this.getActiveRepos()
             }
         })
     }
@@ -113,4 +122,4 @@ class RecoveryHome extends React.Component {
     }
 }
 
-export default RecoveryHome;
+export default withRouter(RecoveryHome);
