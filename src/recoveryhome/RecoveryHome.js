@@ -5,6 +5,7 @@ import NewRepo from "./NewRepo"
 import "./recovery_home.css"
 import Swal from "sweetalert2"
 import { withRouter } from "react-router-dom"
+import { dataToCsv } from "../utils/createCSV"
 
 const backend_url = process.env.REACT_APP_BACKEND
 
@@ -91,13 +92,20 @@ class RecoveryHome extends React.Component {
         })
     }
 
+    startCSV = () => {
+        dataToCsv(this.state.activeRepos)
+    }
+
     render(){
         return (
             <div>
-                <h1>Out for Repo</h1>
-
+                <h1 style={{width: '98%', margin: 'auto'}} className="ui dividing header">
+                    Out For Repossession
+                </h1> 
+     
                 <div className="recovery-home-btn-cont">
                     <button className="ui primary button" onClick={() => this.toggleForm()}>New Repo Order</button>
+                    <button className="ui secondary button" onClick={() => this.startCSV()}>Download CSV</button>
                     <Link className="ui button" to="/repo_follow_ups">Follow Ups</Link>
                 </div>
 
