@@ -45,7 +45,7 @@ class PTPTracker extends React.Component {
     render(){
         return (
             <div>
-                <h1>This is the PTP Tracker</h1>
+                <h1 style={{marginBottom: '1%', marginTop: '0.8%'}}>PTP Tracker</h1>
                 < FilterBar allUsers={this.props.allUsers.map(user => user.username)} handleChange={this.handleChange} 
                 handleSubmit={this.handleSubmit}/>
 

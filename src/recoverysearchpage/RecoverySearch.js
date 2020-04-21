@@ -8,7 +8,7 @@ class RecoverySearch extends React.Component {
         super();
 
         this.state = {
-            otherSearch: true
+            otherSearch: false
         }
     }
 

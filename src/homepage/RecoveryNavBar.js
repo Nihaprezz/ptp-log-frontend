@@ -28,6 +28,7 @@ const RecoveryNavBar = (props) => {
             <Link className="item" to="/recovery_stats">Recovery Stats</Link>
             <Link className="item" to="/search_repo">Search</Link>
 
+            {props.user.isadmin ? <Link className="item" to="/admin_page">Admin Page</Link> : null}
 
             <div className="right menu">
                 {/* eslint-disable-next-line*/}
