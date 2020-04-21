@@ -126,6 +126,22 @@ class PTPManager extends React.Component {
     }
 
     handleDelete = () => {
+        Swal.fire({
+            title: 'Are you sure',
+            text: 'All PTP records will be permanently deleted',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33', 
+            confirmButtonText: 'Yes'
+         }).then((result) => {
+            if(result.value){
+             this.submitDelete()
+           }
+         })
+    }
+
+    submitDelete = () => {
         let recordsToDelete = [];
 
         if(this.state.selectedAll){
