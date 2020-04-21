@@ -79,6 +79,28 @@ class AdvancedSearch extends React.Component {
     submitDelete = (e) => {
         e.preventDefault();
 
+        let {results, selectedRecords } = this.state;
+
+        if(results.length === 0 || selectedRecords.length === 0){
+            Swal.fire('Cannot Delete', 'No Records Selected', 'warning');    
+        } else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Records will be deleted permanently',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33', 
+                confirmButtonText: 'Yes!'
+            }).then((result) => {
+                if(result.value){
+                    this.deleteRecords()
+                }
+            });
+        }
+    }
+
+    deleteRecords = () => {
         let {results, selectedRecords, selectAll} = this.state;
         let records = [];
         selectAll ? records = results : records = selectedRecords
