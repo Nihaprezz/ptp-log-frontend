@@ -41,11 +41,11 @@ const OutRecordsTable = (props) => {
                 <thead>
                     <tr>
                         <th>Acct No</th>
-                        <th>Credit Union</th>
+                        <th className="pointer" onClick={() => props.sortByCU()}>Credit Union</th>
                         <th>Member Name</th>
                         <th>Vehicle Info</th>
                         <th>Vin</th>
-                        <th>Placed Out On</th>
+                        <th className="pointer" onClick={() => props.sortByDate()}>Placed Out On</th>                        
                         <th>Days</th>
                         {props.currentUser.isadmin ? (
                            <th>Edit</th> 

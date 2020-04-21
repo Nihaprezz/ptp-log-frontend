@@ -50,8 +50,13 @@ class RecoveryHome extends React.Component {
         fetch(backend_url + 'repo_orders')
         .then(resp => resp.json())
         .then(activeRepos => {  
-            Swal.close()          
-            this.setState({activeRepos: activeRepos})
+            Swal.close()  
+            if(activeRepos.message){
+                this.setState({activeRepos: activeRepos})
+            } else {
+                const sorted = activeRepos.sort((a,b) => a.creditunion.name > b.creditunion.name ? 1 : -1)     
+                this.setState({activeRepos: sorted})   
+            }
         })
         .catch(err => alert(err));
     }
@@ -68,7 +73,12 @@ class RecoveryHome extends React.Component {
         .then(resp => resp.json())
         .then(activeHolds => {
             Swal.close()  
-            this.setState({activeHolds: activeHolds})
+            if(activeHolds.message){
+                this.setState({activeHolds: activeHolds})
+            } else {
+                const sorted = activeHolds.sort((a,b) => a.creditunion.name > b.creditunion.name ? 1 : -1)
+                this.setState({activeHolds: sorted})    
+            }
         })
     }
 
@@ -94,6 +104,30 @@ class RecoveryHome extends React.Component {
 
     startCSV = () => {
         dataToCsv(this.state.activeRepos)
+    }
+
+    sortByCU = () => {
+        let {showHold, activeRepos, activeHolds} = this.state;
+
+        if(showHold) {
+            let holdSorted = activeHolds.sort((a,b) => a.creditunion.name > b.creditunion.name ? 1 : -1)
+            this.setState({activeHolds: holdSorted})
+        } else {
+            let repoSorted = activeRepos.sort((a, b) => a.creditunion.name > b.creditunion.name ? 1 : -1)
+            this.setState({activeRepos: repoSorted})
+        }
+    }
+
+    sortByDate = () => {
+        let {showHold, activeRepos, activeHolds} = this.state;
+
+        if(showHold){
+            let holdSortedDates = activeHolds.sort((a,b) => a.created_at > b.created_at ? 1 : -1)
+            this.setState({activeHolds: holdSortedDates})
+        } else {
+            let repoSortedDates = activeRepos.sort((a,b) => a.created_on > b.created_on ? 1 : -1)
+            this.setState({activeRepos: repoSortedDates})
+        }
     }
 
     render(){
@@ -122,7 +156,9 @@ class RecoveryHome extends React.Component {
                     showHold={this.state.showHold}
                     toggleActiveRepos={this.toggleActiveRepos}
                     activeHolds={this.state.activeHolds}
-                    currentUser={this.props.user}/>
+                    currentUser={this.props.user}
+                    sortByCU={this.sortByCU}
+                    sortByDate={this.sortByDate}/>  
                 )}
 
             </div>

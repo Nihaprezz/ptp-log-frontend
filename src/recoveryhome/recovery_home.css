@@ -42,3 +42,7 @@
     font-weight: bold;
     color: white;
 }
+
+.pointer {
+    cursor: pointer !important;
+}
