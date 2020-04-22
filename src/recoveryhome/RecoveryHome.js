@@ -103,7 +103,12 @@ class RecoveryHome extends React.Component {
     }
 
     startCSV = () => {
-        dataToCsv(this.state.activeRepos)
+        let { activeRepos } = this.state
+        if(activeRepos.message){
+            Swal.fire('Unable to process', 'No Records to Create CSV', 'info')
+        } else {
+            dataToCsv(activeRepos)  
+        }
     }
 
     sortByCU = () => {

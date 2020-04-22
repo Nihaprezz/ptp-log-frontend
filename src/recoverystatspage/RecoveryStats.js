@@ -42,7 +42,8 @@ class RecoveryStatsPage extends React.Component {
         .then(resp => resp.json())
         .then(stats => {
             Swal.close();
-            this.setState({cuStats: stats.cuStats, cucStats: stats.cucStats})
+            let sortedCUs = stats.cuStats.sort((a,b) => a.cuname > b.cuname ? 1 : -1)
+            this.setState({cuStats: sortedCUs, cucStats: stats.cucStats})
         })
         .catch(err => alert(err))
     }
