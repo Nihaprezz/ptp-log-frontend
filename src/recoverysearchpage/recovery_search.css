@@ -1,0 +1,105 @@
+.recovery-search-button-cont {
+    width: 60%;
+    margin: auto !important;
+    text-align: left;
+}
+
+/* Regular Results Styling */
+.results-card-container p {
+    font-weight: bold;
+}
+
+.results-card-container p span {
+    font-weight: 400;
+    display: block;
+}
+
+.regular-search-header p {
+    font-weight: bold;
+}
+
+.regular-search-form {
+    width: 60%;
+    margin: auto !important;
+    padding-top: 2%;
+}
+
+.regular-results-conts {
+    width: 95%;
+    margin: auto !important;
+    height: 65vh;
+    overflow: auto;
+}
+
+/* Results Text */
+.regular-results-count-txt {
+    text-align: left;
+    margin: auto !important;
+    width: 94%;
+    font-weight: bold;
+}
+
+/* STYLING FOR RESULTS CONTAINERS. */
+.results-card-container {
+    text-align: left !important;
+}
+
+/* REPO INFORMATION SECTION */
+
+.results-repo-section .results-repo-main-section {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+}
+
+
+/* SOLD INFORMATION SECTION */
+.results-sold-section {
+    padding-top: 2%;
+}
+
+.results-sold-section div:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+
+/* AUCTION INFORMATION SECTION */
+.results-auction-section {
+    padding-top: 2%;
+}
+
+.results-auction-section div:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+/* TOGGLE STYLING FOR SECTIONS */
+#results-toggle {
+    cursor: pointer;
+}
+
+/* ADVANCED SEARCH STYLING */
+.repo-adv-search-form-cont form {
+    width: 65%;
+    margin: auto !important;
+    padding-top: 1%;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-items: center;
+    align-items: center;
+}
+
+.repo-adv-segment-cont {
+    /* border: 2px solid red !important; */
+    overflow: auto;
+    height: 65vh;
+    width: 98%;
+    margin: auto !important;
+}
+
+.adv-search-selected-box {
+    /* border: 3px solid red; */
+    display: inline-block;
+    margin-right: 2%;
+    font-weight: bold;
+}

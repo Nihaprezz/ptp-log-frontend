@@ -7,6 +7,8 @@ import { checkUser, signOut, getAllCUs } from "./redux/actions"
 import Login from "./forms/Login"
 import Home from "./homepage/Home"
 import Navbar from "./homepage/Navbar"
+import RecoveryNavBar from "./homepage/RecoveryNavBar"
+import RecoveryHome from "./recoveryhome/RecoveryHome"
 import CreditUnions from "./creditunions/CreditUnionContainer"
 import PTPEditContainer from "./promisetopay/PTPEditContainer"
 import AdminPage from "./adminpage/AdminPage"
@@ -15,8 +17,17 @@ import RegularStatsPage from "./regularstats/RegularStats"
 import SkipTracePage from './skiptracepage/SkipTracePage';
 import AdminSkipTrace from './adminskiptrace/AdminSkipTrace'
 import SkipShowPage from "./skipshowpage/SkipShowPage"
+import RecoveryRecord from "./recoveryshowpage/RecoveryRecordCont"
+import RepodPage from "./recoveryrepodpage/RepodPage"
+import AuctionPage from "./recoveryauctionpage/AuctionPage"
+import AuctionShowPage from "./auctionshowpage/AuctionShowPage"
+import SoldPage from "./recoverysoldpage/SoldPage"
+import SoldShowPage from "./soldshowpage/SoldShowPage"
+import RepoClosedPage from "./recoveryclosedpage/RepoClosedPage"
+import RecoveryStats from "./recoverystatspage/RecoveryStats"
+import RecoverySearch from "./recoverysearchpage/RecoverySearch"
+import FollowUpPage from './recoveryfollowups/FollowUpPage';
 
-// const backend_url = process.env.REACT_APP_BACKEND
 
 class App extends React.Component {
 
@@ -34,12 +45,20 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Navbar signOut={this.signOut} user={this.props.currentUser}/>
-
+        {this.props.currentUser.isrecovery ? (
+          < RecoveryNavBar signOut={this.signOut} user={this.props.currentUser}/> 
+        ) : (
+          <Navbar signOut={this.signOut} user={this.props.currentUser}/>
+        )}
+      
         <Switch>
           < Route exact path="/" render={() => {
             return Array.isArray(this.props.currentUser) ? < Login /> : (
-              < Home user={this.props.currentUser} allCUs={this.props.allCUs}/>  
+              this.props.currentUser.isrecovery ? (
+                < RecoveryHome user={this.props.currentUser} allCUs={this.props.allCUs} />
+              ) : (
+                < Home user={this.props.currentUser} allCUs={this.props.allCUs}/> 
+              )  
             )
           }}/>
 
@@ -80,6 +99,55 @@ class App extends React.Component {
             let skipID = props.match.params.id
 
             return < SkipShowPage skipID={skipID} />
+          }} />
+
+          {/* RECOVERY ROUTES */}
+          < Route exact path="/repo_record/:id" render={(props) => {
+            let recoveryId = props.match.params.id
+
+            return < RecoveryRecord recoveryId={recoveryId} />
+          }} />
+
+          < Route exact path="/repossessed" render={() => {
+             return this.props.currentUser.isrecovery ? < RepodPage user={this.props.currentUser} /> : 
+             ( <Redirect to="/" /> )
+          }} />
+
+          < Route exact path="/auction" render={() => {
+            return this.props.currentUser.isrecovery ? < AuctionPage user={this.props.currentUser} /> : <Redirect to="/" />  
+          }} />
+
+          < Route exact path="/auction_record/:id" render={(props) => {
+            let auctionID = props.match.params.id
+
+            return < AuctionShowPage auctionID={auctionID} />
+          }} />
+
+          < Route exact path="/sold" render={() => {
+            return this.props.currentUser.isrecovery ? < SoldPage user={this.props.currentUser} /> : <Redirect to="/" />  
+          }} />
+
+          < Route exact path="/sold_record/:id" render={(props) => {
+            let soldID = props.match.params.id
+            return < SoldShowPage soldID={soldID}/>
+          }} />
+
+          < Route exact path="/closed" render={() => {
+            return this.props.currentUser.isrecovery ? < RepoClosedPage user={this.props.currentUser} /> : (
+            <Redirect to="/" />  )
+          }} />
+
+          < Route exact path="/recovery_stats" render={() => {
+            return this.props.currentUser.isrecovery ? < RecoveryStats user={this.props.currentUser} /> : (
+            <Redirect to="/" />  )
+          }} />
+
+          < Route exact path="/search_repo" render={() => {
+            return this.props.currentUser.isrecovery ? < RecoverySearch allCUs={this.props.allCUs}/> : <Redirect to="/" />  
+          }} />
+
+          < Route exact path="/repo_follow_ups" render={() => {
+            return this.props.currentUser.isrecovery ? < FollowUpPage user={this.props.currentUser} /> : <Redirect to="/" />  
           }} />
 
           </Switch>

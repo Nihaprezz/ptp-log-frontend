@@ -47,4 +47,34 @@ function decipherSSN(cipherText){
     return decipherText
 }
 
-export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN };
+//RECOVERY FEATURES
+
+function daysInBetween(str_date){
+    const one_day = 1000*60*60*24
+    let today = new Date()
+    let created = new Date(str_date)
+    let days = (today - created) / one_day
+    days = Math.round(days)
+
+    if (days > 0 ){
+        return days
+    } else {
+        return 1
+    }
+}
+
+function validateNewRepo(acct_no, creditunion_id, first_name, last_name, veh_year, veh_make, veh_model, veh_vin, 
+    repo_company, user_id){
+
+    if(acct_no === "" || creditunion_id === "" || first_name === "" || 
+    last_name === "" || veh_year === "" || veh_make === "" || veh_model === "" || veh_vin === "" ||
+    repo_company === "" || user_id === ""){
+        return false
+    } else {
+        return true
+    }
+}
+
+
+export { getMonth, monthNames, validatePTP, validateSkip, encryptSSN, decipherSSN, daysInBetween,
+    validateNewRepo };

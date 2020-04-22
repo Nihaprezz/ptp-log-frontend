@@ -6,14 +6,17 @@ class EditForm extends React.Component {
         super(props);
 
         this.state = {
-            username: "", 
+            username: props.userObj.username, 
             password: "", 
             isadmin: props.userObj.isadmin,
+            isrecovery: props.userObj.isrecovery
         }
     }
 
     handleUncheck = (e) => {
-        this.setState({isadmin: e.currentTarget.checked})
+        this.setState({
+            [e.target.name]: e.currentTarget.checked
+        })
     }
 
     handleChange = (e) => {
@@ -27,7 +30,11 @@ class EditForm extends React.Component {
         let userName, admin = this.state.isadmin;
         this.state.username === "" ? userName = this.props.userObj.username : userName = this.state.username
 
-        let updatedUser = {id: this.props.userObj.id, user: userName, password: this.state.password, isadmin: admin}
+        let updatedUser = {id: this.props.userObj.id, 
+            user: userName, 
+            password: this.state.password, 
+            isadmin: admin, 
+            isrecovery: this.state.isrecovery}
 
         if (this.state.password === ""){
             Swal.fire('Password!', 'Password field cannot be empty!', 'warning')
@@ -43,13 +50,15 @@ class EditForm extends React.Component {
             }).then((result) => {
                 if(result.value){
                     this.props.update(updatedUser)
+                    this.setState({username: "", password: ""})
                 }
             })
         } else {
             this.props.update(updatedUser)
+            this.setState({username: "", password: ""})
         }
 
-        this.setState({username: "", password: ""})
+        
 
     }
 
@@ -73,11 +82,19 @@ class EditForm extends React.Component {
                          type="password" name="password" placeholder="Password" value={this.state.password}/>
                     </div>
 
-                    <div className="field">
-                        <label>Admin</label>
-                        <input 
-                        type="checkbox" checked={this.state.isadmin} onChange={(e) => this.handleUncheck(e)}/>
-                    </div>   
+                    <div className="two fields">
+                        <div className="field">
+                            <label>Admin</label>
+                            <input name="isadmin" 
+                            type="checkbox" checked={this.state.isadmin} onChange={(e) => this.handleUncheck(e)}/>
+                        </div> 
+
+                        <div className="field">
+                            <label>Recovery</label>
+                            <input name="isrecovery"
+                            type="checkbox" checked={this.state.isrecovery} onChange={(e) => this.handleUncheck(e)}/>
+                        </div> 
+                    </div> 
 
                     <div>
                         <button className="ui button green" type="submit" onClick={(e) => this.checkSubmit(e)}
