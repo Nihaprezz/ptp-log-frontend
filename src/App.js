@@ -79,8 +79,11 @@ class App extends React.Component {
             )
           }}/>
 
+          {/* first checks if the user is admin. Then checks is user is recovery, if both are false then will redirect.*/}
           < Route exact path="/admin_stats" render={() => {
-            return this.props.currentUser.isadmin ? < AdminStatsPage user={this.props.currentUser} /> : <Redirect to="/" />
+            return this.props.currentUser.isadmin ? < AdminStatsPage user={this.props.currentUser} /> : (
+              this.props.currentUser.isrecovery ? < AdminStatsPage user={this.props.currentUser} /> : <Redirect to="/" />
+            )
           }}/>
 
           < Route exact path="/user_stats" render={() => {
