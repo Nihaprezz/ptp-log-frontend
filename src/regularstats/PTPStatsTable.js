@@ -5,14 +5,15 @@ const PTPStatsTable = (props) => {
     return (
         <table className="ui celled table stats-table">
         <thead>
-        <tr>
-            <th>Credit Union</th>
-            <th>Total PTP's Taken</th>
-            <th>Total Closed PTPs</th>
-            <th>Total Amount Promise</th>
-            <th>Total Amount Collected</th>
-            <th>Percentage of Amount Collected</th>
-        </tr>
+            <tr>
+                <th>Credit Union</th>
+                <th>Total PTP's Taken</th>
+                <th>Total Broken PTPs</th>
+                <th>Total Amount Promised</th>
+                <th>Total Amount Collected</th>
+                <th>Percentage of $ Collected</th> 
+                <th>Percentage of Promises Broken</th>
+            </tr>
         </thead>
         <tbody>
             {props.userStats.length === 0 ? <tr><td>Loading...</td></tr> : (

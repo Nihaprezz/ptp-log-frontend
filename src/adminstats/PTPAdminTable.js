@@ -8,10 +8,11 @@ const PTPAdminTable = (props) => {
             <tr>
                 <th>Credit Union</th>
                 <th>Total PTP's Taken</th>
-                <th>Total Closed PTPs</th>
+                <th>Total Broken PTPs</th>
                 <th>Total Amount Promised</th>
                 <th>Total Amount Collected</th>
-                <th>Percentage of Amount Collected</th> 
+                <th>Percentage of $ Collected</th> 
+                <th>Percentage of Promises Broken</th>
             </tr>
         </thead>
         <tbody>

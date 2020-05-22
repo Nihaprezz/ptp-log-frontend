@@ -35,6 +35,7 @@ class NewPtp extends React.Component {
         if(validatePTP(this.state.accountNo, this.state.firstName, this.state.lastName, this.state.ptpAmt, this.state.ptpDate)) {
             Swal.fire('Invalid', 'Make sure all fields are filled in.', 'info')
         } else {
+            //unnecessarily passing all creditunions.. need to refactor when I have time.
             fetch(backend_url + '/promisetopays', {
                 method: "POST", 
                 headers: {
@@ -58,7 +59,8 @@ class NewPtp extends React.Component {
         }
 
         this.setState({
-            accountNo: "", creditUnion: "", firstName: "", lastName: "", ptpAmt: "", ptpDate: "", comments: ""
+            accountNo: "", creditUnion: this.state.creditUnion, 
+            firstName: "", lastName: "", ptpAmt: "", ptpDate: "", comments: ""
         })
     }
 
