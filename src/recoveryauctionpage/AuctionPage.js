@@ -31,6 +31,17 @@ class AuctionPage extends React.Component {
         }
     }
 
+    validateRecords(records){
+        const adjustedData = records.map((record) => {
+            if(!record.creditunion){
+                return {...record, creditunion: {name: 'Invalid CU Name'}};
+            } else {
+                return record;
+            }
+        })
+        return adjustedData;
+    }
+
     getAllPending(){
         fetch(backend_url + 'auction_records', {
             headers: {
@@ -41,7 +52,8 @@ class AuctionPage extends React.Component {
         })
         .then(resp => resp.json())
         .then(pendingTransport => {
-            this.setState({repoRecords: pendingTransport})
+            const validatedData = this.validateRecords(pendingTransport);
+            this.setState({repoRecords: validatedData})
         })
     }
 
@@ -57,8 +69,9 @@ class AuctionPage extends React.Component {
         })
         .then(resp => resp.json())
         .then(pendingTransport => {
+            const validatedData = this.validateRecords(pendingTransport);
             Swal.close()
-            this.setState({repoRecords: pendingTransport})
+            this.setState({repoRecords: validatedData})
         })
     }
 
@@ -72,7 +85,8 @@ class AuctionPage extends React.Component {
         })
         .then(resp => resp.json())
         .then(atAuction => {
-            this.setState({auctionRecords: atAuction})
+            const validatedData = this.validateRecords(atAuction);
+            this.setState({auctionRecords: validatedData})
         })
         .catch(err => alert(err))
     }
@@ -88,7 +102,8 @@ class AuctionPage extends React.Component {
         })
         .then(resp => resp.json())
         .then(atAuction => {
-            this.setState({auctionRecords: atAuction})
+            const validatedData = this.validateRecords(atAuction);
+            this.setState({auctionRecords: validatedData})
         })
         .catch(err => alert(err))
     }
