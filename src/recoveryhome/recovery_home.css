@@ -28,17 +28,17 @@
 
 /* COLOR STYLING FOR THE AMOUNT OF DAYS OUT */
 .green-repo-style {
-    background: #21ba45;
+    background: #238823;
     font-weight: bold;
 }
 
 .yellow-repo-style {
-    background: #ffe21f;
+    background: #FFBF00;
     font-weight: bold;
 }
 
 .red-repo-style {
-    background: red;
+    background: #D2222D;
     font-weight: bold;
     color: white;
 }

@@ -7,7 +7,7 @@ import Swal from "sweetalert2"
 import { withRouter } from "react-router-dom"
 import { dataToCsv } from "../utils/createCSV"
 
-const backend_url = process.env.REACT_APP_BACKEND
+const backend_url = process.env.REACT_APP_BACKEND;
 
 class RecoveryHome extends React.Component {
     constructor(){
@@ -45,6 +45,18 @@ class RecoveryHome extends React.Component {
         this.setState({newRepo: !this.state.newRepo})
     }
 
+    validateRepoData(repoData){
+        //Mapping through the data and assigning dummy creditUnion data if needed. 
+        const adjustedData = repoData.map((repo) => {
+            if(!repo.creditunion){
+                return {...repo, creditunion: {name: 'Invalid CU Name'}};
+            } else {
+                return repo;
+            }
+        })
+        return adjustedData.sort((a,b) => a.creditunion.name > b.creditunion.name ? 1 : -1);  
+    }
+
     getActiveRepos = () => {
         Swal.showLoading()
         fetch(backend_url + 'repo_orders')
@@ -54,8 +66,8 @@ class RecoveryHome extends React.Component {
             if(activeRepos.message){
                 this.setState({activeRepos: activeRepos})
             } else {
-                const sorted = activeRepos.sort((a,b) => a.creditunion.name > b.creditunion.name ? 1 : -1)     
-                this.setState({activeRepos: sorted})   
+                const validatedData = this.validateRepoData(activeRepos);     
+                this.setState({activeRepos: validatedData});   
             }
         })
         .catch(err => alert(err));
@@ -76,8 +88,8 @@ class RecoveryHome extends React.Component {
             if(activeHolds.message){
                 this.setState({activeHolds: activeHolds})
             } else {
-                const sorted = activeHolds.sort((a,b) => a.creditunion.name > b.creditunion.name ? 1 : -1)
-                this.setState({activeHolds: sorted})    
+                const validatedData = this.validateRepoData(activeHolds);
+                this.setState({activeHolds: validatedData});    
             }
         })
     }
