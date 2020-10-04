@@ -36,9 +36,7 @@ class RecoveryRecordCont extends React.Component {
             }
             this.setState({recoveryRecord: repoRecord})
         })
-        .catch(err => {
-            console.error(err)
-        })
+        .catch(err => console.error(err));
     }
 
     closeRepoOrder = (reason) => {
