@@ -32,6 +32,8 @@ class AuctionPage extends React.Component {
     }
 
     validateRecords(records){
+        if(records.error){ return records }
+        
         const adjustedData = records.map((record) => {
             if(!record.creditunion){
                 return {...record, creditunion: {name: 'Invalid CU Name'}};

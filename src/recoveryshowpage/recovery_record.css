@@ -58,3 +58,10 @@
     justify-self: end;
 }
 
+.record-deleted {
+    background-color: #D2222D;
+    padding: 0.625rem;
+    color: white;
+    font-weight: bold;
+}
+

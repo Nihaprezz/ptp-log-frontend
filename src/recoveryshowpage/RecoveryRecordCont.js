@@ -16,7 +16,8 @@ class RecoveryRecordCont extends React.Component {
         super();
 
         this.state = {
-            recoveryRecord: []
+            recoveryRecord: [],
+            deleted: false,
         }
     }
 
@@ -30,9 +31,15 @@ class RecoveryRecordCont extends React.Component {
         })
         .then(resp => resp.json())
         .then(repoRecord => {
+            if(repoRecord.id && !repoRecord.creditunion) {
+                repoRecord.creditunion = {name: "Invalid CU Name"}
+            }
             this.setState({recoveryRecord: repoRecord})
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            debugger
+            console.log(err)
+        })
     }
 
     closeRepoOrder = (reason) => {
@@ -96,13 +103,40 @@ class RecoveryRecordCont extends React.Component {
         }
     }
 
+    deleteRepo = (e) => {
+        e.preventDefault();
+        const records = [this.state.recoveryRecord.id];
+        fetch(backend_url + 'repo_orders/delete_by_batch/1', {
+            method: 'DELETE', 
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem('jwt')}`,
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'  
+            }, 
+            body: JSON.stringify({
+                records
+            })
+        })
+        .then(resp => resp.json())
+        .then(resp => {
+            if(resp.message){
+                Swal.fire('Sucess', 'Record have been deleted', 'success');
+                this.setState({deleted: true});
+            } else {
+                Swal.fire('Error', 'Error occurred. Try again', 'error')   
+            }
+        });
+    }
+
     render(){
         return (
             <div className="recovery-record-cont ui card">
 
                 {this.state.recoveryRecord.length === 0 ? <h2>Loading....</h2> : (
                     <React.Fragment>
-                        
+                        {this.state.deleted ? (
+                            <div className="record-deleted">Record has been deleted.</div>
+                        ): null}
                         < MemberVehInfo recordObj={this.state.recoveryRecord} /> 
 
                         {/* update section for recovery  */}
@@ -122,9 +156,16 @@ class RecoveryRecordCont extends React.Component {
                         <div className="recovery-record-form-conts">
                             <form className="ui form">
                                 <div className="field recovery-record-btns-cont">
-                                    <button className="ui red button close-repo-btn" onClick={(e) => this.getCloseReason(e)}>
-                                        Close Repo
-                                    </button>
+                                    {this.state.recoveryRecord.creditunion.name === "Invalid CU Name" ? (
+                                        <button className="ui red button close-repo-btn" onClick={(e) => this.deleteRepo(e)}>
+                                            Delete Repo
+                                        </button>
+                                    ) : (
+                                        <button className="ui red button close-repo-btn" onClick={(e) => this.getCloseReason(e)}>
+                                            Close Repo
+                                        </button>
+                                    )}
+                                    
 
                                     {this.renderBackBtn()}
                                 </div>
