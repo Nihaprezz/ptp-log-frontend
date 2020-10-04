@@ -37,8 +37,7 @@ class RecoveryRecordCont extends React.Component {
             this.setState({recoveryRecord: repoRecord})
         })
         .catch(err => {
-            debugger
-            console.log(err)
+            console.error(err)
         })
     }
 
